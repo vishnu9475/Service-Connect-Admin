@@ -3,14 +3,15 @@ import { useState } from "react";
 
 export default function SettingCard() {
   const [formData, setFormData] = useState({
-    smsDriver: "Twilio",
-    twilioSid: "AC8f4bfd69c98ad28c8f3a1dc8a8cca836",
-    nexmoKey: "7e29c3ce",
-    twilioAuthToken: "********************",
-    nexmoSecret: "**************",
-    twilioSender: "+14154461617",
-    nexmoSender: "ABC",
-  });
+  smsDriver: "Twilio",
+  twilioSid: "TWILIO_ACCOUNT_SID",
+  nexmoKey: "NEXMO_API_KEY",
+  twilioAuthToken: "TWILIO_AUTH_TOKEN",
+  nexmoSecret: "NEXMO_SECRET",
+  twilioSender: "TWILIO_PHONE_NUMBER",
+  nexmoSender: "NEXMO_SENDER_ID",
+});
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
