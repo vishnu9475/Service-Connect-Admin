@@ -25,14 +25,14 @@ import Category from "./page_admin/Category";
 import AddCategory from "./page_admin/AddCategory";
 
 // alaka
-import PayoutSchedule from "./Page_admin/PayoutSchedule";
-import PaymentSchedule from "./Page_admin/PaymentSchedule";
-import DealersDashboard from "./Page_admin/DealersDashboard";
-import DServiceProviderManagement from "./Page_admin/DServiceProviderManagement";
-import DServiceProvider from "./Page_admin/DServiceProvider";
-import DServiceProvidersVerificationForm from "./Page_admin/DServiceProvidersVerificationForm";
-import DpaymentRequestForm from "./Page_admin/DpaymentRequestForm";
-import FranchiseeDashboard from "./Page_admin/FranchiseeDashboard";
+import PayoutSchedule from "./page_admin/PayoutSchedule";
+import PaymentSchedule from "./page_admin/PaymentSchedule";
+import DealersDashboard from "./page_admin/DealersDashboard";
+import DServiceProviderManagement from "./page_admin/DServiceProviderManagement";
+import DServiceProvider from "./page_admin/DServiceProvider";
+import DServiceProvidersVerificationForm from "./page_admin/DServiceProvidersVerificationForm";
+import DpaymentRequestForm from "./page_admin/DpaymentRequestForm";
+import FranchiseeDashboard from "./page_admin/FranchiseeDashboard";
 
 // midhun
 import SubCategory from './page_admin/SubCategory.jsx'
