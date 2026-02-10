@@ -73,7 +73,7 @@ import Chat from './page_admin/Smessage.jsx'
 function App() {
   return (
     <Routes>
-      <Route path="/adminlogin" element={<Adminlogin />} />
+      <Route path="/" element={<Adminlogin />} />
 
       <Route path="/dealerlist" element={<DealerList />} />
       <Route path="/adddealer" element={<AddDealer />} />
