@@ -31,12 +31,12 @@ import DealersDashboard from "./page_admin/DealersDashboard";
 import DServiceProviderManagement from "./page_admin/DServiceProviderManagement";
 import DServiceProvider from "./page_admin/DServiceProvider";
 import DServiceProvidersVerificationForm from "./page_admin/DServiceProvidersVerificationForm";
-import DpaymentRequestForm from "./page_admin/DpaymentRequestForm";
+import DpaymentRequestForm from "./page_admin/DPaymentRequestForm";
 import FranchiseeDashboard from "./page_admin/FranchiseeDashboard";
 
 // midhun
 import SubCategory from './page_admin/SubCategory.jsx'
-import NewSubCategory from './page_admin/New-SubCategory.jsx'
+import NewSubCategory from './page_admin/NewSubCategory.jsx'
 import AdsManagement from './page_admin/AdsManagement.jsx'
 import Newadd from './page_admin/NewAdd.jsx'
 import GeneralSettings from './page_admin/GeneralSettings.jsx'
