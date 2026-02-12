@@ -156,7 +156,7 @@ const AdminMain114 = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f6ff]">
+    <div className="min-h-screen bg-[#f5f6ff] ">
 
       {/* HEADER */}
       <div className="px-4 sm:px-6 py-3">
@@ -165,7 +165,7 @@ const AdminMain114 = ({
         <div className="flex flex-wrap items-center justify-between gap-3">
 
           {/* TITLE */}
-          <h1 className="text-xl font-semibold text-[#2d2d6e] mt-1">
+          <h1 className="text-xl font-semibold text-[#2d2d6e] mt-1 ml-10 lg:ml-0">
             {title}
           </h1>
 
@@ -202,9 +202,11 @@ const AdminMain114 = ({
             </div>
 
             {/* AVATAR */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3"
+            onClick={handleProfileClick}
+            >
               <div className="text-right text-sm leading-tight hidden sm:block"
-                 onClick={handleProfileClick}
+                 
                  title="Admin Profile"
               >
                 <p className="font-medium text-gray-700">{userName}</p>

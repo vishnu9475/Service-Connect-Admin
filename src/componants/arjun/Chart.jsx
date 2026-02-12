@@ -26,7 +26,7 @@ ChartJS.register(
 const Chart = () => {
   const options = {
     responsive: true,
-    maintainAspectRatio: false, // important for dynamic height
+    maintainAspectRatio: false,
     tension: 0.4,
     plugins: {
       legend: {
@@ -40,7 +40,13 @@ const Chart = () => {
           drawBorder: false,
           color: 'rgba(200, 200, 255, 0.2)',
         },
-        ticks: { color: '#9ca3af' }
+        ticks: { 
+          color: '#9ca3af',
+          // Max ticks limit helps avoid crowding on mobile
+          maxRotation: 0,
+          autoSkip: true,
+          maxTicksLimit: 6 
+        }
       },
       y: {
         min: 0,
@@ -94,24 +100,31 @@ const Chart = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-md flex flex-col">
-      <div className="flex justify-between items-start mb-4">
+    /* Adjusted padding for mobile (p-4) vs desktop (p-6) */
+    <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-md flex flex-col w-full max-w-4xl mx-auto">
+      
+      {/* Changed to flex-col for mobile, flex-row for desktop */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <h2 className="text-gray-800 text-xl font-bold">Performance</h2>
-        <div className="flex gap-6 text-sm">
+        
+        {/* Adjusted spacing for stats on mobile */}
+        <div className="flex gap-8 sm:gap-6 text-sm">
           <div>
-            <span className="text-[#FFB800]">●</span> This Week
-            <div className="font-bold text-lg">1.245</div>
+            <span className="text-[#FFB800] mr-1">●</span> 
+            <span className="text-gray-500">This Week</span>
+            <div className="font-bold text-lg sm:text-xl">1.245</div>
           </div>
           <div>
-            <span className="text-[#FF7A50]">●</span> Last Week
-            <div className="font-bold text-lg">1.356</div>
+            <span className="text-[#FF7A50] mr-1">●</span> 
+            <span className="text-gray-500">Last Week</span>
+            <div className="font-bold text-lg sm:text-xl">1.356</div>
           </div>
         </div>
       </div>
 
-      {/* Chart container stretches automatically */}
-      <div className="flex-1 min-h-[200px]">
-        <Line options={options} data={data} className="h-full w-full" />
+      {/* Increased min-height for better visibility on small screens */}
+      <div className="h-[250px] sm:h-[300px] lg:h-[400px] w-full">
+        <Line options={options} data={data} />
       </div>
     </div>
   );

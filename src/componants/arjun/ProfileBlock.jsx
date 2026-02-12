@@ -9,7 +9,12 @@ const ProfileBlock = () => {
   const profileImage = "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=300&auto=format&fit=crop";
 
   return (
-    <div className='w-full max-w-[322px] min-h-[627px] bg-[#FDFEFF] rounded-[20px] p-7 shadow-sm border border-gray-100'>
+    /* 1. Changed max-w-[322px] to w-full to ensure it fills the grid column.
+      2. Changed min-h-[627px] to h-full so it matches its container's height on desktop 
+         but behaves naturally on mobile.
+      3. Changed rounded-[20px] to rounded-xl for consistency with your other brand components.
+    */
+    <div className='w-full h-full bg-white rounded-xl p-7 shadow-sm border border-gray-100'>
       
       {/* Profile Image with Pink Border */}
       <div className='w-[185px] h-[184px] rounded-full border-[3px] border-[#ED2590] flex items-center justify-center m-auto overflow-hidden'>
@@ -22,47 +27,55 @@ const ProfileBlock = () => {
 
       {/* Name and Location */}
       <div className='text-center mt-8 mb-4'>
-        <p className='text-[24px] font-[700] font-Roboto leading-[24px] text-[#4B4B4B]'>
+        <p className='text-[24px] font-[700] leading-[24px] text-[#303972]'>
           Yash Ghori
         </p>
-        <p className='font-[400] text-[#4B4B4B] leading-[24px] mt-4'>
+        <p className='font-[400] text-[#A098AE] leading-[24px] mt-4'>
           Ahmedabad, Gujarat
         </p>
-        <p className='font-[400] text-[16px] text-[#4B4B4B] mt-2'>
+        <p className='font-[400] text-[16px] text-[#A098AE] mt-2'>
           India
         </p>
       </div>
 
       {/* Divider */}
-      <div className='border-t border-[#D9E6F7] w-full my-6' />
+      <div className='border-t border-gray-100 w-full my-6' />
 
       {/* Information List */}
       <div className='flex flex-col gap-6 px-2'>
         
         <div className='flex items-center gap-4'>
-          <CgProfile className='w-[24px] h-[24px] text-gray-500' />
-          <p className='text-[16px] font-[400] text-[#4B4B4B]'>
+          <div className='p-2 bg-[#F5F6FF] rounded-full'>
+            <CgProfile className='w-[20px] h-[20px] text-[#4D44B5]' />
+          </div>
+          <p className='text-[16px] font-[600] text-[#303972]'>
             Administrator
           </p>
         </div>
 
         <div className='flex items-center gap-4'>
-          <AiOutlineUserAdd className='w-[24px] h-[24px] text-gray-500' />
-          <p className='text-[16px] font-[400] text-[#4B4B4B]'>
+          <div className='p-2 bg-[#F5F6FF] rounded-full'>
+            <AiOutlineUserAdd className='w-[20px] h-[20px] text-[#4D44B5]' />
+          </div>
+          <p className='text-[16px] font-[600] text-[#303972]'>
             +91 7048144000
           </p>
         </div>
 
         <div className='flex items-center gap-4'>
-          <CiMail className='w-[24px] h-[24px] shrink-0 text-gray-500' />
-          <p className='text-[16px] font-[400] text-[#4B4B4B] truncate'>
+          <div className='p-2 bg-[#F5F6FF] rounded-full'>
+            <CiMail className='w-[20px] h-[20px] shrink-0 text-[#4D44B5]' />
+          </div>
+          <p className='text-[16px] font-[600] text-[#303972] truncate'>
             yghori@asite.com
           </p>
         </div>
 
         <div className='flex items-center gap-4'>
-          <GrGallery className='w-[24px] h-[24px] shrink-0 text-gray-500' />
-          <p className='text-[16px] font-[400] text-[#4B4B4B]'>
+          <div className='p-2 bg-[#F5F6FF] rounded-full'>
+            <GrGallery className='w-[20px] h-[20px] shrink-0 text-[#4D44B5]' />
+          </div>
+          <p className='text-[16px] font-[600] text-[#303972]'>
             PDT - I
           </p>
         </div>

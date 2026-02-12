@@ -12,7 +12,7 @@ const ServiceCategories = () => {
   ];
 
   return (
-    <div className="w-full bg-white rounded-[30px] p-6 shadow-xl shadow-gray-100 font-sans min-h-[550px]">
+    <div className="w-full bg-white rounded-[30px] p-6 shadow-xl shadow-gray-100 font-sans min-h-[590px]">
       {/* Header */}
       <h2 className="text-lg font-bold text-[#313165] mb-4">Service Categories</h2>
 

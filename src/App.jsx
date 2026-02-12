@@ -11,6 +11,8 @@ import AddServiceProvider from './page_admin/AddServiceProvider.jsx'
 import AddNewService from './page_admin/AddNewService.jsx'
 import RoleAndP from './page_admin/RoleAndP.jsx'
 import ServiceProviderDetails from './page_admin/ServiceProviderDetails.jsx'
+import Adminlogin from './page_admin/Adminlogin.jsx'
+import RoleSelect from './page_admin/RoleSelect.jsx';
 
 // neja
 import Franchisee from "./page_admin/Franchisee";
@@ -63,7 +65,6 @@ import IncBookings from './page_admin/IncBookings.jsx'
 import DecBookings from './page_admin/DecBookings.jsx'
 import AdminMessages from './page_admin/AdminMessages.jsx'
 import ComplaintsList from './page_admin/ComplaintsList.jsx'
-import Adminlogin from './page_admin/Adminlogin.jsx'
 import AllBookings from './page_admin/AllBookings.jsx'
 import Chat from './page_admin/Smessage.jsx'
 
@@ -73,7 +74,8 @@ import Chat from './page_admin/Smessage.jsx'
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Adminlogin />} />
+      <Route path="/" element={<RoleSelect />} />
+      <Route path="/admin" element={<Adminlogin />} />
 
       <Route path="/dealerlist" element={<DealerList />} />
       <Route path="/adddealer" element={<AddDealer />} />

@@ -1,7 +1,7 @@
 // Dashboard.jsx
 import React from "react";
 import AdminSideMenu113 from "../componants/neja/AdminSideMenu113";
-import AdminMain114 from  "../componants/neja/AdminMain114";
+import AdminMain114 from "../componants/neja/AdminMain114";
 import Chart from "../componants/arjun/Chart";
 import Messages120 from "../componants/arjun/Messages120";
 import ServiceCategories from "../componants/arjun/ServiceCategories";
@@ -14,6 +14,34 @@ import CustomerArrivalChart from "../componants/arjun/CustomerArrivalChart";
 import StatisticsCard from "../componants/arjun/StatisticsCard";
 import RevenueCard from "../componants/arjun/RevenueCard";
 import Calendar117 from "../componants/arjun/Calendar117";
+
+/* ✅ ONLY NEW ADDITION */
+const statsData = [
+  {
+    title: "Franchisee",
+    value: "932",
+    icon: "users",
+    color: "bg-indigo-500",
+  },
+  {
+    title: "Dealers",
+    value: "754",
+    icon: "calendar",
+    color: "bg-orange-400",
+  },
+  {
+    title: "Providers",
+    value: "40",
+    icon: "briefcase",
+    color: "bg-yellow-400",
+  },
+  {
+    title: "Users",
+    value: "32k",
+    icon: "users",
+    color: "bg-indigo-900",
+  },
+];
 
 function Dashboard() {
   return (
@@ -45,14 +73,18 @@ function Dashboard() {
               {/* LEFT COLUMN */}
               <div className="xl:col-span-8 flex flex-col gap-6">
 
-                {/* STATS */}
-               
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pr-[15px]">
-                <StatCard title="Franchisee" value="932" icon="users" />
-                <StatCard title="Dealers" value="754" icon="calendar" />
-                <StatCard title="Providers" value="40" icon="briefcase" />
-                <StatCard title="Users" value="32k" icon="users" />
-         </div>
+                {/* STATS — UPDATED ONLY */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pr-[15px]">
+                  {statsData.map((item, index) => (
+                    <StatCard
+                      key={index}
+                      title={item.title}
+                      value={item.value}
+                      icon={item.icon}
+                      color={item.color}
+                    />
+                  ))}
+                </div>
 
                 {/* CHART */}
                 <div className="w-full min-h-[300px]">

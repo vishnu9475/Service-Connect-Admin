@@ -1,32 +1,38 @@
-import React from 'react';
+import React from "react";
+import { Users, Calendar, Briefcase } from "lucide-react";
 
-const StatCard = ({ label = "Franchisee", value = "932" }) => {
+const iconMap = {
+  users: Users,
+  calendar: Calendar,
+  briefcase: Briefcase,
+};
+
+const StatCard = ({ title, value, icon, color }) => {
+  const Icon = iconMap[icon];
+
   return (
-    <div className="flex items-center gap-4 bg-white p-4 rounded-xl w-fit">
-      {/* Icon Wrapper */}
-      <div className="flex items-center justify-center w-16 h-16 bg-[#5249B7] rounded-full shrink-0">
-        <svg 
-          className="w-8 h-8 text-white" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2" 
-          strokeLinecap="round" 
-          strokeLinejoin="round"
-        >
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-          <circle cx="12" cy="7" r="4" />
-        </svg>
+    <div className="
+      bg-white
+      rounded-2xl
+      p-4
+      flex items-center gap-4
+      w-full
+    ">
+      {/* Icon */}
+      <div
+        className={`w-11 h-11 rounded-full ${color} flex items-center justify-center`}
+      >
+        {Icon && <Icon className="w-5 h-5 text-white" />}
       </div>
 
-      {/* Text Wrapper */}
-      <div className="flex flex-col">
-        <span className="text-gray-400 text-lg font-normal leading-tight">
-          {label}
-        </span>
-        <span className="text-[#2D3E75] text-4xl font-bold tracking-tight">
+      {/* Text */}
+      <div className="leading-tight">
+        <p className="text-sm text-gray-400">
+          {title}
+        </p>
+        <p className="text-lg font-semibold text-[#2D3E75]">
           {value}
-        </span>
+        </p>
       </div>
     </div>
   );

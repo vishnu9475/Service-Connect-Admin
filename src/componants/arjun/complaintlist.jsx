@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 import { MoreVertical, Trash2, Eye, X, Clock, Calendar } from 'lucide-react';
 
 const ComplaintsList = () => {
@@ -31,55 +32,74 @@ const ComplaintsList = () => {
   };
 
   return (
-    <div className="relative">
-      {/* REMOVED overflow-hidden to prevent clipping the dropdown */}
-      <div className="bg-white rounded-[20px] shadow-sm border border-gray-100">
-        <table className="w-full text-left border-separate border-spacing-0">
-          <thead className="bg-gray-50">
-            <tr>
-              {/* Added rounded corners directly to the header cells */}
-              <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-wider border-b border-gray-100 rounded-tl-[20px]">ID</th>
-              <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-wider border-b border-gray-100">Subject</th>
-              <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-wider border-b border-gray-100">Customer</th>
-              <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-wider text-center border-b border-gray-100">Logged At</th>
-              <th className="p-4 text-sm font-bold text-gray-500 uppercase tracking-wider text-right border-b border-gray-100 rounded-tr-[20px]">Action</th>
+    <div className="bg-white rounded-xl overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm min-w-[1000px]">
+          <thead>
+            <tr className="border-b border-gray-100 text-left">
+              <th className="px-6 py-5 text-[#303972] font-bold">ID</th>
+              <th className="px-4 text-[#303972] font-bold">Subject</th>
+              <th className="px-4 text-[#303972] font-bold">Customer</th>
+              <th className="text-[#303972] font-bold text-center">Logged At</th>
+              <th className="text-[#303972] font-bold text-center px-6">Action</th>
             </tr>
           </thead>
+
           <tbody className="divide-y divide-gray-50">
             {complaints.map((item, index) => (
-              <tr key={item.id} className="hover:bg-gray-50 transition-colors group">
-                <td className={`p-4 text-sm font-semibold text-gray-700 ${index === complaints.length - 1 ? 'rounded-bl-[20px]' : ''}`}>{item.id}</td>
-                <td className="p-4 text-sm text-gray-600">{item.subject}</td>
-                <td className="p-4 text-sm text-gray-600">{item.customer}</td>
-                <td className="p-4 text-sm text-gray-500 text-center">
+              <tr key={item.id} className="transition-colors hover:bg-gray-50">
+                {/* ID Styled like User ID */}
+                <td className="px-6 py-4 text-[#4D44B5] font-bold whitespace-nowrap">
+                  {item.id}
+                </td>
+
+                {/* Subject Styled like User Name */}
+                <td className="py-4 px-4 whitespace-nowrap">
+                  <span className="text-[#303972] font-bold">{item.subject}</span>
+                </td>
+
+                {/* Customer Styled like Services/Location */}
+                <td className="text-[#303972] px-4 whitespace-nowrap">
+                  {item.customer}
+                </td>
+
+                {/* Logged At Details (Vertical Stack) */}
+                <td className="text-center whitespace-nowrap">
                   <div className="flex flex-col items-center">
-                    <span className="font-medium text-gray-700">{item.date}</span>
-                    <span className="text-[11px] text-gray-400">{item.time}</span>
+                    <span className="text-[#303972] font-bold">{item.time}</span>
+                    <span className="text-[#A098AE] text-xs">{item.date}</span>
                   </div>
                 </td>
-                <td className={`p-4 text-right relative ${index === complaints.length - 1 ? 'rounded-br-[20px]' : ''}`}>
-                  <button 
-                    onClick={() => setOpenMenuId(openMenuId === item.id ? null : item.id)}
-                    className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-all"
-                  >
-                    <MoreVertical size={20} />
-                  </button>
 
-                  {openMenuId === item.id && (
-                    <div 
-                      ref={menuRef} 
-                      className={`absolute right-4 w-40 bg-white border border-gray-100 rounded-xl shadow-xl z-[100] py-2 
-                        ${index >= complaints.length - 2 ? 'bottom-full mb-2' : 'mt-2'}`}
+                {/* Actions Styled like User List */}
+                <td className="px-6 py-4 text-center whitespace-nowrap">
+                  <div className="relative inline-block" ref={openMenuId === item.id ? menuRef : null}>
+                    <button 
+                      onClick={() => setOpenMenuId(openMenuId === item.id ? null : item.id)}
+                      className="p-2 hover:bg-gray-100 rounded-full"
                     >
-                      {/* Logic above: If it's one of the last 2 items, open the menu UPWARDS instead of downwards */}
-                      <button onClick={() => { setViewingComplaint(item); setOpenMenuId(null); }} className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors">
-                        <Eye size={16} className="text-blue-500" /> Details
-                      </button>
-                      <button onClick={() => deleteRow(item.id)} className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
-                        <Trash2 size={16} /> Delete
-                      </button>
-                    </div>
-                  )}
+                      <MoreVertical size={20} className="text-[#A098AE]" />
+                    </button>
+
+                    {openMenuId === item.id && (
+                      <div className={`absolute right-0 w-44 bg-white rounded-xl shadow-xl border border-gray-100 z-50 py-2 ${
+                        index >= complaints.length - 2 ? "bottom-full mb-2" : "mt-2"
+                      }`}>
+                        <button 
+                          onClick={() => { setViewingComplaint(item); setOpenMenuId(null); }} 
+                          className="w-full flex items-center gap-3 px-4 py-2 text-sm text-[#303972] hover:bg-gray-50 font-semibold"
+                        >
+                          <Eye size={16} className="text-[#4D44B5]" /> Details
+                        </button>
+                        <button 
+                          onClick={() => deleteRow(item.id)} 
+                          className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-500 hover:bg-red-50 font-semibold"
+                        >
+                          <Trash2 size={16} /> Delete
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}
@@ -87,48 +107,47 @@ const ComplaintsList = () => {
         </table>
       </div>
 
-      {/* Details Modal remains same */}
+      {/* Modal Styled to match the first component's brand colors */}
       {viewingComplaint && (
-        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-[110] flex items-center justify-center p-4">
-          <div className="bg-white rounded-[24px] p-6 max-w-md w-full shadow-2xl animate-in fade-in zoom-in duration-200">
+        <div className="fixed inset-0 bg-[#303972]/40 backdrop-blur-sm z-[110] flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl p-8 max-w-md w-full shadow-2xl">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-bold text-gray-800 tracking-tight">Complaint Record</h3>
-              <button onClick={() => setViewingComplaint(null)} className="p-1 hover:bg-gray-100 rounded-full transition-colors">
-                <X size={20} className="text-gray-400" />
+              <h3 className="text-xl font-bold text-[#303972]">Complaint Record</h3>
+              <button onClick={() => setViewingComplaint(null)} className="p-1 hover:bg-gray-100 rounded-full">
+                <X size={20} className="text-[#A098AE]" />
               </button>
             </div>
             
-            <div className="space-y-5">
+            <div className="space-y-4">
               <div className="flex gap-4">
-                <div className="flex-1 bg-blue-50/50 p-3 rounded-xl border border-blue-100">
-                  <div className="flex items-center gap-2 text-blue-600 mb-1">
+                <div className="flex-1 bg-[#F5F6FF] p-3 rounded-xl border border-gray-100">
+                  <div className="flex items-center gap-2 text-[#4D44B5] mb-1">
                     <Calendar size={14} />
                     <span className="text-[10px] font-bold uppercase tracking-wider">Date</span>
                   </div>
-                  <p className="text-sm font-semibold text-gray-700">{viewingComplaint.date}</p>
+                  <p className="text-sm font-bold text-[#303972]">{viewingComplaint.date}</p>
                 </div>
-                <div className="flex-1 bg-purple-50/50 p-3 rounded-xl border border-purple-100">
-                  <div className="flex items-center gap-2 text-purple-600 mb-1">
+                <div className="flex-1 bg-[#F5F6FF] p-3 rounded-xl border border-gray-100">
+                  <div className="flex items-center gap-2 text-[#4D44B5] mb-1">
                     <Clock size={14} />
                     <span className="text-[10px] font-bold uppercase tracking-wider">Time</span>
                   </div>
-                  <p className="text-sm font-semibold text-gray-700">{viewingComplaint.time}</p>
+                  <p className="text-sm font-bold text-[#303972]">{viewingComplaint.time}</p>
                 </div>
               </div>
 
               <div>
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Subject & Customer</label>
-                <p className="text-gray-800 font-semibold">{viewingComplaint.subject}</p>
-                <p className="text-sm text-gray-500">Submitted by: {viewingComplaint.customer}</p>
+                <label className="text-[10px] font-bold text-[#A098AE] uppercase tracking-wider">Subject</label>
+                <p className="text-[#303972] font-bold">{viewingComplaint.subject}</p>
+                <p className="text-xs text-[#4D44B5] font-semibold">{viewingComplaint.customer}</p>
               </div>
 
               <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-2">Description</label>
-                <p className="text-gray-600 text-sm leading-relaxed italic">"{viewingComplaint.detail}"</p>
+                <p className="text-[#303972] text-sm italic">"{viewingComplaint.detail}"</p>
               </div>
             </div>
 
-            <button onClick={() => setViewingComplaint(null)} className="w-full mt-6 bg-gray-900 text-white py-3 rounded-xl font-semibold hover:bg-gray-800 transition-shadow">
+            <button onClick={() => setViewingComplaint(null)} className="w-full mt-6 bg-[#4D44B5] text-white py-3 rounded-xl font-bold hover:bg-[#3b348a] transition-all">
               Close Record
             </button>
           </div>

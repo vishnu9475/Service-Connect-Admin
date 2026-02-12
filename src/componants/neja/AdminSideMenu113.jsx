@@ -438,9 +438,14 @@ React.useEffect(() => {
   return (
     <>
       {/* Mobile Toggle */}
-      <button className="lg:hidden fixed top-4 left-4 z-[60] text-white" onClick={() => setOpen(true)}>
-        <FiMenu size={22} />
-      </button>
+      {!open && (
+  <button
+    className="lg:hidden fixed top-4 left-4 z-[60] text-[#4F46B5]"
+    onClick={() => setOpen(true)}
+  >
+    <FiMenu size={22} />
+  </button>
+)}
 
         {open && (
           <div

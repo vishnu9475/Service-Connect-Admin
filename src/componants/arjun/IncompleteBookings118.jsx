@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { FaUser, FaArrowRight } from "react-icons/fa"; // Added FaArrowRight
+import { FaUser, FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const ITEMS_PER_PAGE = 5;
@@ -19,7 +19,7 @@ const IncompleteBookings118 = ({
 }) => {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
-  
+
   const totalItems = data.length;
   const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
@@ -29,42 +29,43 @@ const IncompleteBookings118 = ({
   }, [page, data]);
 
   return (
-    <div className={`${pageMode ? "min-h-screen bg-[#f5f6ff] p-6" : "h-full"}`}>
+    <div className={`${pageMode ? "min-h-screen bg-[#f5f6ff] p-4 sm:p-6" : "h-full"}`}>
       <div
         className={`${
           pageMode
-            ? "max-w-4xl mx-auto bg-white rounded-2xl p-6 shadow-sm h-full flex flex-col border border-gray-300"
-            : "bg-white rounded-2xl p-6 w-full shadow-sm h-full flex flex-col border border-gray-300"
+            ? "max-w-4xl mx-auto bg-white rounded-2xl p-4 sm:p-6 shadow-sm h-full flex flex-col border border-gray-300"
+            : "bg-white rounded-2xl p-4 sm:p-6 w-full shadow-sm h-full flex flex-col border border-gray-300"
         }`}
       >
-        {/* HEADER WITH NEW VIEW MORE STYLE */}
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-xl font-bold text-[#303972]">
+        {/* HEADER */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+          <h2 className="text-lg sm:text-xl font-bold text-[#303972]">
             {title}
           </h2>
-          
-          <button 
-             onClick={() => navigate("/incbookings")}
-                  className="flex items-center gap-1.5 text-[12px] font-extrabold text-[#605BFF] hover:text-[#4D44B5] transition-colors group"
-                   >
-                    <span>View More</span>
-                  <FaArrowRight 
-                   size={10} 
-               className="transition-transform group-hover:translate-x-1" 
-                 />
+
+          <button
+            onClick={() => navigate("/incbookings")}
+            className="flex items-center gap-1.5 text-[12px] font-extrabold text-[#605BFF] hover:text-[#4D44B5] transition-colors group self-start sm:self-auto"
+          >
+            <span>View More</span>
+            <FaArrowRight
+              size={10}
+              className="transition-transform group-hover:translate-x-1"
+            />
           </button>
         </div>
 
-        {/* ROWS WITH SEPARATOR LINES */}
-        <div className="flex-1 flex flex-col">
-          {paginatedData.map((item, index) => (
+        {/* ROWS */}
+        <div className="flex-1 flex flex-col divide-y divide-gray-200">
+          {paginatedData.map((item) => (
             <div
               key={item.id}
-              className={`flex items-center justify-between gap-4 py-4 ${
-                index !== paginatedData.length - 1 ? "border-b border-gray-200" : ""
-              }`}
+              className="
+                flex flex-col gap-4 py-4
+                md:flex-row md:items-center md:justify-between md:gap-4
+              "
             >
-              <div className="flex items-center gap-3 w-48">
+              <div className="flex items-center gap-3 md:w-48">
                 <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-[#4D44B5]">
                   <FaUser size={16} />
                 </div>
@@ -73,18 +74,18 @@ const IncompleteBookings118 = ({
                 </span>
               </div>
 
-              <div className="w-32 text-[#4D44B5] font-medium text-sm">
+              <div className="md:w-32 text-[#4D44B5] font-medium text-sm">
                 ID {item.id}
               </div>
 
-              <div className="flex items-center gap-2 w-40 text-gray-500">
+              <div className="flex items-center gap-2 md:w-40 text-gray-500">
                 <div className="w-8 h-8 rounded-full bg-orange-100 text-orange-500 flex items-center justify-center">
                   <FaUser size={14} />
                 </div>
                 <span className="text-sm font-medium">{item.user}</span>
               </div>
 
-              <div className="w-24 font-bold text-[#303972] text-right">
+              <div className="md:w-24 font-bold text-[#303972] md:text-right">
                 ${item.amount}
               </div>
             </div>
@@ -92,14 +93,14 @@ const IncompleteBookings118 = ({
         </div>
 
         {/* FOOTER */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-auto pt-6 border-t border-gray-100">
-          <p className="text-sm text-gray-400 font-medium">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mt-6 pt-6 border-t border-gray-100">
+          <p className="text-sm text-gray-400 font-medium text-center md:text-left">
             Showing {(page - 1) * ITEMS_PER_PAGE + 1}–
             {Math.min(page * ITEMS_PER_PAGE, totalItems)} of{" "}
             {totalItems} data
           </p>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             <button
               onClick={() => setPage((p) => Math.max(p - 1, 1))}
               disabled={page === 1}
