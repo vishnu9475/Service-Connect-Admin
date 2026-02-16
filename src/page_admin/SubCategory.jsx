@@ -12,8 +12,9 @@ const Page121 = () => {
       {/* Main Content (starts AFTER sidebar) */}
       <div className="flex-1 ml-0 lg:ml-[260px]">
         <Header
-        title="Sub Categories"/>
+        title="Sub Categories">
         <SubCategoryList />
+        </Header>
       </div>
     </div>
   );
