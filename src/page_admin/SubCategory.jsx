@@ -1,7 +1,7 @@
 import React from "react";
 import AdminSideMenu113 from "../componants/neja/AdminSideMenu113";
 import Header114 from "../componants/neja/AdminMain114";
-import SubCategoryList1 from "../componants/midhun/SubCategoryList";
+import SubCategoryList from "../componants/midhun/SubCategoryList";
 
 const Page121 = () => {
   return (
@@ -13,7 +13,7 @@ const Page121 = () => {
       <div className="flex-1 ml-0 lg:ml-[260px]">
         <Header114
         title="Sub Categories">
-        <SubCategoryList1 />
+        <SubCategoryList />
         </Header114>
       </div>
     </div>
