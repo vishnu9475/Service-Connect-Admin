@@ -17,12 +17,27 @@ const Users = () => {
   const navigate = useNavigate();
   
   const [allUsers, setAllUsers] = useState([
-    { name: "Samanta William", id: "#123456781", date: "March 25, 2021", services: 2, location: "Jakarta", status: "Inactive" },
-    { name: "Tony Soap", id: "#123456782", date: "March 25, 2022", services: 8, location: "Jakarta", status: "active" },
-    { name: "Karen Hope", id: "#123456783", date: "March 25, 2023", services: 10, location: "Jakarta", status: "active" },
-    { name: "Jordan Nico", id: "#123456784", date: "March 25, 2020", services: 0, location: "Jakarta", status: "active" },
-  ]);
-
+  { name: "Samanta William", id: "#123456781", date: "March 25, 2021", services: 2, location: "Jakarta", status: "Inactive" },
+  { name: "Tony Soap", id: "#123456782", date: "March 25, 2022", services: 8, location: "Jakarta", status: "active" },
+  { name: "Karen Hope", id: "#123456783", date: "March 25, 2023", services: 10, location: "Jakarta", status: "active" },
+  { name: "Jordan Nico", id: "#123456784", date: "March 25, 2020", services: 0, location: "Jakarta", status: "active" },
+  { name: "Nadila Adani", id: "#123456785", date: "April 12, 2023", services: 5, location: "Jakarta", status: "active" },
+  { name: "Dandi Setyawan", id: "#123456786", date: "April 15, 2023", services: 3, location: "Jakarta", status: "Inactive" },
+  { name: "Bella Simatupang", id: "#123456787", date: "May 02, 2023", services: 12, location: "Jakarta", status: "active" },
+  { name: "Rizky Ramadhan", id: "#123456788", date: "May 10, 2023", services: 1, location: "Jakarta", status: "active" },
+  { name: "Eka Wijaya", id: "#123456789", date: "June 18, 2023", services: 7, location: "Jakarta", status: "Inactive" },
+  { name: "Fanya Putri", id: "#123456790", date: "June 22, 2023", services: 4, location: "Jakarta", status: "active" },
+  { name: "Gilang Pratama", id: "#123456791", date: "July 01, 2023", services: 9, location: "Jakarta", status: "active" },
+  { name: "Hana Lestari", id: "#123456792", date: "July 14, 2023", services: 2, location: "Jakarta", status: "active" },
+  { name: "Indra Kusuma", id: "#123456793", date: "August 05, 2023", services: 15, location: "Jakarta", status: "Inactive" },
+  { name: "Joko Anwar", id: "#123456794", date: "August 20, 2023", services: 6, location: "Jakarta", status: "active" },
+  { name: "Kiki Amalia", id: "#123456795", date: "September 03, 2023", services: 0, location: "Jakarta", status: "active" },
+  { name: "Lucky Hakim", id: "#123456796", date: "September 12, 2023", services: 11, location: "Jakarta", status: "active" },
+  { name: "Maya Sofia", id: "#123456797", date: "October 05, 2023", services: 3, location: "Jakarta", status: "Inactive" },
+  { name: "Nanda Persada", id: "#123456798", date: "October 22, 2023", services: 8, location: "Jakarta", status: "active" },
+  { name: "Olivia Zalianty", id: "#123456799", date: "November 10, 2023", services: 4, location: "Jakarta", status: "active" },
+  { name: "Putu Gede", id: "#123456800", date: "December 01, 2023", services: 5, location: "Jakarta", status: "active" },
+]);
   const [filterStatus, setFilterStatus] = useState("All Status");
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("Newest");

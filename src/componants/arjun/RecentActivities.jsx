@@ -19,7 +19,7 @@ const RecentActivities = () => {
   };
 
   return (
-    <div className="w-full bg-white rounded-[30px] p-6 shadow-xl shadow-gray-100 font-sans min-h-[450px] flex flex-col justify-between">
+    <div className="w-full bg-white rounded-[30px] p-6 shadow-xl shadow-gray-100 font-sans min-h-[520px] flex flex-col justify-between">
       
       <div>
         {/* Section Header */}
@@ -65,7 +65,7 @@ const RecentActivities = () => {
         
         {/* Navigates to /details/1, /details/2, etc. */}
         <button 
-         onClick={() => navigate('/User_Details')}
+         onClick={() => navigate('/userdetails')}
           className="w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors" >
                  Details
         </button>

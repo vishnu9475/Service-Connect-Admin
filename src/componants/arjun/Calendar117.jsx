@@ -32,7 +32,7 @@ const Calendar117 = ({ onSelect, className }) => {
   };
 
   const renderDays = () => (
-    <div className="grid grid-cols-7 text-center text-xs sm:text-sm text-gray-500 mb-1">
+    <div className="grid grid-cols-7 text-center text-[10px] font-bold text-gray-400 mb-2 uppercase tracking-widest">
       {["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map((d) => <div key={d}>{d}</div>)}
     </div>
   );
@@ -54,21 +54,21 @@ const Calendar117 = ({ onSelect, className }) => {
 
         days.push(
           <button
-            key={day}
+            key={day.toString()}
             onClick={() => onDateClick(cloneDay)}
-            className={`aspect-square border border-gray-100 flex items-center justify-center text-xs sm:text-sm
+            className={`aspect-square flex items-center justify-center text-xs sm:text-sm transition-all rounded-xl hover:bg-gray-50
               ${
                 !isSameMonth(day, monthStart)
-                  ? "text-gray-300"
+                  ? "text-gray-200"
                   : isSunday
                   ? "text-red-400"
-                  : "text-indigo-900"
+                  : "text-[#2D3E75]"
               }
             `}
           >
             <span
-              className={`w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center rounded-full
-                ${isSameDay(day, selectedDate) ? "bg-indigo-600 text-white" : ""}
+              className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-full transition-colors
+                ${isSameDay(day, selectedDate) ? "bg-indigo-600 text-white shadow-md" : ""}
               `}
             >
               {format(day, "d")}
@@ -77,44 +77,41 @@ const Calendar117 = ({ onSelect, className }) => {
         );
         day = addDays(day, 1);
       }
-      rows.push(<div key={day} className="grid grid-cols-7">{days}</div>);
+      rows.push(<div key={day.toString()} className="grid grid-cols-7">{days}</div>);
     }
 
     return <div className="flex flex-col flex-1">{rows}</div>;
   };
 
   return (
-    <div className={`w-full h-full ${className || ""}`}>
-      {/* White Card Wrapper */}
-      <div className="bg-white rounded-xl shadow-md p-4">
-        {/* HEADER */}
-        <div className="flex items-center justify-between mb-2">
-          <h2 className="text-sm sm:text-base font-semibold text-indigo-900">Calendar</h2>
-          <div className="flex gap-1">
-            <select
-              value={currentDate.getMonth()}
-              onChange={(e) =>
-                setCurrentDate(new Date(currentDate.getFullYear(), Number(e.target.value), 1))
-              }
-              className="border border-gray-300 rounded px-1 text-xs sm:text-sm focus:outline-none"
-            >
-              {months.map((m, i) => <option key={m} value={i}>{m}</option>)}
-            </select>
-            <select
-              value={currentDate.getFullYear()}
-              onChange={(e) =>
-                setCurrentDate(new Date(Number(e.target.value), currentDate.getMonth(), 1))
-              }
-              className="border border-gray-300 rounded px-1 text-xs sm:text-sm focus:outline-none"
-            >
-              {years.map((y) => <option key={y} value={y}>{y}</option>)}
-            </select>
-          </div>
+    <div className={`w-full h-full bg-white rounded-[2rem] p-6 shadow-sm border border-gray-50 flex flex-col ${className || ""}`}>
+      {/* HEADER - Flexible for mobile */}
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-6">
+        <h2 className="text-xl font-bold text-[#2D3E75]">Calendar</h2>
+        <div className="flex gap-2">
+          <select
+            value={currentDate.getMonth()}
+            onChange={(e) =>
+              setCurrentDate(new Date(currentDate.getFullYear(), Number(e.target.value), 1))
+            }
+            className="bg-gray-50 border-none rounded-lg px-2 py-1 text-xs font-semibold text-[#2D3E75] focus:ring-2 focus:ring-indigo-500 outline-none"
+          >
+            {months.map((m, i) => <option key={m} value={i}>{m.substring(0, 3)}</option>)}
+          </select>
+          <select
+            value={currentDate.getFullYear()}
+            onChange={(e) =>
+              setCurrentDate(new Date(Number(e.target.value), currentDate.getMonth(), 1))
+            }
+            className="bg-gray-50 border-none rounded-lg px-2 py-1 text-xs font-semibold text-[#2D3E75] focus:ring-2 focus:ring-indigo-500 outline-none"
+          >
+            {years.map((y) => <option key={y} value={y}>{y}</option>)}
+          </select>
         </div>
-
-        {renderDays()}
-        <div className="flex-1">{renderCells()}</div>
       </div>
+
+      {renderDays()}
+      <div className="flex-1 overflow-hidden">{renderCells()}</div>
     </div>
   );
 };

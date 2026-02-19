@@ -15,7 +15,6 @@ import StatisticsCard from "../componants/arjun/StatisticsCard";
 import RevenueCard from "../componants/arjun/RevenueCard";
 import Calendar117 from "../componants/arjun/Calendar117";
 
-/* ✅ ONLY NEW ADDITION */
 const statsData = [
   {
     title: "Franchisee",
@@ -73,8 +72,8 @@ function Dashboard() {
               {/* LEFT COLUMN */}
               <div className="xl:col-span-8 flex flex-col gap-6">
 
-                {/* STATS — UPDATED ONLY */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pr-[15px]">
+                {/* STATS — Extra padding removed to match chart width */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 w-full">
                   {statsData.map((item, index) => (
                     <StatCard
                       key={index}

@@ -12,7 +12,8 @@ const Finance = () => {
   ];
 
   return (
-    <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-50 max-w-md">
+    /* Changed max-w-md to w-full to allow it to fill its grid cell */
+    <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-50 w-full">
       <div className="flex justify-between items-start mb-6">
         <h3 className="text-xl font-bold text-[#2D3154]">Finance</h3>
         <div className="flex gap-4">
@@ -31,7 +32,8 @@ const Finance = () => {
         </div>
       </div>
 
-      <div className="relative h-48 flex items-end justify-between px-2">
+      {/* Increased padding here (px-4) to center the bars better on wider mobile views */}
+      <div className="relative h-48 flex items-end justify-between px-4">
         {/* Y-Axis Grid Lines */}
         <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
           {[100, 80, 60, 40, 20, 0].map(val => (
@@ -45,8 +47,9 @@ const Finance = () => {
         {data.map((item, i) => (
           <div key={i} className="flex flex-col items-center flex-1 z-10 relative group">
             <div className="flex items-end gap-1 h-32">
-              <div className="w-2.5 bg-[#FF7F5C] rounded-t-full" style={{ height: `${item.lastWeek}%` }}></div>
-              <div className="w-2.5 bg-[#FFB648] rounded-t-full" style={{ height: `${item.thisWeek}%` }}></div>
+              {/* Width slightly increased to w-3 for better visibility on wider screens */}
+              <div className="w-3 bg-[#FF7F5C] rounded-t-full" style={{ height: `${item.lastWeek}%` }}></div>
+              <div className="w-3 bg-[#FFB648] rounded-t-full" style={{ height: `${item.thisWeek}%` }}></div>
             </div>
             <span className={`text-[11px] mt-2 font-semibold ${item.day === 'Wed' ? 'text-[#4E4CB8]' : 'text-gray-300'}`}>
               {item.day}

@@ -7,10 +7,36 @@ import DataTable from "../componants/arjun/dataTable";
 const CompletedBookingPage = () => {
   const navigate = useNavigate();
   const [openMenuId, setOpenMenuId] = useState(null);
-
-  // --- Pagination State ---
-  // The logic is now handled inside DataTable based on this state
   const [currentPage, setCurrentPage] = useState(1);
+
+  // 1. STATEFUL DATA
+  const [bookingData, setBookingData] = useState([
+    { id: "1", name: "Samanta William", idNum: "#123456781", service: "Tap Repair", category: "Plumbing", provider: "Karen Hope", location: "Jakarta", date: "March 25, 2021" },
+    { id: "2", name: "Tony Stark", idNum: "#123456782", service: "AC Service", category: "Appliance", provider: "Nazrul Islam", location: "New York", date: "March 26, 2021" },
+    { id: "3", name: "Steve Rogers", idNum: "#123456783", service: "Painting", category: "Renovation", provider: "Karan Hope", location: "Brooklyn", date: "March 27, 2021" },
+    { id: "4", name: "Samanta William", idNum: "#123456784", service: "Cleaning", category: "Housekeeping", provider: "Karen Hope", location: "Jakarta", date: "March 28, 2021" },
+    { id: "5", name: "Bruce Banner", idNum: "#123456785", service: "Electrical", category: "Maintenance", provider: "Nazrul Islam", location: "India", date: "March 29, 2021" },
+    { id: "6", name: "Natasha Romanoff", idNum: "#123456786", service: "Security", category: "Protection", provider: "Karan Hope", location: "Russia", date: "March 30, 2021" },
+    { id: "7", name: "Peter Parker", idNum: "#123456787", service: "Network", category: "IT", provider: "Karen Hope", location: "Queens", date: "April 01, 2021" },
+    { id: "8", name: "Wanda Maximoff", idNum: "#123456788", service: "Interior", category: "Design", provider: "Nazrul Islam", location: "Westview", date: "April 02, 2021" },
+    { id: "9", name: "Stephen Strange", idNum: "#123456789", service: "Medical", category: "Health", provider: "Karan Hope", location: "London", date: "April 03, 2021" },
+    { id: "10", name: "Carol Danvers", idNum: "#123456790", service: "Energy", category: "Power", provider: "Karen Hope", location: "Space", date: "April 04, 2021" },
+    { id: "11", name: "Thor Odinson", idNum: "#123456791", service: "Hammer Repair", category: "Tools", provider: "Nazrul Islam", location: "Asgard", date: "April 05, 2021" },
+    { id: "12", name: "Loki Laufeyson", idNum: "#123456792", service: "Illusion", category: "Magic", provider: "Karan Hope", location: "Asgard", date: "April 06, 2021" },
+  ]);
+
+  // 2. DELETE FUNCTION WITH CONFIRMATION
+  const handleDeleteSelected = (idsToDelete) => {
+    // Determine the message based on single or bulk delete
+    const message = idsToDelete.length === 1 
+      ? "Are you sure you want to delete this booking?" 
+      : `Are you sure you want to delete ${idsToDelete.length} bookings?`;
+
+    if (window.confirm(message)) {
+      setBookingData((prev) => prev.filter((item) => !idsToDelete.includes(item.id)));
+      setOpenMenuId(null); // Close any open action menus
+    }
+  };
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -51,16 +77,20 @@ const CompletedBookingPage = () => {
 
           {openMenuId === row.id && (
             <>
+              {/* Overlay to close menu on outside click */}
               <div className="fixed inset-0 z-10" onClick={() => setOpenMenuId(null)}></div>
               <div className="absolute right-0 top-8 w-32 bg-white border border-gray-100 rounded-lg shadow-xl z-20 overflow-hidden text-left">
                 <button 
                   onClick={() => navigate("/combookingsdetails")} 
                   className="w-full px-4 py-2 text-sm text-[#303972] hover:bg-gray-50 flex items-center gap-2"
                 >
-                  <span>📄</span> Details
+                  <span role="img" aria-label="details">📄</span> Details
                 </button>
-                <button className="w-full px-4 py-2 text-sm text-red-500 hover:bg-red-50 flex items-center gap-2">
-                  <span>🗑️</span> Delete
+                <button 
+                  onClick={() => handleDeleteSelected([row.id])}
+                  className="w-full px-4 py-2 text-sm text-red-500 hover:bg-red-50 flex items-center gap-2"
+                >
+                  <span role="img" aria-label="delete">🗑️</span> Delete
                 </button>
               </div>
             </>
@@ -68,22 +98,6 @@ const CompletedBookingPage = () => {
         </div>
       )
     }
-  ];
-
-  // Added more records to test the 10-item page limit
-  const data = [
-    { id: "1", name: "Samanta William", idNum: "#123456781", service: "Tap Repair", category: "Plumbing", provider: "Karen Hope", location: "Jakarta", date: "March 25, 2021" },
-    { id: "2", name: "Tony Stark", idNum: "#123456782", service: "AC Service", category: "Appliance", provider: "Nazrul Islam", location: "New York", date: "March 26, 2021" },
-    { id: "3", name: "Steve Rogers", idNum: "#123456783", service: "Painting", category: "Renovation", provider: "Karan Hope", location: "Brooklyn", date: "March 27, 2021" },
-    { id: "4", name: "Samanta William", idNum: "#123456784", service: "Cleaning", category: "Housekeeping", provider: "Karen Hope", location: "Jakarta", date: "March 28, 2021" },
-    { id: "5", name: "Bruce Banner", idNum: "#123456785", service: "Electrical", category: "Maintenance", provider: "Nazrul Islam", location: "India", date: "March 29, 2021" },
-    { id: "6", name: "Natasha Romanoff", idNum: "#123456786", service: "Security", category: "Protection", provider: "Karan Hope", location: "Russia", date: "March 30, 2021" },
-    { id: "7", name: "Peter Parker", idNum: "#123456787", service: "Network", category: "IT", provider: "Karen Hope", location: "Queens", date: "April 01, 2021" },
-    { id: "8", name: "Wanda Maximoff", idNum: "#123456788", service: "Interior", category: "Design", provider: "Nazrul Islam", location: "Westview", date: "April 02, 2021" },
-    { id: "9", name: "Stephen Strange", idNum: "#123456789", service: "Medical", category: "Health", provider: "Karan Hope", location: "London", date: "April 03, 2021" },
-    { id: "10", name: "Carol Danvers", idNum: "#123456790", service: "Energy", category: "Power", provider: "Karen Hope", location: "Space", date: "April 04, 2021" },
-    { id: "11", name: "Thor Odinson", idNum: "#123456791", service: "Hammer Repair", category: "Tools", provider: "Nazrul Islam", location: "Asgard", date: "April 05, 2021" },
-    { id: "12", name: "Loki Laufeyson", idNum: "#123456792", service: "Illusion", category: "Magic", provider: "Karan Hope", location: "Asgard", date: "April 06, 2021" },
   ];
 
   return (
@@ -99,18 +113,18 @@ const CompletedBookingPage = () => {
             showSearch={true}
           >
             <div className="p-4 sm:p-6 lg:p-8 flex-1">
-              <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-                <div className="overflow-x-auto scrollbar-hide">
-                  <div className="min-w-[1000px] lg:min-w-full">
-                     <DataTable 
-                       columns={columns} 
-                       data={data} 
-                       currentPage={currentPage}
-                       onPageChange={handlePageChange}
-                     />
-                  </div>
-                </div>
-              </div>
+              {/* Note: If your DataTable component also has window.confirm, 
+                  bulk deletes will trigger the confirm dialog twice. 
+                  You may want to remove the confirm inside DataTable 
+                  since it's now handled here.
+              */}
+              <DataTable 
+                columns={columns} 
+                data={bookingData} 
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+                onDeleteSelected={handleDeleteSelected}
+              />
             </div>
           </AdminMain114>
         </div>
