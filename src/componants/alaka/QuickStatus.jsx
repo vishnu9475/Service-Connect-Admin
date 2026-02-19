@@ -36,7 +36,7 @@ function DashboardStats() {
           value="932"
           percent="+10%"
           trend="text-green-500"
-          bg="bg-indigo-600"
+          bg="bg-[#4D44B5]"
         />
 
         <StatCard
@@ -45,7 +45,7 @@ function DashboardStats() {
           value="932"
           percent="+10%"
           trend="text-green-500"
-          bg="bg-indigo-600"
+          bg="bg-[#4D44B5]"
         />
 
         <StatCard
@@ -54,7 +54,7 @@ function DashboardStats() {
           value="932"
           percent="+10%"
           trend="text-green-500"
-          bg="bg-indigo-600"
+          bg="bg-[#4D44B5]"
         />
 
         {/* ROW 2 — 754 STARTS HERE (FORCED) */}
@@ -73,7 +73,7 @@ function DashboardStats() {
           value="932"
           percent="+10%"
           trend="text-green-500"
-          bg="bg-indigo-600"
+          bg="bg-[#4D44B5]"
         />
 
         <StatCard
@@ -91,7 +91,7 @@ function DashboardStats() {
             <p className="text-sm text-[#A098AE] mb-4">
               Pending Verification
             </p>
-            <div className="w-14 h-14 rounded-full bg-indigo-600 flex items-center justify-center mx-auto mb-3">
+            <div className="w-14 h-14 rounded-full bg-[#4D44B5] flex items-center justify-center mx-auto mb-3">
               <UserIcon className="w-7 h-7 text-white" />
             </div>
             <p className="text-2xl font-bold text-[#303972]">32</p>

@@ -181,9 +181,9 @@ const filtered = tableData.filter((item) => {
           <div className="relative">
             <button
               onClick={() => setStatusOpen((prev) => !prev)}
-              className="px-4 py-2 border border-indigo-400 text-indigo-600 rounded-full text-sm flex items-center gap-2 font-medium">
+              className="px-4 py-2 border border-[#4D44B5] text-[#4D44B5] rounded-full text-sm flex items-center gap-2 font-medium">
               {statusFilter}
-              <span className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[7px] border-t-indigo-600"></span>
+              <span className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[7px] border-[#4D44B5]"></span>
             </button>
             {statusOpen && (
             <div className="absolute right-0 mt-2 w-36 bg-white border rounded-xl shadow-lg z-50">
@@ -197,7 +197,7 @@ const filtered = tableData.filter((item) => {
                 }}
                 className={`w-full text-left px-4 py-2 text-sm hover:bg-indigo-50 ${
                 statusFilter === opt
-                   ? "text-indigo-600 font-medium"
+                   ? "text-[#4D44B5] font-medium"
                    : "text-gray-700"
                 }`}
                 >
@@ -211,21 +211,21 @@ const filtered = tableData.filter((item) => {
               <div className="relative">
                  <button
                     onClick={() => setOpenDateFilter(!openDateFilter)}
-                    className="px-4 py-2 border border-indigo-400 text-indigo-600 rounded-full text-sm flex items-center gap-2 font-medium"> 
-                    <FiFilter className="text-indigo-500" />
+                    className="px-4 py-2 border border-[#4D44B5] text-[#4D44B5] rounded-full text-sm flex items-center gap-2 font-medium"> 
+                    <FiFilter className="text-[#4D44B5]" />
                     {fromDate || toDate ? (
                         <span className="text-gray-700">
                            {fromDate || "Any"} → {toDate || "Any"}
                         </span>
                      ) : (
-                     <span className="text-indigo-600">Filter by date</span>
+                     <span className="text-[#4D44B5]">Filter by date</span>
                     )}
                   </button>
                   {openDateFilter && (
                   <div 
                     ref={dateFilterRef} 
                     className="fixed top-20 right-6 w-80 bg-white border rounded-xl shadow-lg p-4 z-[9999]">
-                    <p className="text-sm font-semibold text-indigo-700 mb-2">
+                    <p className="text-sm font-semibold text-[#4D44B5] mb-2">
                       Select Date Range
                     </p>
                     <div className="flex flex-col gap-2">
@@ -261,7 +261,7 @@ const filtered = tableData.filter((item) => {
                         setOpenDateFilter(false);
                         setPage(1);
                       }}
-                      className="px-4 py-2 bg-indigo-600 text-white rounded-full text-sm">
+                      className="px-4 py-2 bg-[#4D44B5] text-white rounded-full text-sm">
                        Apply
                       </button>
                     </div>
@@ -281,10 +281,22 @@ const filtered = tableData.filter((item) => {
                       deleteSelected();
                       }
                     }}
-                    className="p-2 rounded-full hover:bg-blue-100"
-                    title={`Delete selected (${selectedIds.length})`}
-                  >
-                <FiTrash2 size={20} className="text-blue-600" />
+                    disabled={selectedIds.length === 0}
+                    className={`p-2 rounded-full transition ${
+                       selectedIds.length === 0
+                          ? "bg-gray-100 cursor-not-allowed"
+                          : "hover:bg-blue-100 cursor-pointer"
+                        }`}
+                      title={`Delete selected (${selectedIds.length})`}
+                    >
+                    <FiTrash2
+                       size={20}
+                       className={`${
+                       selectedIds.length === 0
+                          ? "text-gray-400"
+                          : "text-[#4D44B5]"
+                        }`}
+                    />
             </button>
 
                           {/* <button className="px-4 py-2 border border-indigo-400 text-indigo-600 rounded-full text-sm flex items-center gap-2 font-medium">

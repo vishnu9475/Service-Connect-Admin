@@ -41,7 +41,7 @@ function AddCategoryForm143( {onSave, onSaveDraft } ) {
       <div className="relative w-full max-w-[620px] bg-white rounded-2xl shadow-md p-6">
 
         {/* TITLE */}
-        <h2 className="text-[#303972] text-[22px] sm:text-[26px] font-bold mb-6">
+        <h2 className="text-[#303972] text-lg font-bold mb-6">
           Add Category details
         </h2>
 

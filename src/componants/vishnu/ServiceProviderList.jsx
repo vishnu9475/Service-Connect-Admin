@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { LuTrash2 } from "react-icons/lu";
 import {useNavigate} from 'react-router-dom';
-import {
+import { 
   MagnifyingGlassIcon,
   ChevronDownIcon,
   PhoneIcon,
@@ -131,11 +131,11 @@ function ServiceProviderList() {
     const handleBulkDelete = () => {
       if (selected.length === 0) return;
 
-      // // optional confirmation
-      // const confirmDelete = window.confirm(
-      //   `Delete ${selected.length} selected dealer(s)?`
-      // );
-      // if (!confirmDelete) return;
+      // optional confirmation
+      const confirmDelete = window.confirm(
+        `Delete ${selected.length} selected dealer(s)?`
+      );
+      if (!confirmDelete) return;
 
       setUsers((prev) => prev.filter((u) => !selected.includes(u.id)));
       setSelected([]); 
@@ -160,7 +160,7 @@ function ServiceProviderList() {
       {/* TOP BAR */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <div className="flex gap-4">
-          <button className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-1.5 text-xs xl:px-5 xl:py-2 xl:text-sm rounded-full">
+          <button className="flex items-center gap-2 bg-[#4D44B5] text-white px-4 py-1.5 text-xs xl:px-5 xl:py-2 xl:text-sm rounded-full">
             Franchise Name
             <ChevronDownIcon className="w-4 h-4" />
           </button>
@@ -188,7 +188,7 @@ function ServiceProviderList() {
           <button
             onClick={() => setOpenFilter(!openFilter)}
             className="flex items-center gap-2
-              bg-indigo-600 text-white
+              bg-[#4D44B5] text-white
               px-3 py-1.5 text-xs
               xl:px-5 xl:py-2 xl:text-sm
               rounded-full"
@@ -221,8 +221,8 @@ function ServiceProviderList() {
             className="flex items-center gap-2
               px-3 py-1.5 text-xs
               xl:px-4 xl:py-2 xl:text-sm
-              rounded-full border border-indigo-500
-              text-indigo-600"
+              rounded-full border border-[#4D44B5]
+              text-[#4D44B5]"
                     >
             {sort}
             <ChevronDownIcon className="w-4 h-4" />
@@ -233,7 +233,7 @@ function ServiceProviderList() {
             className="    flex items-center gap-2
               px-3 py-1.5 text-xs
               xl:px-4 xl:py-2 xl:text-sm
-              rounded-full bg-indigo-600 text-white
+              rounded-full bg-[#4D44B5] text-white
               whitespace-nowrap"
           >
             <PlusIcon className="w-4 h-4" />
@@ -243,14 +243,14 @@ function ServiceProviderList() {
           <button
               onClick={handleBulkDelete}
               disabled={selected.length === 0}
-              className={`p-2 rounded-full transition ${
-               "hover:bg-red-100"
-              }`}
+              className={`p-2 transition-all flex items-center justify-center ${
+                    selected.length > 0 
+                     ? "text-[#4D44B5] hover:scale-110 active:scale-95" 
+                    : "text-gray-300 cursor-not-allowed"
+                     }`}
             >
-              <TrashIcon
-                className={`w-6 h-6 ${
-                  selected.length === 0 ? "text-gray-400" : "text-red-600"
-                }`}
+              <LuTrash2
+                size={24} strokeWidth={2.5}
               />
             </button>
 
@@ -293,25 +293,27 @@ function ServiceProviderList() {
                     />
                   </td>
 
-                  <td className="px-3 py-4">
+                  <td className="px-3 py-4 ">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-indigo-200 rounded-full" />
+                      <span className="font-medium text-indigo-900">
                       {user.name}
+                      </span>
                     </div>
                   </td>
 
-                  <td className="px-3 py-4 text-center text-indigo-600">{user.id}</td>
-                  <td className="px-3 py-4 text-center">{user.services}</td>
-                  <td className="px-3 py-4 text-center">{user.jobs}</td>
-                  <td className="px-3 py-4 text-left">{user.location}</td>
+                  <td className="px-3 py-4 text-center text-[#4D44B5]">{user.id}</td>
+                  <td className="px-3 py-4 text-center text-[#4D44B5]">{user.services}</td>
+                  <td className="px-3 py-4 text-center text-[#4D44B5]">{user.jobs}</td>
+                  <td className="px-3 py-4 text-left text-[#4D44B5]">{user.location}</td>
 
                   <td className="px-3 py-4 text-center">
                     <div className="flex justify-center gap-2">
                       <button className="p-2 bg-indigo-100 rounded-full">
-                        <PhoneIcon className="w-4 h-4 text-indigo-600" />
+                        <PhoneIcon className="w-4 h-4 text-[#4D44B5]" />
                       </button>
                       <button className="p-2 bg-indigo-100 rounded-full">
-                        <EnvelopeIcon className="w-4 h-4 text-indigo-600" />
+                        <EnvelopeIcon className="w-4 h-4 text-[#4D44B5]" />
                       </button>
                     </div>
                   </td>
@@ -354,7 +356,7 @@ function ServiceProviderList() {
         </div>
 
         {/* PAGINATION */}
-        <div className="flex justify-between items-center mt-6 text-sm">
+        <div className="flex justify-between items-center mt-6 text-sm text-gray-400">
           {/* ✅ fixed variable */}
           <span>Showing {paginated.length} of {processedUsers.length}</span>
 
@@ -372,7 +374,7 @@ function ServiceProviderList() {
                 key={i}
                 onClick={() => setPage(i + 1)}
                 className={`w-9 h-9 rounded-full ${
-                  page === i + 1 ? "bg-indigo-600 text-white" : "border"
+                  page === i + 1 ? "bg-[#4D44B5] text-white" : "border"
                 }`}
               >
                 {i + 1}

@@ -493,7 +493,7 @@ function ServiceProviderVerificationForm() {
         </button>
         <button
           onClick={handleConfirm}
-          className="flex-1 bg-[#65558F] text-white py-2 rounded-full text-sm"
+          className="flex-1 bg-[#4D44B5] text-white py-2 rounded-full text-sm"
         >
           Confirm
         </button>

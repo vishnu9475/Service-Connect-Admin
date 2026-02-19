@@ -7,7 +7,7 @@ const stats = [
     value: "932",
     percent: "+10%",
     trend: "text-green-500",
-    iconBg: "bg-indigo-600",
+    iconBg: "bg-[#4D44B5]",
   },
   {
     title: "Total Dealers",
@@ -21,7 +21,7 @@ const stats = [
     value: "932",
     percent: "+10%",
     trend: "text-green-500",
-    iconBg: "bg-indigo-600",
+    iconBg: "bg-[#4D44B5]",
   },
   {
     title: "Complaints",
@@ -35,7 +35,7 @@ const stats = [
     value: "932",
     percent: "+10%",
     trend: "text-green-500",
-    iconBg: "bg-indigo-600",
+    iconBg: "bg-[#4D44B5]",
   },
   {
     title: "Registration Earnings",
@@ -49,7 +49,7 @@ const stats = [
     value: "932",
     percent: "+10%",
     trend: "text-green-500",
-    iconBg: "bg-indigo-600",
+    iconBg: "bg-[#4D44B5]",
   },
   {
     title: "Ads Earnings",

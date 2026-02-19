@@ -5,7 +5,7 @@ const stats = [
   {
     value: "24K",
     label: "Service Providers",
-    bg: "bg-[#6C5CE7]",
+    bg: "bg-[#4D44B5]",
   },
   {
     value: "82K",

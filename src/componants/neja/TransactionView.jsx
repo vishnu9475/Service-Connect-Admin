@@ -42,7 +42,7 @@ const TransactionDetailsView = ({ onBack }) => {
         <div className="flex gap-3">
           <button
             onClick={onBack}
-            className="px-4 py-2 rounded-full border border-blue-700 text-gray-700 text-sm hover:bg-gray-100"
+            className="px-4 py-2 rounded-full border border-[#4D44B5] text-[#4D44B5] text-sm hover:bg-blue-50"
           >
             Back
           </button>

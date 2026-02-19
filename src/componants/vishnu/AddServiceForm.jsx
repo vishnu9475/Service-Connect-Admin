@@ -91,7 +91,7 @@ function AddServiceForm() {
       <div className="mx-auto max-w-7xl bg-[#EEF0FA] rounded-2xl min-h-[85vh] flex flex-col">
 
         {/* HEADER */}
-        <div className="bg-indigo-600 text-white px-6 py-3 rounded-t-2xl font-medium">
+        <div className="bg-[#4D44B5] text-white px-6 py-3 rounded-t-2xl font-medium">
           Service Details
         </div>
 
@@ -226,7 +226,7 @@ function AddServiceForm() {
 
           <button
             onClick={handleSubmitgo}
-            className="w-full sm:w-auto px-6 py-2 bg-indigo-600 text-white rounded-full text-sm cursor-pointer"
+            className="w-full sm:w-auto px-6 py-2 bg-[#4D44B5] text-white rounded-full text-sm cursor-pointer"
           >
             Submit
           </button>

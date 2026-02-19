@@ -106,7 +106,7 @@ export default function ComplaintsCard119({
               onClick={() => setPage(num)}
               className={`w-6 h-6 rounded-full text-xs ${
                 page === num
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-[#4D44B5] text-white"
                   : "border border-gray-300 text-gray-400"
               }`}
             >

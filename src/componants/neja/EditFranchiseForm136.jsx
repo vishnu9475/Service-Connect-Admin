@@ -76,7 +76,7 @@ const FranchiseeTypeForm136 = ({ typeName = "", mode = "view" }) => {
               </button>
 
               <button
-                className="px-10 py-2.5 rounded-full bg-[#4F46B5] text-white text-sm font-medium"
+                className="px-10 py-2.5 rounded-full bg-[#4D44B5] text-white text-sm font-medium"
                 onClick={() => setIsManualEdit(true)}
               >
                 Edit
@@ -87,21 +87,21 @@ const FranchiseeTypeForm136 = ({ typeName = "", mode = "view" }) => {
           {isEditMode && (
             <>
               <button
-                className="px-8 py-2.5 rounded-full border border-[#4F46B5] text-[#4F46B5] text-sm font-medium hover:bg-[#F3F4FF]"
+                className="px-8 py-2.5 rounded-full border border-[#4D44B5] text-[#4D44B5] text-sm font-medium hover:bg-[#F3F4FF]"
                 onClick={() => alert("Cleared")}
               >
                 Clear
               </button>
 
               <button
-                className="px-8 py-2.5 rounded-full border border-[#4F46B5] text-[#4F46B5] text-sm font-medium hover:bg-[#F3F4FF]"
+                className="px-8 py-2.5 rounded-full border border-[#4D44B5] text-[#4D44B5] text-sm font-medium hover:bg-[#F3F4FF]"
                 onClick={() => alert("Saved as draft!")}
               >
                 Save as Draft
               </button>
 
               <button
-                className="px-10 py-2.5 rounded-full bg-[#4F46B5] text-white text-sm font-medium"
+                className="px-10 py-2.5 rounded-full bg-[#4D44B5] text-white text-sm font-medium"
                 onClick={() => {
                   alert("Saved");
                   if (!isAddNew) setIsManualEdit(false);

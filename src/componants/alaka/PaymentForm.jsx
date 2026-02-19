@@ -23,8 +23,11 @@ function PaymentForm() {
     hour12: true,
   });
 
-  const handleSave = () => {
-  navigate("/PaymentSchedule");
+ const handleSave = () => {
+  const confirmSave = window.confirm("Are you sure you want to save?");
+  if (confirmSave) {
+    navigate("/PaymentSchedule");
+  }
 };
 
   const handleDelete = () => {
@@ -197,7 +200,7 @@ function PaymentForm() {
 
         <button
           onClick={handleSave}
-          className="bg-indigo-600 text-white px-10 py-2 rounded-full"
+          className="bg-[#4D44B5] text-white px-10 py-2 rounded-full"
         >
           Save
         </button>

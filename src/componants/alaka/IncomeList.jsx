@@ -96,7 +96,7 @@ function IncomeList() {
 
             <button
               onClick={handleDownloadReport}
-              className="flex items-center justify-center gap-2 bg-[#5B5FEF] text-white px-4 py-2 rounded-lg text-xs w-full sm:w-auto cursor-pointer"
+              className="flex items-center justify-center gap-2 bg-[#4D44B5] text-white px-4 py-2 rounded-lg text-xs w-full sm:w-auto cursor-pointer"
             >
               <ArrowDownTrayIcon className="w-4 h-4" />
               Download Report

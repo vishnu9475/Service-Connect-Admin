@@ -117,13 +117,7 @@ function PaymentSchedule() {
           Payment Schedules
         </h2>
 
-        <button
-          onClick={() => setShowHistory(true)}
-          className="flex items-center gap-2 border px-3 py-1 rounded-md text-blue-600 text-xs"
-        >
-          <span className="text-lg">⟳</span>
-          View History
-        </button>
+        
       </div>
 
       {/* LIST */}

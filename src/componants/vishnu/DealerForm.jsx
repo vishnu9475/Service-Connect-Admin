@@ -226,7 +226,7 @@ function DealerForm({ onNext }) {
           <button onClick={handleDraft} className="px-8 py-2 rounded-full border border-indigo-500 text-indigo-600 cursor-pointer">
             Save as Draft
           </button>
-          <button onClick={handleSubmitAndPay} className="px-8 py-2 rounded-full bg-indigo-600 text-white cursor-pointer">
+          <button onClick={handleSubmitAndPay} className="px-8 py-2 rounded-full bg-[#4D44B5] text-white cursor-pointer">
             Submit & Pay
           </button>
         </div>

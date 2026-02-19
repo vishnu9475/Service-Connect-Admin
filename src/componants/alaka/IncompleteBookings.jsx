@@ -245,7 +245,7 @@ const IncompleteBookings = () => {
               onClick={() => setPage(n)}
               className={`w-6 h-6 rounded-full ${
                 page === n
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-[#4D44B5] text-white"
                   : "border border-indigo-300 text-indigo-600"
               }`}
             >

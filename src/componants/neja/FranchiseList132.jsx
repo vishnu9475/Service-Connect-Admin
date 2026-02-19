@@ -205,9 +205,9 @@ const totalPages = Math.ceil(sorted.length / PER_PAGE);
           <div className="relative">
               <button
                 onClick={() => setFranchiseTypeOpen((prev) => !prev)}
-                className="px-4 py-2 border border-indigo-400 text-indigo-600 rounded-full text-sm flex items-center gap-2 font-medium">
+                className="px-4 py-2 border border-[#4D44B5] text-[#4D44B5] rounded-full text-sm flex items-center gap-2 font-medium">
                 {FranchiseTypeFilter}
-                <span className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[7px] border-t-indigo-600"></span>
+                <span className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[7px] border-[#4D44B5]"></span>
               </button>
 
               {FranchiseTypeOpen && (
@@ -222,7 +222,7 @@ const totalPages = Math.ceil(sorted.length / PER_PAGE);
                }}
                className={`w-full text-left px-4 py-2 text-sm hover:bg-indigo-50 ${
                FranchiseTypeFilter === opt
-                 ? "text-indigo-600 font-medium"
+                 ? "text-[#4D44B5] font-medium"
                  : "text-gray-700"
                }`}
               >
@@ -236,16 +236,16 @@ const totalPages = Math.ceil(sorted.length / PER_PAGE);
     
           <button 
             onClick={onAddFranchiseType} 
-            className="px-5 py-2 bg-indigo-600 text-white rounded-full text-sm">
+            className="px-5 py-2 bg-[#4D44B5] hover:bg-[#3b348a] text-white rounded-full text-sm">
             Add/Edit Franchisee Type
           </button>
         {/* NEWEST */}
           <div className="relative">
               <button
                  onClick={() => setSortOpen(!sortOpen)}
-                 className="px-4 py-2 border border-indigo-400 text-indigo-600 rounded-full text-sm flex items-center gap-2 font-medium">
+                 className="px-4 py-2 border border-[#4D44B5] text-[#4D44B5] rounded-full text-sm flex items-center gap-2 font-medium">
                 {sortBy}
-                <span className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[7px] border-t-indigo-600"></span>
+                <span className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[7px] border-[#4D44B5]"></span>
               </button>
 
             {sortOpen && (
@@ -259,7 +259,7 @@ const totalPages = Math.ceil(sorted.length / PER_PAGE);
                     setPage(1);
                    }}
                    className={`w-full text-left px-4 py-2 text-sm hover:bg-indigo-50 ${
-                   sortBy === opt ? "text-indigo-600 font-medium" : "text-gray-700"
+                   sortBy === opt ? "text-[#4D44B5] font-medium" : "text-gray-700"
                 }`}>
                 {opt}
               </button>
@@ -271,16 +271,16 @@ const totalPages = Math.ceil(sorted.length / PER_PAGE);
 
           <button 
              onClick={onAdd}
-             className="px-5 py-2 bg-indigo-600 text-white rounded-full text-sm">
+             className="px-5 py-2 bg-[#4D44B5] hover:bg-[#3b348a] text-white rounded-full text-sm">
             + New franchisee
           </button>
         {/* STATUS */}
           <div className="relative">
             <button
               onClick={() => setStatusOpen((prev) => !prev)}
-              className="px-4 py-2 border border-indigo-400 text-indigo-600 rounded-full text-sm flex items-center gap-2 font-medium">
+              className="px-4 py-2 border border-[#4D44B5] text-[#4D44B5] rounded-full text-sm flex items-center gap-2 font-medium">
               {statusFilter}
-              <span className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[7px] border-t-indigo-600"></span>
+              <span className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[7px] border-[#4D44B5]"></span>
             </button>
             {statusOpen && (
             <div className="absolute right-0 mt-2 w-36 bg-white border rounded-xl shadow-lg z-50">
@@ -294,7 +294,7 @@ const totalPages = Math.ceil(sorted.length / PER_PAGE);
                 }}
                 className={`w-full text-left px-4 py-2 text-sm hover:bg-indigo-50 ${
                 statusFilter === opt
-                   ? "text-indigo-600 font-medium"
+                   ? "text-[#4D44B5] font-medium"
                    : "text-gray-700"
                 }`}
                 >
@@ -318,10 +318,22 @@ const totalPages = Math.ceil(sorted.length / PER_PAGE);
                  deleteSelected();
               }
              }}
-             className="p-2 rounded-full hover:bg-blue-100"
-             title={`Delete selected (${selectedIds.length})`}
+             disabled={selectedIds.length === 0}
+             className={`p-2 rounded-full transition ${
+                selectedIds.length === 0
+                  ? "bg-gray-100 cursor-not-allowed"
+                  : "hover:bg-blue-100 cursor-pointer"
+               }`}
+               title={`Delete selected (${selectedIds.length})`}
              >
-             <FiTrash2 size={20} className="text-blue-600" />
+             <FiTrash2
+                size={20}
+                className={`${
+                selectedIds.length === 0
+                    ? "text-gray-400"
+                    : "text-[#4D44B5]"
+                  }`}
+                />
             </button>
 
 

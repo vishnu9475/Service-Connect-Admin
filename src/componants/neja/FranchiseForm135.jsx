@@ -169,13 +169,13 @@ const FranchiseForm135 = ({mode = "new",onPay}) => {
          
           
            {mode === "new" && (
-          <button className="px-6 py-2 border border-indigo-500 text-indigo-600 rounded-full"onClick={() => {
+          <button className="px-6 py-2 border border-[#4D44B5] text-[#4D44B5] rounded-full"onClick={() => {
       alert("Saved as draft!");
     }}>
             Save as Draft
           </button>
          )}
-          <button onClick={onPay} className="px-6 py-2 bg-indigo-600 text-white rounded-full">
+          <button onClick={onPay} className="px-6 py-2 bg-[#4D44B5] text-white rounded-full">
             {mode === "edit" ? "Update" : "Submit & Pay"}
            
           </button>

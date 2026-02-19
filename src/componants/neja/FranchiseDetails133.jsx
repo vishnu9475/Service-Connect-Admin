@@ -46,7 +46,7 @@ const FranchiseDetails133 = ({
       <div className="max-w-6xl mx-auto bg-white rounded-2xl pt-14 p-6 sm:p-8 shadow-sm relative">
         <button
           onClick={onEdit}
-            className="absolute top-3 right-3 sm:top-6 sm:right-6 px-5 py-2 text-sm bg-[#4F46B5] text-white rounded-full z-10">
+            className="absolute top-3 right-3 sm:top-6 sm:right-6 px-5 py-2 text-sm bg-[#4D44B5] text-white rounded-full z-10">
             Edit
         </button>
         {/* TOP HEADER */}
@@ -137,7 +137,7 @@ const FranchiseDetails133 = ({
         <div className="mt-10 flex justify-end">
           <button
             onClick={onViewDashboard}
-            className="px-8 py-3 bg-[#4F46B5] text-white text-sm rounded-lg font-medium"
+            className="px-8 py-3 bg-[#4D44B5] text-white text-sm rounded-lg font-medium"
           >
             VIEW DASHBOARD
           </button>

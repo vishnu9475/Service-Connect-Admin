@@ -162,19 +162,32 @@ function ServiceProviderList() {
 
           <button
             onClick={() => navigate("/Addnewuser")}
-            className="w-[140px] flex items-center justify-center gap-2 px-5 py-2 rounded-full bg-indigo-600 text-white text-sm whitespace-nowrap"
+            className="w-[140px] flex items-center justify-center gap-2 px-5 py-2 rounded-full bg-[#4D44B5] text-white text-sm whitespace-nowrap"
           >
             <PlusIcon className="w-4 h-4" />
             New User
           </button>
 
-          <button
+          {/* <button
             onClick={handleBulkDelete}
             className="w-10 h-10 flex items-center justify-center text-blue-600 hover:text-blue-800"
             title="Delete selected"
           >
             <TrashIcon className="w-5 h-5" />
-          </button>
+          </button> */}
+          <button
+  onClick={handleBulkDelete}
+  disabled={selected.length === 0}
+  className={`w-10 h-10 flex items-center justify-center transition-all ${
+    selected.length > 0
+      ? "text-[#4D44B5] hover:scale-110 active:scale-95"
+      : "text-gray-300 cursor-not-allowed"
+  }`}
+  title="Delete selected"
+>
+  <TrashIcon className="w-5 h-5" />
+</button>
+
         </div>
       </div>
 
@@ -287,7 +300,7 @@ function ServiceProviderList() {
       {/* PAGINATION */}
       <div className="flex justify-between items-center mt-6 text-sm text-gray-400">
         <p>
-          Showing {processedUsers.length} of {users.length}
+          Showing {processedUsers.length} of {users.length} data
         </p>
         <div className="flex items-center gap-1">
           <button disabled={page === 1} onClick={() => setPage((p) => p - 1)}>
@@ -299,7 +312,7 @@ function ServiceProviderList() {
               onClick={() => setPage(n)}
               className={`w-6 h-6 rounded-full text-xs ${
                 page === n
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-[#4D44B5] text-white"
                   : "border border-gray-300 text-gray-400"
               }`}
             >

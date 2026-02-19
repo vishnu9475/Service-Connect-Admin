@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { LuTrash2 } from "react-icons/lu";
 import {useNavigate} from 'react-router-dom';
 import {
   MagnifyingGlassIcon,
@@ -111,11 +111,11 @@ function DealersList() {
   const handleBulkDelete = () => {
   if (selected.length === 0) return;
 
-  // // optional confirmation
-  // const confirmDelete = window.confirm(
-  //   `Delete ${selected.length} selected dealer(s)?`
-  // );
-  // if (!confirmDelete) return;
+  // optional confirmation
+  const confirmDelete = window.confirm(
+    `Delete ${selected.length} selected dealer(s)?`
+  );
+  if (!confirmDelete) return;
 
   setDealers((prev) => prev.filter((d) => !selected.includes(d.id)));
   setSelected([]); 
@@ -156,8 +156,8 @@ function DealersList() {
               className="flex items-center gap-1.5
                 px-3 py-1.5 text-xs
                 lg:px-4 lg:py-2 lg:text-sm
-                rounded-full border border-indigo-500
-                text-indigo-600"
+                rounded-full border border-[#4D44B5]
+                text-[#4D44B5]"
             >
               {filter}
               <ChevronDownIcon className="w-4 h-4 lg:w-5 lg:h-5" />
@@ -187,8 +187,8 @@ function DealersList() {
               className="flex items-center gap-1.5
                 px-3 py-1.5 text-xs
                 lg:px-4 lg:py-2 lg:text-sm
-                rounded-full border border-indigo-500
-                text-indigo-600"
+                rounded-full border border-[#4D44B5]
+                text-[#4D44B5]"
             >
               {sort}
               <ChevronDownIcon className="w-4 h-4" />
@@ -199,7 +199,7 @@ function DealersList() {
               className="flex items-center gap-1.5
                 px-3 py-1.5 text-xs
                 lg:px-4 lg:py-2 lg:text-sm
-                rounded-full bg-indigo-600 text-white"
+                rounded-full bg-[#4D44B5] text-white"
             >
               <PlusIcon className="w-4 h-4 lg:w-5 lg:h-5" />
               New Dealers
@@ -208,12 +208,14 @@ function DealersList() {
             <button
               onClick={handleBulkDelete}
               disabled={selected.length === 0}
-              className="p-1.5 rounded-full hover:bg-red-100 transition"
+              className={`p-2 transition-all flex items-center justify-center ${
+                    selected.length > 0 
+                     ? "text-[#4D44B5] hover:scale-110 active:scale-95" 
+                    : "text-gray-300 cursor-not-allowed"
+                     }`}
             >
-              <TrashIcon
-                className={`w-4 h-4 ${
-                  selected.length === 0 ? "text-gray-400" : "text-red-600"
-                }`}
+              <LuTrash2
+                size={24} strokeWidth={2.5}
               />
             </button>
 
@@ -265,17 +267,17 @@ function DealersList() {
                     </div>
                   </td>
 
-                  <td className="py-4 text-indigo-600">{dealer.code}</td>
+                  <td className="py-4 text-[#4D44B5]">{dealer.code}</td>
                   <td className="py-4 text-center text-indigo-700">{dealer.providers}</td>
                   <td className="py-4 text-indigo-700">{dealer.location}</td>
 
                   <td className="py-4">
                     <div className="flex justify-center gap-2">
                       <button className="p-2 rounded-full bg-indigo-100">
-                        <PhoneIcon className="w-4 h-4 text-indigo-600" />
+                        <PhoneIcon className="w-4 h-4 text-[#4D44B5]" />
                       </button>
                       <button className="p-2 rounded-full bg-indigo-100">
-                        <EnvelopeIcon className="w-4 h-4 text-indigo-600" />
+                        <EnvelopeIcon className="w-4 h-4 text-[#4D44B5]" />
                       </button>
                     </div>
                   </td>
@@ -298,7 +300,7 @@ function DealersList() {
                   <td className="py-4 text-center relative">
                     <EllipsisHorizontalIcon
                       onClick={() => setOpenMenu(openMenu === i ? null : i)}
-                      className="w-5 h-5 text-gray-400 cursor-pointer mx-auto"
+                      className="w-5 h-5 cursor-pointer mx-auto"
                     />
 
                     {openMenu === i && (
@@ -341,7 +343,7 @@ function DealersList() {
               onClick={() => setPage(page - 1)}
               className="w-9 h-9 grid place-items-center rounded-full border"
             >
-              <ChevronLeftIcon className="w-4 h-4 text-indigo-600" />
+              <ChevronLeftIcon className="w-4 h-4 text-[#4D44B5]" />
             </button>
 
             {[...Array(totalPages)].map((_, i) => (
@@ -349,7 +351,7 @@ function DealersList() {
                 key={i}
                 onClick={() => setPage(i + 1)}
                 className={`w-9 h-9 grid place-items-center rounded-full ${
-                  page === i + 1 ? "bg-indigo-600 text-white" : "border"
+                  page === i + 1 ? "bg-[#4D44B5] text-white" : "border"
                 }`}
               >
                 {i + 1}
@@ -361,7 +363,7 @@ function DealersList() {
               onClick={() => setPage(page + 1)}
               className="w-9 h-9 grid place-items-center rounded-full border"
             >
-              <ChevronRightIcon className="w-4 h-4 text-indigo-600" />
+              <ChevronRightIcon className="w-4 h-4 text-[#4D44B5]" />
             </button>
           </div>
         </div>

@@ -33,7 +33,10 @@ const DailyWorkForm140 = ({ title = "Daily work" }) => {
 
   const deleteRow = (index) => {
     if (!isEditMode) return;
-    setRows(rows.filter((_, i) => i !== index));
+      const ok = window.confirm("Are you sure you want to delete this row?");
+    if (ok) {
+      setRows(rows.filter((_, i) => i !== index));
+    }
   };
 
   return (
@@ -87,7 +90,7 @@ const DailyWorkForm140 = ({ title = "Daily work" }) => {
             {isEditMode && (
               <button
                 onClick={addRow}
-                className="flex items-center gap-2 text-sm font-medium text-[#303972]"
+                className="flex items-center gap-2 text-sm font-medium text-[#4D44B5]"
               >
                 <Plus size={16} />
                 Add new
@@ -123,9 +126,9 @@ const DailyWorkForm140 = ({ title = "Daily work" }) => {
                   {isEditMode && (
                     <button
                       onClick={() => deleteRow(index)}
-                      className="h-11 w-11 flex items-center justify-center rounded-md hover:bg-red-50"
+                      className="h-11 w-11 flex items-center justify-center rounded-md hover:bg-blue-50"
                     >
-                      <Trash2 size={18} className="text-red-500" />
+                      <Trash2 size={18} className="text-[#4D44B5]" />
                     </button>
                   )}
                 </div>
@@ -151,7 +154,7 @@ const DailyWorkForm140 = ({ title = "Daily work" }) => {
               </button>
 
               <button
-                className="px-10 py-2.5 rounded-full bg-[#4F46B5] text-white text-sm font-medium"
+                className="px-10 py-2.5 rounded-full bg-[#4D44B5] text-white text-sm font-medium"
                 onClick={() => setIsManualEdit(true)}
               >
                 Edit
@@ -163,21 +166,21 @@ const DailyWorkForm140 = ({ title = "Daily work" }) => {
           {isEditMode && (
             <>
               <button
-                className="px-8 py-2.5 rounded-full border border-[#4F46B5] text-[#4F46B5] text-sm font-medium hover:bg-[#F3F4FF]"
+                className="px-8 py-2.5 rounded-full border border-[#4D44B5] text-[#4D44B5] text-sm font-medium hover:bg-[#F3F4FF]"
                 onClick={clearAll}
               >
                 Clear
               </button>
 
               <button
-                className="px-8 py-2.5 rounded-full border border-[#4F46B5] text-[#4F46B5] text-sm font-medium hover:bg-[#F3F4FF]"
+                className="px-8 py-2.5 rounded-full border border-[#4D44B5] text-[#4D44B5] text-sm font-medium hover:bg-[#F3F4FF]"
                 onClick={() => alert("Saved as draft!")}
               >
                 Save as Draft
               </button>
 
               <button
-                className="px-10 py-2.5 rounded-full bg-[#4F46B5] text-white text-sm font-medium"
+                className="px-10 py-2.5 rounded-full bg-[#4D44B5] text-white text-sm font-medium"
                 onClick={() => {
                   alert("Saved");
                   if (!isAddNew) {

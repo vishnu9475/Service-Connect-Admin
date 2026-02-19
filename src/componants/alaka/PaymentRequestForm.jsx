@@ -327,7 +327,7 @@ function PaymentRequest() {
 
         <button
           onClick={handleConfirm}
-          className="w-40 bg-[#65558F] text-white py-2 rounded-full text-sm"
+          className="w-40 bg-[#4D44B5] text-white py-2 rounded-full text-sm"
         >
           Confirm
         </button>

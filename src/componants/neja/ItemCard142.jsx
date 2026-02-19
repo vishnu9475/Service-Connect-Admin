@@ -41,7 +41,7 @@ export default function ItemCard142({
           {/* SORT BUTTON */}
           <button
             onClick={() => setOpenSort(!openSort)}
-            className="flex items-center gap-2 px-4 sm:px-6 py-1.5 text-xs bg-[#6C63FF] text-white rounded-full"
+            className="flex items-center gap-2 px-4 sm:px-6 py-1.5 text-xs bg-[#4D44B5] text-white rounded-full"
           >
             {sortFilter} <FiChevronDown size={12} />
           </button>
@@ -57,7 +57,7 @@ export default function ItemCard142({
                     setOpenSort(false);
                   }}
                   className={`block w-full text-left px-3 py-2 hover:bg-[#F3F4FF] ${
-                    sortFilter === option ? "text-[#6C63FF] font-medium" : ""
+                    sortFilter === option ? "text-[#4D44B5] font-medium" : ""
                   }`}
                 >
                   {option}
