@@ -1,20 +1,20 @@
 import React from "react";
-import AdminSideMenu from "../componants/neja/AdminSideMenu113";
-import Header from "../componants/neja/AdminMain114";
-import SubCategoryList from "../componants/midhun/SubCategoryList";
+import AdminSideMenu113 from "../componants/neja/AdminSideMenu113";
+import Header114 from "../componants/neja/AdminMain114";
+import SubCategoryList1 from "../componants/midhun/SubCategoryList";
 
 const Page121 = () => {
   return (
     <div className="flex">
       {/* Sidebar */}
-      <AdminSideMenu />
+      <AdminSideMenu113 />
 
       {/* Main Content (starts AFTER sidebar) */}
       <div className="flex-1 ml-0 lg:ml-[260px]">
-        <Header
+        <Header114
         title="Sub Categories">
-        <SubCategoryList />
-        </Header>
+        <SubCategoryList1 />
+        </Header114>
       </div>
     </div>
   );
