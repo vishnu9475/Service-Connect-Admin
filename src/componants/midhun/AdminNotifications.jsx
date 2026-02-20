@@ -94,14 +94,14 @@ export default function AdminNotifications() {
   };
 
   return (
-    <div className=" bg-gray-100 flex  sm:px-4 sm:py-6">
+    <div className=" flex  sm:px-4 sm:py-6">
       
       {/* CARD */}
       <div className="w-full max-w-[760px] bg-white rounded-md p-6">
 
         {/* Header */}
         <div
-          className="px-4 sm:px-6 py-4 text-sm font-semibold text-orange-500"
+          className="sm:px-6 py-3 text-sm font-semibold text-orange-500"
           style={aldrich}
         >
           Notifications

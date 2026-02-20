@@ -43,9 +43,9 @@ export default function NewNotificationForm() {
     setSendVia({ ...sendVia, [key]: !sendVia[key] });
 
   return (
-    <div className="flex   bg-gray-100">
+    <div className="flex">
       
-      <div className="w-full max-w-[760px] px-4">
+      <div className="w-full max-w-[760px] px-4  mt-4">
         
         {/*  CHANGED: removed min-w to avoid mobile overflow */}
         <div className="bg-white rounded-2xl w-full max-w-[560px] p-6 shadow-sm">

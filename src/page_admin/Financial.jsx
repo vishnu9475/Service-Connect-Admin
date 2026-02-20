@@ -60,7 +60,7 @@ const Page127 = () => {
 
         <Chart/>
 
-        <div className='flex flex-col lg:flex-row gap-4'>
+        <div className='flex flex-col lg:flex-row gap-4  mt-3'>
           <SubscriptionService/>
           <Expense/>
         </div>

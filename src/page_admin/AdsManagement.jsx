@@ -34,18 +34,18 @@
 
 import React from "react";
 import AdminSideMenu from '../componants/neja/AdminSideMenu113'
-import StatCardSection115  from '../componants/midhun/StatCardSection115.jsx'
 import DropDownSet from "../componants/midhun/DropdownSet.jsx";
 import AdCategory from "../componants/midhun/AdCategory.jsx";
 import AdList from "../componants/midhun/AdList.jsx";
-import AdminMain from "../componants/neja/AdminMain114.jsx";
-
+import AdminMain from "../componants/neja/AdminMain114";
+import StatCard115 from "../componants/midhun/StatCard115.jsx";
+import { ImUserTie } from "react-icons/im";
 const Page123 = () => {
   return (
-    <div className="flex min-h-screen bg-[#F3F4FF]">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-[#F3F4FF]">
 
       {/* SIDEBAR */}
-      <aside className="hidden lg:flex lg:w-[260px] shrink-0">
+      <aside className="w-full lg:w-[260px] lg:shrink-0">
         <AdminSideMenu/>
       </aside>
 
@@ -53,17 +53,67 @@ const Page123 = () => {
       <main className="flex-1 flex flex-col overflow-x-hidden">
 
         {/* ✅ AdminMain must wrap content */}
+        
         <AdminMain title="Ads Management">
 
           {/* PAGE CONTAINER */}
-          <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 py-6 space-y-6">
+          <div className="  mx-auto px-4 sm:px-6 py-6 space-y-6">
+          <div className="flex gap-3 w-full flex-col lg:flex-row">
+            
+       <StatCard115
+            Icon={ImUserTie}
+            title='Total Adds'
+             value='932'
+             iconBg = "bg-[#4D44B5]"
+             
+            text={
+              <>
+                <span className="text-green-500">+10%</span> than last month
+              </>
+            }
+          />
+           <StatCard115
+            Icon={ImUserTie}
+            title='Total Ads Revenue'
+             value='932'
+             iconBg = "bg-[#FB7D5B]"
+            text={
+              <>
+                <span className="text-green-500">+10%</span> than last month
+              </>
+            }
+          />
+           <StatCard115
+            Icon={ImUserTie}
+            title='Boosted Profile '
+             value='932'iconBg = "bg-[#4D44B5]"
 
+            text={
+              <>
+                <span className="text-green-500">+10%</span> than last month
+              </>
+            }
+          />
+           <StatCard115
+            Icon={ImUserTie}
+            title='Other Adds'
+             value='932'
+             iconBg = "bg-[#FB7D5B]"
+            text={
+              <>
+                <span className="text-green-500">+10%</span> than last month
+              </>
+            }
+          />
+          </div>
             {/* STATS + DROPDOWN */}
-            <StatCardSection115 />
+           
+          
+          
             <DropDownSet />
 
             {/* CATEGORY + LIST */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
               <div className="lg:col-span-1">
                 <AdCategory />
               </div>

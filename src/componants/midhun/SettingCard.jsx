@@ -23,7 +23,7 @@ export default function SettingCard() {
   };
 
   return (
-    <div className=" bg-gray-100 p-6 flex justify-center">
+    <div className="p-6 flex justify-center">
       
       {/* RESPONSIVE SCROLL WRAPPER */}
       <div className="w-full  px-4">
