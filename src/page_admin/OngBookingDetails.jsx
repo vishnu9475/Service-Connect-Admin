@@ -1,5 +1,5 @@
 import React from "react";
-import AdminSideMenu113 from "../componants/arjun/AdminSideMenu113";
+import AdminSideMenu113 from "../componants/neja/AdminSideMenu113";
 import AdminMain114 from  "../componants/neja/AdminMain114";
 import BookingCard from "../componants/arjun/book";
 
