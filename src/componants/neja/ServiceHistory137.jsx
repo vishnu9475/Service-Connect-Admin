@@ -53,9 +53,9 @@ const DATA = [
     agent: "abc",
     providerId: "R01A0SI002",
     customerId: "R01A0SI002",
-    customerType: "Service Provider",
-    jobType: "One Time Lead",
-    status: "Active",
+    customerType: "Customer",
+    jobType: "Daily Work",
+    status: "Incompleted",
     createdAt: "2021-01-15",
     updatedAt: "2020-05-10",
   },
@@ -69,7 +69,7 @@ const DATA = [
     customerId: "R01A0SI002",
     customerType: "Service Provider",
     jobType: "One Time Lead",
-    status: "Active",
+    status: "Inactive",
     createdAt: "2024-01-15",
     updatedAt: "2023-05-10",
   },
@@ -257,7 +257,7 @@ const totalPages = Math.ceil(sorted.length / PER_PAGE);
             </button>
             {statusOpen && (
             <div className="absolute right-0 mt-2 w-36 bg-white border rounded-xl shadow-lg z-50">
-               {["All", "Completed", "Active"].map((opt) => (
+               {["All", "Completed", "Incompleted", "Active", "Inactive"].map((opt) => (
                <button
                   key={opt}
                   onClick={() => {
@@ -388,10 +388,16 @@ const totalPages = Math.ceil(sorted.length / PER_PAGE);
 
                 <td className="p-4">
                   <span
-                    className={`px-3 py-1 text-xs rounded-full text-white ${
+                    className={`inline-flex items-center justify-center min-w-[90px] h-6 px-3 text-xs font-medium rounded-full ${
                       item.status === "Completed"
-                        ? "bg-green-500"
-                        : "bg-orange-500"
+                        ? "bg-green-500 text-green-100"
+                        : item.status === "Active"
+                        ? "bg-orange-500 text-green-100"
+                        : item.status === "Inactive"
+                        ? "bg-gray-500 text-green-100"
+                        : item.status === "Incompleted"
+                        ? "bg-red-500 text-green-100"
+                        : "bg-blue-500 text-green-100"
                     }`}
                   >
                     {item.status}

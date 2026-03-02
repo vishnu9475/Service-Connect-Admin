@@ -1,11 +1,20 @@
+// import React from 'react'
+
+// const SubscribeEditPage = () => {
+//   return (
+//     <div>SubscribeEditPage</div>
+//   )
+// }
+
+// export default SubscribeEditPage
+
 import React from "react";
 import { useNavigate,useLocation } from "react-router-dom";
 import AdminSideMenu113 from "../componants/neja/AdminSideMenu113";
 import AdminMain114 from "../componants/neja/AdminMain114";
-import FranchiseType134 from "../componants/neja/FranchiseType134";
-import FranchiseForm135 from "../componants/neja/FranchiseForm135";
+import SubscribeEditComp from "../componants/midhun/SubscribeEditComp";
 
-const Page114 = () => {
+const SubscribeEditPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const mode = location.state?.mode || "new";
@@ -28,7 +37,7 @@ const Page114 = () => {
       {/* MAIN CONTENT */}
       <div className="flex-1 lg:ml-64">
         <AdminMain114
-          title={mode === "edit" ? "Edit Franchisee" : "New Franchisee"}
+          title="Edit"
           userName="Nabila"
           userRole="Admin"
           showSearch={false}
@@ -37,16 +46,11 @@ const Page114 = () => {
           <div className="flex flex-col xl:flex-row gap-3 xl:gap-4">
 
             {/* LEFT : TYPE CARD */}
-            <div className="w-full xl:w-70 shrink-0">
-              <FranchiseType134
-                showEdit={false}
-                showAdd={false}
-              />
-            </div>
+           
 
             {/* RIGHT : FORM CARD */}
             <div className="flex-1 bg-white rounded-[20px] min-w-0 overflow-hidden">
-              <FranchiseForm135
+              <SubscribeEditComp
               mode={mode}
               onPay={handlePay}
               
@@ -61,4 +65,4 @@ const Page114 = () => {
   );
 };
 
-export default Page114;
+export default SubscribeEditPage;

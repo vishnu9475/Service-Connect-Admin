@@ -44,7 +44,7 @@ export default function ItemCard() {
               <img
                 src={Pic}
                 alt={title}
-                className="w-full h-[150px] object-cover rounded-xl"
+                className="w-full h-[150px] object-cover object-top rounded-xl"
               />
 
               {/* TITLE + DATE */}

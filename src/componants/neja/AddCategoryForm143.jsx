@@ -121,18 +121,25 @@ function AddCategoryForm143( {onSave, onSaveDraft } ) {
            
           <button
             onClick={handleDelete}
-            className="h-[34px] w-full sm:w-[100px] rounded-full bg-[#FF3D00] text-white text-[12px]"
+            className="h-[34px] w-full sm:w-[100px] bg-red-600 text-white rounded-full hover:bg-red-700 transition text-[12px]"
           >
             Delete
           </button>
          <button
-            onClick={onSaveDraft}
-            className="h-[34px] w-full sm:w-[100px] rounded-full bg-[#e93e24] text-white text-[12px]"
+            onClick={() => {
+            alert("Category saved as draft!");
+            onSaveDraft && onSaveDraft();
+          }}
+            className="h-[34px] w-full sm:w-[100px] bg-orange-600 text-white rounded-full hover:bg-orange-500 transition text-[12px]"
+            
           >
             Save As Draft
           </button>
           <button
-            onClick={onSave}
+              onClick={() => {
+              alert("Category saved successfully!");
+              onSave && onSave();
+            }}
             className="h-[34px] w-full sm:w-[100px] rounded-full bg-[#4D44B5] text-white text-[12px]"
           >
             Save

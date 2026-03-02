@@ -29,7 +29,7 @@ const UserDetailBanner = () => {
 
   const viewUser = () => {
     setMenuOpen(false);
-    navigate("/ServiceProviderDetails"); 
+    navigate("/DealerDetails"); 
   };
 
   return (

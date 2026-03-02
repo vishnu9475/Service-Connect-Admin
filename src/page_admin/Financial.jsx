@@ -58,7 +58,12 @@ const Page127 = () => {
 
         </div>
 
-        <Chart/>
+       <Chart
+  expenseData={[0,75,30,40,50,60,70,80,90,60,40,20]}
+  incomeData={[25,50,35,45,55,65,75,85,95,70,50,30]}
+  expenseValue={1245}
+  incomeValue={1356}
+/>
 
         <div className='flex flex-col lg:flex-row gap-4  mt-3'>
           <SubscriptionService/>

@@ -166,14 +166,14 @@ const DailyWorkForm140 = ({ title = "Daily work" }) => {
           {isEditMode && (
             <>
               <button
-                className="px-8 py-2.5 rounded-full border border-[#4D44B5] text-[#4D44B5] text-sm font-medium hover:bg-[#F3F4FF]"
+                className="px-8 py-2.5 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition text-sm font-medium"
                 onClick={clearAll}
               >
                 Clear
               </button>
 
               <button
-                className="px-8 py-2.5 rounded-full border border-[#4D44B5] text-[#4D44B5] text-sm font-medium hover:bg-[#F3F4FF]"
+                className="px-8 py-2.5 bg-orange-600 text-white rounded-full hover:bg-orange-500 transition text-sm font-medium"
                 onClick={() => alert("Saved as draft!")}
               >
                 Save as Draft

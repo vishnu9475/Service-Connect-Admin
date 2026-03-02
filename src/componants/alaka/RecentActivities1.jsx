@@ -49,7 +49,7 @@ function RecentActivities() {
 
   /* 🔹 VIEW MORE CLICK */
   const handleViewMore = () => {
-    navigate("/Franchisee");
+    navigate("/ServiceHistory");
   };
 
   return (

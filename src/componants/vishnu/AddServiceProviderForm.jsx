@@ -26,6 +26,7 @@ function AddServiceProviderForm({ onSubmit }) {
     house: "",
     landmark: "",
     pincode: "",
+    branch: "",
     district: "",
     state: "",
     description: "", // ✅ NEW
@@ -77,9 +78,11 @@ function AddServiceProviderForm({ onSubmit }) {
   };
 
   const handleSubmitgo = () => {
-    handleSubmit();
-    navigate("/serviceproviderList");
-  }
+    if (!window.confirm("Submit?")) return;
+    setFormData(initialState);
+    setPhotoPreview(null);
+    setIdCopyName("");
+  };
 
   return (
     <div className="min-h-screen">
@@ -142,6 +145,7 @@ function AddServiceProviderForm({ onSubmit }) {
             <Input placeholder="House Name" value={formData.house} onChange={(v) => handleChange("house", v)} />
             <Input placeholder="Landmark" value={formData.landmark} onChange={(v) => handleChange("landmark", v)} />
             <Input placeholder="Pincode" value={formData.pincode} onChange={(v) => handleChange("pincode", v)} />
+            <Input placeholder="Branch" value={formData.branch} onChange={(v) => handleChange("branch", v)} />
             <Input placeholder="District" value={formData.district} onChange={(v) => handleChange("district", v)} />
             <Input placeholder="State" value={formData.state} onChange={(v) => handleChange("state", v)} />
 
@@ -195,8 +199,8 @@ function AddServiceProviderForm({ onSubmit }) {
           <button onClick={handleDelete} className="px-5 py-2 bg-red-500 text-white rounded-full text-sm cursor-pointer">
             Delete
           </button>
-          <button onClick={handleDraft} className="px-5 py-2 border border-indigo-500 text-indigo-600 rounded-full text-sm bg-white cursor-pointer">
-            Draft
+          <button onClick={handleDraft} className="px-5 py-2 border  bg-orange-500 rounded-full text-sm text-white cursor-pointer">
+            Save Draft
           </button>
           <button onClick={handleSubmitgo} className="px-5 py-2 bg-indigo-600 text-white rounded-full text-sm cursor-pointer">
             Submit

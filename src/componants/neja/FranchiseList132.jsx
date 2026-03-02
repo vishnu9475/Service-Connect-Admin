@@ -416,20 +416,30 @@ const totalPages = Math.ceil(sorted.length / PER_PAGE);
                 <td className="p-4">{item.location}</td>
 
                 <td className="p-4 flex gap-2">
-                  <span className="p-2 rounded-full bg-indigo-100 text-indigo-600">
-                    <FiPhone size={14} />
-                  </span>
-                  <span className="p-2 rounded-full bg-indigo-100 text-indigo-600">
-                    <FiMail size={14} />
-                  </span>
-                </td>
+  <span
+    onClick={() => alert(`Are you sure you want to call ${item.name}...`)}
+    className="p-2 rounded-full bg-indigo-100 text-indigo-600 cursor-pointer hover:bg-indigo-200 transition"
+    title="Call"
+  >
+    <FiPhone size={14} />
+  </span>
+
+  <span
+    onClick={() => alert(`Are you sure you want to send an email to ${item.name}...`)}
+    className="p-2 rounded-full bg-indigo-100 text-indigo-600 cursor-pointer hover:bg-indigo-200 transition"
+    title="Message"
+  >
+    <FiMail size={14} />
+  </span>
+</td>
 
                 <td className="p-4 text-gray-500">{item.valid}</td>
 
                 <td className="p-4">
                   <span
-                    className={`px-3 py-1 text-xs rounded-full ${
-                      item.status.toLowerCase() === "active"
+                    className={`inline-flex items-center justify-center min-w-[70px] h-6 px-3 text-xs font-medium rounded-full 
+                      ${
+                       item.status.toLowerCase() === "active"
                          ? "bg-green-600 text-green-100"
                          : "bg-orange-600 text-orange-100"
                       }`}

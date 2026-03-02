@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaEllipsisH, FaCaretLeft, FaCaretRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function SubscriptionService() {
   const [page, setPage] = useState(1);
@@ -14,12 +15,12 @@ export default function SubscriptionService() {
     { name: "Nadila Adja", role: "Franchasee" },
   ];
 
+  const navigate = useNavigate();
   const totalPages = 3;
 
   const prevPage = () => page > 1 && setPage(page - 1);
   const nextPage = () => page < totalPages && setPage(page + 1);
 
-  // 👉 Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -33,12 +34,23 @@ export default function SubscriptionService() {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="w-full overflow-x-auto px-4">
+      <div className="w-full overflow-x-auto px-1 lg:px-4">
         <div className="w-[700px] bg-white rounded-2xl shadow-md p-6 mx-auto">
 
-          <h2 className="text-lg font-semibold text-[#2D2F7A] mb-6">
-            Subscription Iaps Service/Franchasee
-          </h2>
+          {/* TITLE + CREATE BUTTON */}
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-semibold text-[#2D2F7A]">
+              Subscription Iaps Service/Franchasee
+            </h2>
+
+            {/* NEW BUTTON ADDED */}
+            <button
+              onClick={() => navigate("/CreateLeadPage")}
+              className="bg-[#4B4ACF] text-white px-4 py-2 rounded-lg text-sm font-medium"
+            >
+              Create Lead
+            </button>
+          </div>
 
           <div className="space-y-6">
             {data.map((item, index) => (
@@ -56,7 +68,6 @@ export default function SubscriptionService() {
                   {item.role}
                 </p>
 
-                {/* 3 DOT ICON */}
                 <button
                   onClick={() =>
                     setOpenMenuIndex(openMenuIndex === index ? null : index)
@@ -66,24 +77,40 @@ export default function SubscriptionService() {
                   <FaEllipsisH className="text-gray-400 cursor-pointer" />
                 </button>
 
-                {/* DROPDOWN */}
                 {openMenuIndex === index && (
                   <div
                     ref={menuRef}
                     className="absolute right-0 top-10 w-36 bg-white border rounded-lg shadow-lg z-10"
                   >
                     <button
-                      onClick={() => setOpenMenuIndex(null)}
+                      onClick={() =>
+                        navigate("/SubscribeDetails", {
+                          state: {
+                            name: item.name,
+                            role: item.role,
+                          },
+                        })
+                      }
                       className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
                     >
                       View More
                     </button>
-                    <button
-                      onClick={() => setOpenMenuIndex(null)}
-                      className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
-                    >
-                      Edit
-                    </button>
+
+                   <button
+  onClick={() => {
+    navigate("/SubscribeEditPage", {
+      state: {
+        name: item.name,
+        role: item.role,
+      },
+    });
+    setOpenMenuIndex(null);
+  }}
+  className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
+>
+  Edit
+</button>
+
                     <button
                       onClick={() => setOpenMenuIndex(null)}
                       className="w-full px-4 py-2 text-left text-sm text-red-500 hover:bg-gray-100"

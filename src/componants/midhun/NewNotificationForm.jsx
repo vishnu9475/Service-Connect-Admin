@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
-import { FaCaretDown } from "react-icons/fa";
 import mount from "../../assets/Dummy.jpg";
+import { FaChevronDown } from "react-icons/fa";
 
 export default function NewNotificationForm() {
   const fileRef = useRef(null);
@@ -24,6 +24,11 @@ export default function NewNotificationForm() {
   const [audience, setAudience] = useState("");
   const [status, setStatus] = useState("Status");
 
+  const [fromDate, setFromDate] = useState("2024-06-10");
+  const [fromTime, setFromTime] = useState("09:41");
+  const [toDate, setToDate] = useState("2024-07-10");
+  const [toTime, setToTime] = useState("09:41");
+
   const [target, setTarget] = useState({
     user: true,
     provider: true,
@@ -42,12 +47,53 @@ export default function NewNotificationForm() {
   const toggleSendVia = (key) =>
     setSendVia({ ...sendVia, [key]: !sendVia[key] });
 
+  /* BUTTON FUNCTIONS */
+
+  const DeleteNot = () => {
+    setTitle("");
+    setDescription("");
+    setAudience("");
+    setStatus("Status");
+    setFromDate("2024-06-10");
+    setFromTime("09:41");
+    setToDate("2024-07-10");
+    setToTime("09:41");
+    setImage(mount);
+    alert("Notification deleted");
+  };
+
+  const handleSave = () => {
+    const data = {
+      title,
+      description,
+      audience,
+      status,
+      fromDate,
+      fromTime,
+      toDate,
+      toTime,
+      target,
+      sendVia,
+    };
+    console.log("Saved:", data);
+    alert("Saved Successfully");
+  };
+
+  const handleDraft = () => {
+    console.log("Saved as Draft");
+    alert("Saved as Draft");
+  };
+
   return (
     <div className="flex">
+
+      <div className="w-full max-w-[760px] px-4 mt-4">
+
       
       <div className="w-full max-w-[760px] px-4  mt-4">
         
         {/*  CHANGED: removed min-w to avoid mobile overflow */}
+
         <div className="bg-white rounded-2xl w-full max-w-[560px] p-6 shadow-sm">
 
           {/* IMAGE */}
@@ -104,46 +150,73 @@ export default function NewNotificationForm() {
             className="w-full md:w-[230px] h-[36px] border rounded-md px-3 text-sm mb-2 ml-1"
           />
 
-          {/*  CHANGED: GRID responsive */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
 
             {/* SCHEDULE */}
-            <div>
-              <p className="font-medium mb-2">Schedule</p>
+          <div>
+  <p className="font-medium mb-2">Schedule</p>
 
-              <p className="text-xs mb-1">From</p>
-              <div className="flex gap-2 mb-4">
-                <div
-                  className="bg-[#7878801F] px-3 py-2 rounded text-xs text-[#007AFF] w-[120px]"
-                  style={aldrichStyle}
-                >
-                  Jun 10, 2024
-                </div>
-                <div
-                  className="bg-[#7878801F] px-3 py-2 rounded text-xs text-[#007AFF] w-[90px]"
-                  style={aldrichStyle}
-                >
-                  9:41 AM
-                </div>
-              </div>
+  <p className="text-xs mb-1">From</p>
+  <div className="flex gap-2 mb-4">
 
-              <p className="text-xs mb-1">To</p>
-              <div className="flex gap-2">
-                <div
-                  className="bg-[#7878801F] px-3 py-2 rounded text-xs text-[#007AFF] w-[120px]"
-                  style={aldrichStyle}
-                >
-                  July 10, 2024
-                </div>
-                <div
-                  className="bg-[#7878801F] px-3 py-2 rounded text-xs text-[#007AFF] w-[90px]"
-                  style={aldrichStyle}
-                >
-                  9:41 AM
-                </div>
-              </div>
-            </div>
+    <label
+  className="relative bg-[#7878801F] px-3 py-2 rounded text-xs text-[#007AFF] w-[120px] cursor-pointer"
+  style={aldrichStyle}
+>
+  {fromDate}
+  <input
+    type="date"
+    value={fromDate}
+    onChange={(e) => setFromDate(e.target.value)}
+    className="absolute inset-0 opacity-0 cursor-pointer"
+  />
+</label>
 
+   <label
+  className="relative bg-[#7878801F] px-3 py-2 rounded text-xs text-[#007AFF] w-[90px] cursor-pointer"
+  style={aldrichStyle}
+>
+  {fromTime}
+  <input
+    type="time"
+    value={fromTime}
+    onChange={(e) => setFromTime(e.target.value)}
+    className="absolute inset-0 opacity-0 cursor-pointer"
+  />
+</label>
+  </div>
+
+  <p className="text-xs mb-1">To</p>
+  <div className="flex gap-2">
+
+    <label
+  className="relative bg-[#7878801F] px-3 py-2 rounded text-xs text-[#007AFF] w-[120px] cursor-pointer"
+  style={aldrichStyle}
+>
+  {toDate}
+  <input
+    type="date"
+    value={toDate}
+    onChange={(e) => setToDate(e.target.value)}
+    className="absolute inset-0 opacity-0 cursor-pointer"
+  />
+</label>
+
+   <label
+  className="relative bg-[#7878801F] px-3 py-2 rounded text-xs text-[#007AFF] w-[90px] cursor-pointer"
+  style={aldrichStyle}
+>
+  {toTime}
+  <input
+    type="time"
+    value={toTime}
+    onChange={(e) => setToTime(e.target.value)}
+    className="absolute inset-0 opacity-0 cursor-pointer"
+  />
+</label>
+
+  </div>
+</div>
             {/* TARGET + SEND VIA */}
             <div>
               <p className="font-medium mb-2">Target Specific</p>
@@ -162,8 +235,8 @@ export default function NewNotificationForm() {
                     checked={target[item.key]}
                     onChange={() => toggleTarget(item.key)}
                     className="w-4 h-4 appearance-none border border-black rounded checked:bg-black relative
-                      after:content-['✓'] after:absolute after:left-[3px] after:top-[-1px]
-                      after:text-white after:text-sm after:hidden checked:after:block"
+                    after:content-['✓'] after:absolute after:left-[3px] after:top-[-1px]
+                    after:text-white after:text-sm after:hidden checked:after:block"
                   />
                   {item.label}
                 </label>
@@ -185,8 +258,8 @@ export default function NewNotificationForm() {
                     checked={sendVia[item.key]}
                     onChange={() => toggleSendVia(item.key)}
                     className="w-4 h-4 appearance-none border border-black rounded checked:bg-black relative
-                      after:content-['✓'] after:absolute after:left-[3px] after:top-[-1px]
-                      after:text-white after:text-sm after:hidden checked:after:block"
+                    after:content-['✓'] after:absolute after:left-[3px] after:top-[-1px]
+                    after:text-white after:text-sm after:hidden checked:after:block"
                   />
                   {item.label}
                 </label>
@@ -194,26 +267,50 @@ export default function NewNotificationForm() {
             </div>
           </div>
 
-          {/*  CHANGED: Buttons responsive */}
+          {/* BUTTONS */}
           <div className="flex flex-col items-center gap-3 mt-8 md:flex-row md:justify-end">
-            <button className="border border-[#6C63FF] text-[#6C63FF] px-5 py-2 rounded-full flex items-center gap-1 text-sm">
-              {status} <FaCaretDown />
-            </button>
 
-            <button className="bg-[#FF3D00] text-white px-5 py-2 rounded-full text-sm">
+            <div className="relative">
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                className="h-[34px] lg:w-[110px] w-full border border-[#4D44B5]
+                text-[#4D44B5] rounded-full lg:px-3 px-26 text-xs appearance-none"
+              >
+                <option>Status</option>
+                <option>Active</option>
+                <option>Inactive</option>
+              </select>
+
+              <FaChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4D44B5] text-[10px]" />
+            </div>
+
+            <button
+              onClick={DeleteNot}
+              className="bg-[#FF3D00] text-white lg:px-5 py-2 rounded-full text-sm  px-26"
+            >
               Delete
             </button>
 
-            <button className="bg-[#4F46BA] text-white px-5 py-2 rounded-full text-sm">
+            <button
+              onClick={handleSave}
+              className="bg-[#4F46BA] text-white lg:px-5 py-2 px-26 rounded-full text-sm"
+            >
               Save
             </button>
-            <button className="bg-[#FF3D00] text-white px-5 py-2 rounded-full text-sm">
+
+            <button
+              onClick={handleDraft}
+              className="bg-[#FF3D00] text-white lg:px-5 py-2 px-16 rounded-full lg:text-sm text-1xl"
+            >
               Save As Draft
             </button>
+
           </div>
 
         </div>
       </div>
     </div>
-  );
+  </div>
+)
 }

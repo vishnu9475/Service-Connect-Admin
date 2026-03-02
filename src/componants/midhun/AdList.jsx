@@ -41,7 +41,7 @@ const navigate=useNavigate()
   };
 
   return (
-    <div className="  bg-[#F6F7FB] p-4 sm:p-[20px]">
+    <div className="  p-4 sm:p-[20px]">
 
       {/* TOP ACTION BAR (alignment unchanged) */}
       <div className="flex lg:justify-end justify-center  gap-[12px] mb-[20px] flex-wrap sm:flex-nowrap">

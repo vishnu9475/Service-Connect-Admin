@@ -583,7 +583,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { FaAd,FaHandshake } from "react-icons/fa";
+import { FaAd,FaHandshake,FaUserShield } from "react-icons/fa";
 import {
   FiHome,
   FiUsers,
@@ -622,8 +622,32 @@ const menuData = [
     ],
   },
 
-  { id: 4, label: "Service Providers", icon: FiUserCheck, path: "/serviceproviderlist" },
-  { id: 5, label: "Dealers", icon: FaHandshake, path: "/dealerlist" },
+  { 
+    id: 4,     
+    label: "Service Providers",
+    icon: FiUserCheck, 
+    children: [
+      { id: "4-1", label: "Service Providers", path: "/serviceproviderList" },
+      { 
+        id: "4-2", 
+        label: "Payments",
+        children: [
+          { id: "4-2-1", label: "Payment Request Form", path: "/dpaymentrequestform" },
+        ],
+       },
+    ],
+  },
+
+  { 
+    id: 5,
+    label: "Dealer Management", 
+    icon: FaHandshake, 
+    children: [
+      { id: "5-1", label: "Dealers", path: "/dealerlist" },
+      { id: "5-2", label: "Dealer Service Providers", path: "/dserviceprovidermanagement" },
+    ],
+  },
+
   { id: 6, label: "Franchisee", icon: FiBriefcase, path: "/franchisee" },
   { id: 7, label: "Finance", icon: FiDollarSign, path: "/financial" },
 
@@ -633,18 +657,19 @@ const menuData = [
     label: "Accounts",
     icon: FiLayers,
     children: [
+      { id: "8-1", label: "Accounts", path: "/accounts" },
       {
-        id: "8-1",
+        id: "8-2",
         label: "Service Provider Accounts",
         children: [
-          { id: "8-1-1", label: "Bank Details", popup: "Bank Details" },
-          { id: "8-1-2", label: "Billing Cycle", popup: "Billing Cycle" },
+          { id: "8-2-1", label: "Bank Details", popup: "Bank Details" },
+          { id: "8-2-2", label: "Billing Cycle", popup: "Billing Cycle" },
           {
-            id: "8-1-3",
+            id: "8-2-3",
             label: "Payment Management",
             children: [
-              { id: "8-1-3-1", label: "Payment Requests", popup: "Payment Requests" },
-              { id: "8-1-3-2", label: "Payout History", popup: "Payout History" },
+              { id: "8-2-3-1", label: "Payment Requests", popup: "Payment Requests" },
+              { id: "8-2-3-2", label: "Payout History", popup: "Payout History" },
             ],
           },
         ],
@@ -675,6 +700,8 @@ const menuData = [
 
   { id: 13, label: "Ads Management", icon: FaAd, path: "/adsmanagement" },
   { id: 14, label: "Notifications", icon: FiBell, path: "/notification" },
+  { id: 15, label: "Roles and permissions", icon: FaUserShield, path: "/roleandp" },
+
 ];
 
 const AdminSideMenu113 = () => {

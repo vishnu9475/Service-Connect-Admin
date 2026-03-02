@@ -45,7 +45,8 @@ import GeneralSettings from './page_admin/GeneralSettings.jsx'
 import Notification from './page_admin/Notification.jsx'
 import Financial from './page_admin/Financial.jsx'
 import Accounts from './page_admin/Accounts.jsx'
-
+import SubscribeDetails from './page_admin/SubscribeDetails.jsx' 
+import SubscribeEditPage from './page_admin/SubscribeEditPage.jsx'
 
 // arjun
 import Dashboard from './page_admin/Dashboard.jsx'
@@ -115,6 +116,8 @@ function App() {
       <Route path="/notification" element={<Notification/>}/>
       <Route path="/financial" element={<Financial/>} /> 
       <Route path="/accounts" element={<Accounts />} />
+      <Route path="/subscribedetails" element={<SubscribeDetails />} />
+      <Route path="/subscribeeditpage" element={<SubscribeEditPage />} />
 
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/users" element={<Users />} />

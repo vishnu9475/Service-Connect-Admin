@@ -14,15 +14,16 @@ import {
 } from "@heroicons/react/24/outline";
 
 const DEALERS = [
-  { id: 1, name: "Samanta William", code: "#123456789", providers: 2, location: "Jakarta", status: "Not Active" },
-  { id: 2, name: "Tony Soap", code: "#123456789", providers: 8, location: "Jakarta", status: "Active" },
-  { id: 3, name: "Karen Hope", code: "#123456789", providers: 10, location: "Jakarta", status: "Active" },
-  { id: 4, name: "Jordan Nico", code: "#123456789", providers: 0, location: "Jakarta", status: "Active" },
-  { id: 5, name: "Nadilla Adja", code: "#123456789", providers: 1, location: "Jakarta", status: "Not Active" },
-  { id: 6, name: "Johnny Ahmad", code: "#123456789", providers: 3, location: "Jakarta", status: "Active" },
-  { id: 7, name: "Devid Nico", code: "#123456789", providers: 0, location: "Jakarta", status: "Not Verified" },
-  { id: 8, name: "pooja sharma", code: "#123456789", providers: 1, location: "Jakarta", status: "Active" },
-  { id: 9, name: "Ali Ahmad", code: "#123456789", providers: 3, location: "Jakarta", status: "Not Verified" }
+  { id: 1, name: "Samanta William", code: "#123456789", providers: 2, location: "Jakarta", status: "Not Active", createdAt: "2024-01-11", updatedAt: "2024-02-16" },
+  { id: 2, name: "Tony Soap", code: "#123456789", providers: 8, location: "Jakarta", status: "Active", createdAt: "2024-01-12", updatedAt: "2024-02-17" },
+  { id: 3, name: "Karen Hope", code: "#123456789", providers: 10, location: "Jakrta", status: "Active", createdAt: "2024-01-13", updatedAt: "2024-02-18" },
+  { id: 4, name: "Jordan Nico", code: "#123456789", providers: 0, location: "Jakarta", status: "Active", createdAt: "2024-01-14", updatedAt: "2024-02-19" },
+  { id: 5, name: "Nadilla Adja", code: "#123456789", providers: 1, location: "Jakrta", status: "Not Active", createdAt: "2024-01-15", updatedAt: "2024-02-15" },
+  { id: 6, name: "Johnny Ahmad", code: "#123456789", providers: 3, location: "Jakarta", status: "Active", createdAt: "2024-01-16", updatedAt: "2024-02-15" },
+  { id: 7, name: "Devid Nico", code: "#123456789", providers: 0, location: "Jakarta", status: "Not Verified", createdAt: "2024-01-17", updatedAt: "2024-02-15" },
+  { id: 8, name: "pooja sharma", code: "#123456789", providers: 1, location: "Jakarta", status: "Active", createdAt: "2024-01-18", updatedAt: "2024-02-15" },
+  { id: 9, name: "Ali Ahmad", code: "#123456789", providers: 3, location: "Jakarta", status: "Not Verified", createdAt: "2024-01-19", updatedAt: "2024-02-15" },
+  { id: 10, name: "mohan das", code: "#123456789", providers: 3, location: "Jakarta", status: "Not Verified", createdAt: "2024-01-20", updatedAt: "2024-02-15" }
 ];
 
 const FILTERS = [
@@ -39,7 +40,10 @@ function DealersList() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState([]);
+  const SORT_OPTIONS = ["Newest", "Oldest", "Last Updated"];
   const [sort, setSort] = useState("Newest");
+  const [openSort, setOpenSort] = useState(false);
+  const sortRef = useRef(null);
   const [filter, setFilter] = useState("All");
   const [openFilter, setOpenFilter] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
@@ -58,15 +62,29 @@ function DealersList() {
       if (filterRef.current && !filterRef.current.contains(e.target)) {
         setOpenFilter(false);
       }
+      // close sort dropdown
+      if (sortRef.current && !sortRef.current.contains(e.target)) {
+        setOpenSort(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  // 🔥 Reset page when search or filter changes
+  useEffect(() => {
+    setPage(1);
+  }, [search, filter]);
 
   /* FILTER + SEARCH LOGIC */
   const processedDealers = [...dealers]
-    .filter((d) => d.name.toLowerCase().includes(search.toLowerCase()))
+    .filter((u) => {
+      const query = search.trim().toLowerCase();
+
+      return Object.values(u).some((value) =>
+        String(value).toLowerCase().includes(query)
+      );
+    })
     .sort((a, b) => {
       switch (filter) {
         case "Active":
@@ -80,16 +98,38 @@ function DealersList() {
         case "Providers Low":
           return a.providers - b.providers;
         default:
-          return 0;
+          break;
       }
-    });
+      // 🔥 SORT DROPDOWN LOGIC
+      if (sort === "Newest") {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      }
+
+      if (sort === "Oldest") {
+        return new Date(a.createdAt) - new Date(b.createdAt);
+      }
+
+      if (sort === "Last Updated") {
+        return new Date(b.updatedAt) - new Date(a.updatedAt);
+      }
+
+      return 0;
+        });
 
   const totalPages = Math.ceil(processedDealers.length / itemsPerPage);
   const paginated = processedDealers.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
+  const startIndex =
+    processedDealers.length === 0
+      ? 0
+      : (page - 1) * itemsPerPage + 1;
 
+  const endIndex = Math.min(
+    page * itemsPerPage,
+    processedDealers.length
+  );
   const toggleAll = (e) =>
     setSelected(e.target.checked ? paginated.map((d) => d.id) : []);
 
@@ -98,10 +138,10 @@ function DealersList() {
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
     );
 
-  const handleSort = () => {
-    setSort(sort === "Newest" ? "Oldest" : "Newest");
-    setDealers([...dealers].reverse());
-  };
+  // const handleSort = () => {
+  //   setSort(sort === "Newest" ? "Oldest" : "Newest");
+  //   setDealers([...dealers].reverse());
+  // };
 
   const handleDelete = (id) => {
     setDealers((prev) => prev.filter((d) => d.id !== id));
@@ -182,17 +222,37 @@ function DealersList() {
             )}
 
             {/* SORT */}
-            <button
-              onClick={handleSort}
-              className="flex items-center gap-1.5
-                px-3 py-1.5 text-xs
-                lg:px-4 lg:py-2 lg:text-sm
-                rounded-full border border-[#4D44B5]
-                text-[#4D44B5]"
-            >
-              {sort}
-              <ChevronDownIcon className="w-4 h-4" />
-            </button>
+            <div ref={sortRef} className="relative">
+              <button
+                onClick={() => setOpenSort(!openSort)}
+                className="flex items-center gap-2
+                  px-3 py-1.5 text-xs
+                  xl:px-4 xl:py-2 xl:text-sm
+                  rounded-full border border-[#4D44B5]
+                  text-[#4D44B5]"
+              >
+                {sort}
+                <ChevronDownIcon className="w-4 h-4" />
+              </button>
+
+              {openSort && (
+                <div className="absolute top-12 left-0 bg-white border rounded-lg shadow text-sm z-20 w-40">
+                  {SORT_OPTIONS.map((option) => (
+                    <button
+                      key={option}
+                      onClick={() => {
+                        setSort(option);
+                        setPage(1);
+                        setOpenSort(false);
+                      }}
+                      className="block px-4 py-2 hover:bg-indigo-50 w-full text-left"
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             <button
               onClick={handleaddNewDealer}
@@ -224,7 +284,7 @@ function DealersList() {
 
         {/* TABLE */}
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[1200px] table-fixed">
+          <table className="w-full text-sm table-auto">
             <thead>
               <tr className="border-b border-b-gray-200 text-sm text-indigo-800">
                 <th className="w-[50px] py-4 text-center">
@@ -273,10 +333,14 @@ function DealersList() {
 
                   <td className="py-4">
                     <div className="flex justify-center gap-2">
-                      <button className="p-2 rounded-full bg-indigo-100">
+                      <button
+                        onClick={() => alert(`Calling ${dealer.name}`)}
+                        className="p-2 rounded-full bg-indigo-100">
                         <PhoneIcon className="w-4 h-4 text-[#4D44B5]" />
                       </button>
-                      <button className="p-2 rounded-full bg-indigo-100">
+                      <button
+                        onClick={() => alert(`Sending email to ${dealer.name}`)}
+                        className="p-2 rounded-full bg-indigo-100">
                         <EnvelopeIcon className="w-4 h-4 text-[#4D44B5]" />
                       </button>
                     </div>
@@ -285,7 +349,7 @@ function DealersList() {
                   {/* ✅ STATUS COLOR DERIVED FROM STATUS */}
                   <td className="py-4 text-center">
                     <span
-                      className={`inline-flex w-[110px] py-1 items-center justify-center rounded-full text-xs text-white ${
+                      className={`inline-flex w-[90px] py-1 items-center justify-center rounded-full text-xs text-white ${
                         dealer.status === "Active"
                           ? "bg-green-400"
                           : dealer.status === "Not Verified"
@@ -335,7 +399,7 @@ function DealersList() {
 
         {/* PAGINATION */}
         <div className="flex justify-between items-center mt-6 text-sm text-gray-400">
-          <span>Showing {paginated.length} of {processedDealers.length}</span>
+          <span>Showing {startIndex}-{endIndex} from {processedDealers.length}</span>
 
           <div className="flex gap-2">
             <button

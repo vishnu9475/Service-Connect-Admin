@@ -29,6 +29,7 @@ function DealerForm({ onNext }) {
     password: "",
     landmark: "",
     pincode: "",
+    branch: "",
     district: "",
     state: "",
     verificationId: "",
@@ -89,6 +90,7 @@ function DealerForm({ onNext }) {
       password: "",
       landmark: "",
       pincode: "",
+      branch: "",
       district: "",
       state: "",
       verificationId: "",
@@ -175,6 +177,7 @@ function DealerForm({ onNext }) {
             <Input placeholder="Password" type="password" value={form.password} onChange={(v) => update("password", v)} />
             <Input placeholder="Land mark" value={form.landmark} onChange={(v) => update("landmark", v)} />
             <Input placeholder="Pin code" value={form.pincode} onChange={(v) => update("pincode", v)} />
+            <Input placeholder="Branch" value={form.branch} onChange={(v) => update("branch", v)} />
             <Input placeholder="District" value={form.district} onChange={(v) => update("district", v)} />
             <Input placeholder="State" value={form.state} onChange={(v) => update("state", v)} />
             <Textarea
@@ -223,7 +226,7 @@ function DealerForm({ onNext }) {
           <button onClick={handleDelete} className="px-8 py-2 rounded-full bg-red-500 text-white cursor-pointer">
             Delete
           </button>
-          <button onClick={handleDraft} className="px-8 py-2 rounded-full border border-indigo-500 text-indigo-600 cursor-pointer">
+          <button onClick={handleDraft} className="px-8 py-2 rounded-full border  text-white bg-orange-500 cursor-pointer">
             Save as Draft
           </button>
           <button onClick={handleSubmitAndPay} className="px-8 py-2 rounded-full bg-[#4D44B5] text-white cursor-pointer">

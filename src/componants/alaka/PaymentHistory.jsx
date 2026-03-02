@@ -16,128 +16,78 @@ const Payement = () => {
   };
 
   const payementHistory = [
-    {
-      id: 1,
-      number: "#123456789",
-      date: "2 March 2021, 13:45 PM",
-      description: "Description",
-      amount: "$ 50,036",
-      status: "Complete",
-    },
-    {
-      id: 2,
-      number: "#123456789",
-      date: "2 March 2021, 13:45 PM",
-      description: "Description",
-      amount: "$ 50,036",
-      status: "Pending",
-    },
-    {
-      id: 3,
-      number: "#123456789",
-      date: "2 March 2021, 13:45 PM",
-      description: "Description",
-      amount: "$ 50,036",
-      status: "Canceled",
-    },
-    {
-      id: 4,
-      number: "#123456789",
-      date: "2 March 2021, 13:45 PM",
-      description: "Description",
-      amount: "$ 50,036",
-      status: "Complete",
-    },
+    { id: 1, number: "#123456789", date: "2 March 2021, 13:45 PM", description: "Description", amount: "$ 50,036", status: "Complete" },
+    { id: 2, number: "#123456789", date: "2 March 2021, 13:45 PM", description: "Description", amount: "$ 50,036", status: "Pending" },
+    { id: 3, number: "#123456789", date: "2 March 2021, 13:45 PM", description: "Description", amount: "$ 50,036", status: "Canceled" },
+    { id: 4, number: "#123456789", date: "2 March 2021, 13:45 PM", description: "Description", amount: "$ 50,036", status: "Complete" },
   ];
 
+  const TOTAL_DATA = 10;
   const TOTAL_PAGES = 3;
   const [page, setPage] = useState(1);
 
-  /* ✅ CLICK ANYWHERE → NAVIGATE (ROW DATA PRESERVED) */
-  const handleCardClick = (item) => {
-    navigate("/TransactionHistory", {
-      state: {
-        transactionId: item.number,
-        amount: item.amount,
-        status: item.status,
-        date: item.date,
-        description: item.description,
-      },
-    });
+  const handleViewMore = () => {
+    navigate("/TransactionHistory");
   };
 
   return (
-    /* 🔥 ENTIRE CARD IS THE POPUP-STYLE CLICKABLE AREA */
     <div
       className={`
-        bg-white rounded-xl p-3 w-full h-full flex flex-col
-        border border-gray-200
-        shadow-sm cursor-pointer
-        transition-all duration-200
-        hover:bg-indigo-50
-        hover:shadow-xl
-        hover:-translate-y-1
-        hover:border-indigo-300
+        bg-white rounded-xl p-3 w-full
+        border border-gray-200 shadow-sm
         ${isActivePage ? "ring-2 ring-[#4D44B5]/30" : ""}
       `}
-      onClick={() => handleCardClick(payementHistory[0])}
     >
-      {/* TITLE */}
-      <h2 className="text-sm font-semibold text-[#303972] mb-3">
-        Payment History
-      </h2>
+      {/* HEADER */}
+      <div className="flex justify-between items-center mb-3">
+        <h2 className="text-sm font-semibold text-[#303972]">
+          Payment History
+        </h2>
 
-      {/* LIST */}
-      <div className="space-y-3 flex-1">
-        {payementHistory.map((item) => (
-          <div
-            key={item.id}
-            onClick={(e) => {
-              e.stopPropagation(); // prevent double firing
-              handleCardClick(item);
-            }}
-            className="
-              flex flex-col gap-2
-              sm:grid sm:grid-cols-[40px_1.2fr_1.6fr_1fr_1fr_auto]
-              sm:items-center
-            "
-          >
-            <div className="w-9 h-9 rounded-full bg-[#FF4550] flex items-center justify-center">
-              <IoMdTrendingUp className="text-white text-sm" />
-            </div>
-
-            <p className="text-xs font-semibold text-[#303972]">
-              {item.number}
-            </p>
-
-            <p className="text-[11px] text-[#A098AE]">
-              {item.date}
-            </p>
-
-            <p className="text-[11px] text-[#A098AE]">
-              {item.description}
-            </p>
-
-            <p className="text-xs font-semibold text-[#303972]">
-              {item.amount}
-            </p>
-
-            <p className={`text-xs font-semibold ${Statusclass[item.status]}`}>
-              {item.status}
-            </p>
-          </div>
-        ))}
+        <button
+          onClick={handleViewMore}
+          className="text-[#4D44B5] text-xs font-semibold flex items-center gap-1"
+        >
+          View More →
+        </button>
       </div>
 
+      {/* LIST */}
+      {page === 1 && (
+        <div className="space-y-3">
+          {payementHistory.map((item) => (
+            <div
+              key={item.id}
+              className="
+                flex flex-col gap-2
+                sm:grid sm:grid-cols-[40px_1.2fr_1.6fr_1fr_1fr_auto]
+                sm:items-center
+              "
+            >
+              <div className="w-9 h-9 rounded-full bg-[#FF4550] flex items-center justify-center">
+                <IoMdTrendingUp className="text-white text-sm" />
+              </div>
+
+              <p className="text-xs font-semibold text-[#303972]">{item.number}</p>
+              <p className="text-[11px] text-[#A098AE]">{item.date}</p>
+              <p className="text-[11px] text-[#A098AE]">{item.description}</p>
+              <p className="text-xs font-semibold text-[#303972]">{item.amount}</p>
+              <p className={`text-xs font-semibold ${Statusclass[item.status]}`}>
+                {item.status}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* FOOTER */}
-      <div
-        className="mt-3 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="mt-3 flex justify-between items-center">
+        {/* ✅ TEXT LEFT */}
         <p className="text-[11px] text-[#A098AE]">
-          Showing <span className="text-[#303972] font-medium">1–5</span> from 100 data
+          Showing <span className="text-[#303972] font-medium">1–4</span> from {TOTAL_DATA}
         </p>
 
+        {/* PAGINATION */}
         <div className="flex items-center gap-2">
           <BiLeftArrow
             className="text-[#A098AE] cursor-pointer text-xs"

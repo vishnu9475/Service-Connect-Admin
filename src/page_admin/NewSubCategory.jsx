@@ -7,8 +7,9 @@ const Page122 = () => {
     <div className='flex'>
         <AdminSideMenu/>
         <div className='flex-1 ml-0 lg:ml-[260px]'>
-               <Header title="New Category"/>
+               <Header title="New Category">
               <AddCategoryForm />
+              </Header>
         </div>      
     </div>
   )

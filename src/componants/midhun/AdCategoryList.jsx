@@ -12,7 +12,7 @@ function AdCategoryList() {
   ];
 
   return (
-    <div className=" bg-[#F5F6FA] w-full md:w-[320px] lg:w-[430px]   flex  items-start px-4 pt-6 ">
+    <div className="  w-full md:w-[320px] lg:w-[430px]   flex  items-start px-4 pt-6 ">
       
       {/* Card */}
       <div className="w-full   lg:h-screen bg-white rounded-2xl shadow-md p-5 pb-10">

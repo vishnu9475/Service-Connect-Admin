@@ -19,7 +19,7 @@ function AdCategory() {
   };
 
   return (
-    <div className=" bg-[#F6F7FB] lg:w-[430px] flex  pt-10 px-4">
+    <div className=" lg:w-[430px] flex  pt-10 px-4">
       <div className="w-full  bg-white rounded-[20px] px-4 pt-4 pb-6">
 
         <div className="flex items-center gap-4 mb-4">

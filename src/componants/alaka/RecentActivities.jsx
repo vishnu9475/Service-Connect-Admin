@@ -49,8 +49,8 @@ function RecentActivities() {
 
   /* 🔹 VIEW MORE CLICK */
   const handleViewMore = () => {
-    navigate("/DealerList");
-  };
+    navigate("/ServiceHistory");
+  };  
 
   return (
     <div className="bg-[#F3F4FF] min-h-screen flex justify-center px-3 sm:px-6 py-4">

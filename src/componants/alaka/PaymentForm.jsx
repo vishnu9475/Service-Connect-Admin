@@ -167,33 +167,36 @@ function PaymentForm() {
         </div>
       </div>
 
-      {/* FOOTER BUTTONS */}
-      <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mt-10 relative">
+     <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mt-10">
+        
+        <div className="relative">
+          <button
+            onClick={() => setShowStatus(!showStatus)}
+            className="border border-indigo-500 text-indigo-600 px-10 py-2 rounded-full"
+          >
+            Status ▼
+          </button>
 
-        <button
-          onClick={() => setShowStatus(!showStatus)}
-          className="border border-indigo-500 text-indigo-600 px-10 py-2 rounded-full"
-        >
-          Status ▼
-        </button>
+          {showStatus && (
+            <div className="absolute bottom-full mb-2 w-full bg-white shadow rounded-lg text-sm z-10">
+              {["Pending", "Approved", "Rejected"].map((s) => (
+                <div
+                  key={s}
+                  onClick={() => handleStatus(s)}
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                >
+                  {s}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
-        {showStatus && (
-          <div className="absolute top-[-120px] bg-white shadow rounded-lg text-sm">
-            {["Pending", "Approved", "Rejected"].map((s) => (
-              <div
-                key={s}
-                onClick={() => handleStatus(s)}
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-              >
-                {s}
-              </div>
-            ))}
-          </div>
-        )}
+        
 
         <button
           onClick={handleDelete}
-          className="bg-orange-500 text-white px-10 py-2 rounded-full"
+          className="bg-red-500 text-white px-10 py-2 rounded-full"
         >
           Delete
         </button>

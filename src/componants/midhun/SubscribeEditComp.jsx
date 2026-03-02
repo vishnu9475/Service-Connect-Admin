@@ -10,16 +10,11 @@ import {
 
 import { SlCalender } from "react-icons/sl";
 
-const FranchiseForm135 = ({mode = "new",onPay}) => {
-  const [fromDate, setFromDate] = useState("");
-  const [fromTime, setFromTime] = useState("");
-  const [toDate, setToDate] = useState("");
-  const [toTime, setToTime] = useState("");
-  const [photo, setPhoto] = useState(null);
+const SubscribeEditComp= () => {
+  
+  
   const [about, setAbout] = useState("");
   const [service, setService] = useState("");
-  const [branches, setBranches] = useState("");
-  const [branchNames, setBranchNames] = useState([]);
   
   return (
     <div className="w-full p-4 sm:p-6 md:px-6 lg:px-6 xl:pl-8 xl:pr-20">
@@ -28,37 +23,8 @@ const FranchiseForm135 = ({mode = "new",onPay}) => {
         {/* MAIN LAYOUT */}
         <div className="flex flex-col lg:flex-row gap-8">
 
-          {/* LEFT – PHOTO */}
-        <div className="w-full lg:w-56">
-           <p className="text-sm font-semibold text-[#303972] mb-2">
-              Photo *
-           </p>
-           <label className="relative h-44 w-full bg-[#C1BBEB] rounded-md flex items-center justify-center text-sm text-gray-700 cursor-pointer text-center overflow-hidden">
-
-           <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => {
-              const file = e.target.files[0];
-               if (file) {
-                  setPhoto(URL.createObjectURL(file));
-                }
-              }}
-            />
-
-          {photo ? (
-           <img
-             src={photo}
-             alt="Selected"
-             className="absolute inset-0 w-full h-full object-cover"/>
-             ) : (
-            <span>
-               Drag and drop or <br /> click here to select file
-            </span>
-           )}
-          </label>
-       </div>
+         
+        
 
 
           {/* RIGHT – FORM */}
@@ -75,32 +41,7 @@ const FranchiseForm135 = ({mode = "new",onPay}) => {
             <IconInput icon={<FiPhone />} placeholder="Alternate Phone" type="tel" />
 
             <Input placeholder="Revenue" type="number" />
-            <input
-              type="number"
-              placeholder="Branches"
-              value={branches}
-              min="0"
-              onChange={(e) => {
-              const value = parseInt(e.target.value) || 0;
-              setBranches(value);
-              setBranchNames(Array(value).fill(""));
-            }}
-             className="w-full h-12 px-4 bg-[#F3F4FF] rounded-md outline-none text-sm"
-           />
-           {branchNames.map((name, index) => (
-           <input
-             key={index}
-             type="text"
-             placeholder={`Branch Name ${index + 1}`}
-             value={name}
-             onChange={(e) => {
-             const updated = [...branchNames];
-             updated[index] = e.target.value;
-             setBranchNames(updated);
-           }}
-           className="w-full h-12 px-4 bg-[#F3F4FF] rounded-md outline-none text-sm"
-          />
-          ))}
+            <Input placeholder="Branches" type="number" />
             <Input placeholder="Service Providers" type="number" />
 
             <PasswordInput placeholder="Password" />
@@ -155,82 +96,33 @@ const FranchiseForm135 = ({mode = "new",onPay}) => {
   </p>
 </div>
 
-            {/* DATE & TIME SECTION */}
-            <div className="mt-6 space-y-4">
-
-              {/* FROM */}
-              <div>
-                <p className="text-sm font-semibold mb-2">From</p>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                  <DateBox value={fromDate} onChange={setFromDate} />
-                  <TimeBox value={fromTime} onChange={setFromTime} />
-                </div>
-              </div>
-
-              {/* TO */}
-              <div>
-                <p className="text-sm font-semibold mb-2">To</p>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                  <DateBox value={toDate} onChange={setToDate} />
-                  <TimeBox value={toTime} onChange={setToTime} />
-                </div>
-              </div>
-            </div>
-
+            
             {/* AMOUNT */}
-            <p className="text-center text-2xl font-medium mt-6">
-              Amount To Pay : <span className="font-medium">150000 Rs</span>
-            </p>
+            
           </div>
         </div>
 
         {/* ACTION BUTTONS */}
-<div className="flex flex-col sm:flex-row justify-center sm:justify-end gap-4 mt-10">
-
-  {/* DELETE → ONLY EDIT MODE */}
-  {mode === "edit" && (
-    <button
-      className="px-6 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition"
-      onClick={() => {
-        alert("Deleted!");
-      }}
-    >
-      Delete
-    </button>
-  )}
-
-  {/* CLEAR → ONLY NEW MODE */}
-  {mode === "new" && (
-    <button
-      className="px-6 py-2 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition"
-      onClick={() => {
-        alert("Cleared");
-      }}
-    >
-      Clear
-    </button>
-  )}
-
-  {/* SAVE AS DRAFT → ONLY NEW */}
-  {mode === "new" && (
-    <button
-      className="px-6 py-2 bg-orange-600 text-white rounded-full hover:bg-orange-500 transition"
-      onClick={() => {
-        alert("Saved as draft!");
-      }}
-    >
-      Save as Draft
-    </button>
-  )}
-
-  {/* SUBMIT / UPDATE */}
-  <button
-    onClick={onPay}
-    className="px-6 py-2 bg-[#4D44B5] text-white rounded-full hover:bg-[#4338CA] transition"
-  >
-    {mode === "edit" ? "Update" : "Submit & Pay"}
-  </button>
-</div>
+        <div className="flex flex-col sm:flex-row justify-center sm:justify-end gap-4 mt-10">
+          
+          <button 
+          className="px-6 py-2 bg-red-600 text-white rounded-full" onClick={() => {
+      alert("Deleted!");
+    }}>
+            Delete
+          </button>
+         
+          
+           
+          <button className="px-6 py-2 border border-[#4D44B5] text-[#4D44B5] rounded-full"onClick={() => {
+      alert("Saved ");
+    }}>
+            Save 
+          </button>
+         
+        
+          
+        </div>
       </div>
     </div>
   );
@@ -312,4 +204,4 @@ const TimeBox = ({ value, onChange }) => (
   </label>
 );
 
-export default FranchiseForm135;
+export default SubscribeEditComp;

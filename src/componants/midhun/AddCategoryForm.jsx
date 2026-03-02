@@ -59,7 +59,7 @@ function AddCategoryForm() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F6FA] flex ml-[30px] px-4 py-6">
+    <div className="min-h-screen flex ml-[30px] px-4 py-6">
 
       {/* CARD */}
       <div className="relative w-full max-w-[620px] bg-white rounded-2xl shadow-md p-6">

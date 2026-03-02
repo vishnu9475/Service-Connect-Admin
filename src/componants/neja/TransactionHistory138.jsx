@@ -374,11 +374,11 @@ const filtered = tableData.filter((item) => {
 
                   <td className="p-4">
                     <span
-                      className={`px-3 py-1 text-xs rounded-full text-white
-                        ${item.status === "Completed" ? "bg-green-500" : ""}
-                        ${item.status === "Failed" ? "bg-red-500" : ""}
-                        ${item.status === "Pending" ? "bg-yellow-500" : ""}
-                        ${item.status === "Processing" ? "bg-blue-500" : ""}
+                      className={`inline-flex items-center justify-center min-w-[90px] h-6 px-3 text-xs font-medium rounded-full
+                        ${item.status === "Completed" ? "bg-green-500 text-green-100" : ""}
+                        ${item.status === "Failed" ? "bg-red-500 text-green-100" : ""}
+                        ${item.status === "Pending" ? "bg-yellow-500 text-green-100" : ""}
+                        ${item.status === "Processing" ? "bg-blue-500 text-green-100" : ""}
                        `}
                       >
                      {item.status}

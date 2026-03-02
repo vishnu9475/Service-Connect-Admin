@@ -12,7 +12,7 @@ function ServiceProviderManagementPage() {
 
       
       <main className="ml-0 lg:ml-[260px] transition-all duration-300">
-        <AdminMain
+        <AdminMain showSearch={false}
           title="Service Provider Management"
           userName="Abc"
           userRole="Admin"

@@ -13,16 +13,16 @@ import {
 } from "@heroicons/react/24/outline";
 
 const USERS = [
-  { name: "Samanta William", id: "#123456789", services: 2, jobs: 2, location: "Jakarta", status: "Not Active" },
-  { name: "Tony Soap", id: "#223456789", services: 2, jobs: 8, location: "Jakarta", status: "Active" },
-  { name: "Karen Hope", id: "#323456789", services: 2, jobs: 10, location: "Jakarta", status: "Active" },
-  { name: "Jordan Nico", id: "#423456789", services: 2, jobs: 0, location: "Jakarta", status: "Active" },
-  { name: "Nadilla Adja", id: "#523456789", services: 2, jobs: 1, location: "Jakarta", status: "Not Active" },
-  { name: "Johnny Ahmad", id: "#623456789", services: 2, jobs: 3, location: "Jakarta", status: "Active" },
-  { name: "Modi", id: "#723456789", services: 2, jobs: 3, location: "Jakarta", status: "Not Verified" },
-  { name: "Rahul", id: "#823456789", services: 2, jobs: 3, location: "Jakarta", status: "Not Verified" },
-  { name: "Rohan", id: "#923456789", services: 2, jobs: 3, location: "Jakarta", status: "Not Verified" },
-  { name: "Jaya", id: "#103456789", services: 2, jobs: 3, location: "Jakarta", status: "Active" }
+  { franchise: "Alex", name: "Samanta William", id: "#123456789", services: 2, jobs: 2, location: "Jakarta", status: "Not Active", createdAt: "2024-01-10", updatedAt: "2024-02-16" },
+  { franchise: "Alex", name: "Tony Soap", id: "#223456789", services: 2, jobs: 8, location: "Jakata", status: "Active", createdAt: "2024-01-10", updatedAt: "2024-02-18" },
+  { franchise: "Bivin", name: "Karen Hope", id: "#323456789", services: 2, jobs: 10, location: "Jakarta", status: "Active", createdAt: "2024-01-10", updatedAt: "2024-02-19" },
+  { franchise: "Bivin", name: "Jordan Nico", id: "#423456789", services: 2, jobs: 0, location: "Jakarta", status: "Active", createdAt: "2024-01-10", updatedAt: "2024-02-15" },
+  { franchise: "Bivin", name: "Nadilla Adja", id: "#523456789", services: 2, jobs: 1, location: "Jakata", status: "Not Active", createdAt: "2024-01-10", updatedAt: "2024-02-15" },
+  { franchise: "Carlo", name: "Johnny Ahmad", id: "#623456789", services: 2, jobs: 3, location: "Jakarta", status: "Active", createdAt: "2024-01-10", updatedAt: "2024-02-15" },
+  { franchise: "Carlo", name: "Modi", id: "#723456789", services: 2, jobs: 3, location: "Jakarta", status: "Not Verified", createdAt: "2024-01-10", updatedAt: "2024-02-15" },
+  { franchise: "Carlo", name: "Rahul", id: "#823456789", services: 2, jobs: 3, location: "Jakarta", status: "Not Verified", createdAt: "2024-01-10", updatedAt: "2024-02-15" },
+  { franchise: "Devid", name: "Rohan", id: "#923456789", services: 2, jobs: 3, location: "Jakarta", status: "Not Verified", createdAt: "2024-01-10", updatedAt: "2024-02-15" },
+  { franchise: "Devid", name: "Jaya", id: "#103456789", services: 2, jobs: 3, location: "Jakarta", status: "Active", createdAt: "2024-01-10", updatedAt: "2024-02-15" }
 ];
 
 const FILTERS = [
@@ -41,7 +41,10 @@ function ServiceProviderList() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState([]);
+  const SORT_OPTIONS = ["Newest", "Oldest", "Last Updated"];
   const [sort, setSort] = useState("Newest");
+  const [openSort, setOpenSort] = useState(false);
+  const sortRef = useRef(null);
   const [filter, setFilter] = useState("All");
   const [openFilter, setOpenFilter] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
@@ -62,11 +65,19 @@ function ServiceProviderList() {
       if (filterRef.current && !filterRef.current.contains(e.target)) {
         setOpenFilter(false);
       }
+      // close sort dropdown
+      if (sortRef.current && !sortRef.current.contains(e.target)) {
+        setOpenSort(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  //  Reset page when search or filter changes
+  useEffect(() => {
+    setPage(1);
+  }, [search, filter]);
 
 
   // ✅ close menu on page change (logic only)
@@ -76,27 +87,69 @@ function ServiceProviderList() {
 
   /* PROCESS USERS */
   const processedUsers = [...users]
-    .filter((u) => u.name.toLowerCase().includes(search.toLowerCase()))
+    .filter((u) => {
+  const query = search.trim().toLowerCase();
+
+  return Object.values(u).some((value) =>
+    String(value).toLowerCase().includes(query)
+  );
+})
+    // .sort((a, b) => {
+    //   switch (filter) {
+    //     case "Active":
+    //       return a.status === "Active" ? -1 : 1;
+    //     case "Not Active":
+    //       return a.status === "Not Active" ? -1 : 1;
+    //     case "Not Verified":
+    //       return a.status === "Not Verified" ? -1 : 1;
+    //     case "Providers High":
+    //       return b.services - a.services;
+    //     case "Providers Low":
+    //       return a.services - b.services;
+    //     case "Jobs High":
+    //       return b.jobs - a.jobs;
+    //     case "Jobs Low":
+    //       return a.jobs - b.jobs;
+    //     default:
+    //       return 0;
+    //   }
+    // });
     .sort((a, b) => {
-      switch (filter) {
-        case "Active":
-          return a.status === "Active" ? -1 : 1;
-        case "Not Active":
-          return a.status === "Not Active" ? -1 : 1;
-        case "Not Verified":
-          return a.status === "Not Verified" ? -1 : 1;
-        case "Providers High":
-          return b.services - a.services;
-        case "Providers Low":
-          return a.services - b.services;
-        case "Jobs High":
-          return b.jobs - a.jobs;
-        case "Jobs Low":
-          return a.jobs - b.jobs;
-        default:
-          return 0;
-      }
-    });
+  // STATUS + OTHER FILTERS FIRST
+  switch (filter) {
+    case "Active":
+      return a.status === "Active" ? -1 : 1;
+    case "Not Active":
+      return a.status === "Not Active" ? -1 : 1;
+    case "Not Verified":
+      return a.status === "Not Verified" ? -1 : 1;
+    case "Providers High":
+      return b.services - a.services;
+    case "Providers Low":
+      return a.services - b.services;
+    case "Jobs High":
+      return b.jobs - a.jobs;
+    case "Jobs Low":
+      return a.jobs - b.jobs;
+    default:
+      break;
+  }
+
+  //  SORT DROPDOWN LOGIC
+  if (sort === "Newest") {
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  }
+
+  if (sort === "Oldest") {
+    return new Date(a.createdAt) - new Date(b.createdAt);
+  }
+
+  if (sort === "Last Updated") {
+    return new Date(b.updatedAt) - new Date(a.updatedAt);
+  }
+
+  return 0;
+});
 
   /* PAGINATION */
   const totalPages = Math.ceil(processedUsers.length / itemsPerPage);
@@ -116,11 +169,11 @@ function ServiceProviderList() {
     );
   };
 
-  /* SORT (kept as you had it) */
-  const handleSort = () => {
-    setSort(sort === "Newest" ? "Oldest" : "Newest");
-    setUsers([...users].reverse());
-  };
+  // /* SORT (kept as you had it) */
+  // const handleSort = () => {
+  //   setSort(sort === "Newest" ? "Oldest" : "Newest");
+  //   setUsers([...users].reverse());
+  // };
 
   /* DELETE — FIXED (logic only) */
   const handleDelete = (id) => {
@@ -140,6 +193,16 @@ function ServiceProviderList() {
       setUsers((prev) => prev.filter((u) => !selected.includes(u.id)));
       setSelected([]); 
     };
+
+    const startIndex =
+      processedUsers.length === 0
+        ? 0
+        : (page - 1) * itemsPerPage + 1;
+
+    const endIndex = Math.min(
+      page * itemsPerPage,
+      processedUsers.length
+    );
 
 
   const handleAddNewServiceProvider = () => {
@@ -161,7 +224,7 @@ function ServiceProviderList() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <div className="flex gap-4">
           <button className="flex items-center gap-2 bg-[#4D44B5] text-white px-4 py-1.5 text-xs xl:px-5 xl:py-2 xl:text-sm rounded-full">
-            Franchise Name
+            Frachise Name
             <ChevronDownIcon className="w-4 h-4" />
           </button>
           <div className="relative flex items-center">
@@ -215,18 +278,38 @@ function ServiceProviderList() {
             </div>
           )}
 
-          {/* SORT & ADD NEW */}
-          <button
-            onClick={handleSort}
-            className="flex items-center gap-2
-              px-3 py-1.5 text-xs
-              xl:px-4 xl:py-2 xl:text-sm
-              rounded-full border border-[#4D44B5]
-              text-[#4D44B5]"
-                    >
-            {sort}
-            <ChevronDownIcon className="w-4 h-4" />
-          </button>
+          {/* SORT DROPDOWN */}
+          <div ref={sortRef} className="relative">
+            <button
+              onClick={() => setOpenSort(!openSort)}
+              className="flex items-center gap-2
+                px-3 py-1.5 text-xs
+                xl:px-4 xl:py-2 xl:text-sm
+                rounded-full border border-[#4D44B5]
+                text-[#4D44B5]"
+            >
+              {sort}
+              <ChevronDownIcon className="w-4 h-4" />
+            </button>
+
+            {openSort && (
+              <div className="absolute top-12 left-0 bg-white border rounded-lg shadow text-sm z-20 w-40">
+                {SORT_OPTIONS.map((option) => (
+                  <button
+                    key={option}
+                    onClick={() => {
+                      setSort(option);
+                      setPage(1);
+                      setOpenSort(false);
+                    }}
+                    className="block px-4 py-2 hover:bg-indigo-50 w-full text-left"
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
           <button
             onClick={handleAddNewServiceProvider}
@@ -260,7 +343,7 @@ function ServiceProviderList() {
       {/* TABLE */}
       <div className="bg-white rounded-2xl shadow-sm p-4">
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[900px] lg:min-w-[1100px] text-sm table-fixed">
+          <table className="w-full text-sm table-auto">
             <thead className="border-b border-b-gray-200 text-indigo-800">
               <tr>
                 <th className="w-[50px] px-3 py-4 text-center">
@@ -276,6 +359,7 @@ function ServiceProviderList() {
                 <th className="w-[120px] px-3 py-4 text-center">Services</th>
                 <th className="w-[120px] px-3 py-4 text-center">Jobs</th>
                 <th className="w-[120px] px-3 py-4 text-left">Location</th>
+                <th className="w-[120px] px-3 py-4 text-left">Franchise</th>
                 <th className="w-[160px] px-3 py-4 text-center">Contact</th>
                 <th className="w-[140px] px-3 py-4 text-center">Status</th>
                 <th className="w-[80px] px-3 py-4 text-center">Action</th>
@@ -306,13 +390,17 @@ function ServiceProviderList() {
                   <td className="px-3 py-4 text-center text-[#4D44B5]">{user.services}</td>
                   <td className="px-3 py-4 text-center text-[#4D44B5]">{user.jobs}</td>
                   <td className="px-3 py-4 text-left text-[#4D44B5]">{user.location}</td>
-
+                  <td className="px-3 py-4 text-center text-[#4D44B5]">{user.franchise}</td>
                   <td className="px-3 py-4 text-center">
                     <div className="flex justify-center gap-2">
-                      <button className="p-2 bg-indigo-100 rounded-full">
+                      <button
+                        onClick={() => alert(`Calling ${user.name}`)}
+                        className="p-2 bg-indigo-100 rounded-full">
                         <PhoneIcon className="w-4 h-4 text-[#4D44B5]" />
                       </button>
-                      <button className="p-2 bg-indigo-100 rounded-full">
+                      <button
+                        onClick={() => alert(`Sending email to ${user.name}`)}
+                        className="p-2 bg-indigo-100 rounded-full">
                         <EnvelopeIcon className="w-4 h-4 text-[#4D44B5]" />
                       </button>
                     </div>
@@ -358,7 +446,7 @@ function ServiceProviderList() {
         {/* PAGINATION */}
         <div className="flex justify-between items-center mt-6 text-sm text-gray-400">
           {/* ✅ fixed variable */}
-          <span>Showing {paginated.length} of {processedUsers.length}</span>
+          <span>Showing {startIndex}-{endIndex} from {processedUsers.length}</span>
 
           <div className="flex items-center gap-2">
             <button

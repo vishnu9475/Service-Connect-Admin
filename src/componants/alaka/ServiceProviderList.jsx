@@ -95,7 +95,7 @@ function ServiceProviderList() {
     setSelected((prev) => prev.filter((id) => id !== user.id));
     setOpenMenuId(null);
   };
-
+const pageSize = 5;
   const processedUsers = [...users]
     .filter((u) => {
       const match = u.name.toLowerCase().includes(search.toLowerCase());
@@ -106,12 +106,26 @@ function ServiceProviderList() {
       return match;
     })
     .sort((a, b) => {
-      if (!sortOrder) return 0;
-      const A = new Date(a.date);
-      const B = new Date(b.date);
-      return sortOrder === "Newest" ? B - A : A - B;
-    });
+  if (!sortOrder) return 0;
 
+  if (sortOrder === "Newest") {
+    return new Date(b.date) - new Date(a.date);
+  }
+
+  if (sortOrder === "Oldest") {
+    return new Date(a.date) - new Date(b.date);
+  }
+
+  if (sortOrder === "LastUpdated") {
+    return new Date(b.lastUpdated) - new Date(a.lastUpdated);
+  }
+
+  return 0;
+});
+const paginatedUsers = processedUsers.slice(
+  (page - 1) * pageSize,
+  page * pageSize
+);
   const toggleRow = (id) =>
     setSelected((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
 
@@ -156,8 +170,9 @@ function ServiceProviderList() {
             className="w-[140px] px-4 py-2 rounded-full border border-indigo-500 text-indigo-600 text-sm bg-white outline-none"
           >
             <option value="">Sort by</option>
-            <option>Newest</option>
-            <option>Oldest</option>
+<option value="Newest">Newest</option>
+<option value="Oldest">Oldest</option>
+<option value="LastUpdated">Last Updated</option>
           </select>
 
           <button
@@ -218,7 +233,7 @@ function ServiceProviderList() {
           </thead>
 
           <tbody className="text-sm text-gray-700">
-            {processedUsers.map((user) => (
+             {paginatedUsers.map((user) => (
               <tr key={user.id} className="border-b border-gray-100">
                 <td className="w-[48px] py-4 px-3 text-center">
                   <input
@@ -238,10 +253,16 @@ function ServiceProviderList() {
 
                 <td className="py-4 px-3">
                   <div className="flex gap-2">
-                    <button className="w-9 h-9 flex items-center justify-center rounded-full bg-indigo-100">
+                   <button
+  onClick={() => alert(`Calling ${user.name}`)}
+  className="w-9 h-9 flex items-center justify-center rounded-full bg-indigo-100"
+>
                       <PhoneIcon className="w-4 h-4 text-indigo-600" />
                     </button>
-                    <button className="w-9 h-9 flex items-center justify-center rounded-full bg-indigo-100">
+                   <button
+  onClick={() => alert(`Emailing ${user.name}`)}
+  className="w-9 h-9 flex items-center justify-center rounded-full bg-indigo-100"
+>
                       <EnvelopeIcon className="w-4 h-4 text-indigo-600" />
                     </button>
                   </div>
@@ -300,8 +321,9 @@ function ServiceProviderList() {
       {/* PAGINATION */}
       <div className="flex justify-between items-center mt-6 text-sm text-gray-400">
         <p>
-          Showing {processedUsers.length} of {users.length} data
-        </p>
+  Showing {(page - 1) * 5 + 1} –
+  {Math.min(page * 5, users.length)} from {users.length}
+</p>
         <div className="flex items-center gap-1">
           <button disabled={page === 1} onClick={() => setPage((p) => p - 1)}>
             ‹
