@@ -144,8 +144,7 @@ const SuperAdminList = () => {
   };
 
   return (
-    <div className="w-full bg-[#F4F5FF] p-4 sm:p-6">
-      <div className="max-w-6xl mx-auto bg-white rounded-2xl p-4 sm:p-8 shadow-sm">
+    <div className="w-full p-4 sm:p-6">
 
         <h2 className="text-lg sm:text-xl font-semibold text-[#2D2D6E] mb-6">
           Super Admin Members
@@ -185,7 +184,7 @@ const SuperAdminList = () => {
                   <td className="p-3">
                     <button
                       onClick={() => handleRemove(user.id, user.name)}
-                      className="flex items-center gap-1 text-red-600 hover:text-red-700"
+                      className="flex items-center gap-1 text-red-600 hover:text-red-700 cursor-pointer"
                     >
                       <Trash2 size={16} />
                       Remove
@@ -288,8 +287,6 @@ const SuperAdminList = () => {
             )}
           </div>
         </div>
-
-      </div>
     </div>
   );
 };

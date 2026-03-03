@@ -14,11 +14,11 @@ import {
 } from "@heroicons/react/24/outline";
 
 const DEALERS = [
-  { id: 1, name: "Samanta William", code: "#123456789", providers: 2, location: "Jakarta", status: "Not Active", createdAt: "2024-01-11", updatedAt: "2024-02-16" },
-  { id: 2, name: "Tony Soap", code: "#123456789", providers: 8, location: "Jakarta", status: "Active", createdAt: "2024-01-12", updatedAt: "2024-02-17" },
-  { id: 3, name: "Karen Hope", code: "#123456789", providers: 10, location: "Jakrta", status: "Active", createdAt: "2024-01-13", updatedAt: "2024-02-18" },
-  { id: 4, name: "Jordan Nico", code: "#123456789", providers: 0, location: "Jakarta", status: "Active", createdAt: "2024-01-14", updatedAt: "2024-02-19" },
-  { id: 5, name: "Nadilla Adja", code: "#123456789", providers: 1, location: "Jakrta", status: "Not Active", createdAt: "2024-01-15", updatedAt: "2024-02-15" },
+  { id: 1, name: "Samanta William", code: "#123456789", providers: 2, location: "Jakarta", status: "Not Active", createdAt: "2024-01-21", updatedAt: "2024-02-16" },
+  { id: 2, name: "Tony Soap", code: "#123456789", providers: 8, location: "Jakarta", status: "Active", createdAt: "2024-01-26", updatedAt: "2024-02-17" },
+  { id: 3, name: "Karen Hope", code: "#123456789", providers: 10, location: "Jakrta", status: "Active", createdAt: "2024-01-23", updatedAt: "2024-02-18" },
+  { id: 4, name: "Jordan Nico", code: "#123456789", providers: 0, location: "Jakarta", status: "Active", createdAt: "2024-01-24", updatedAt: "2024-02-19" },
+  { id: 5, name: "Nadilla Adja", code: "#123456789", providers: 1, location: "Jakrta", status: "Not Active", createdAt: "2024-01-25", updatedAt: "2024-02-15" },
   { id: 6, name: "Johnny Ahmad", code: "#123456789", providers: 3, location: "Jakarta", status: "Active", createdAt: "2024-01-16", updatedAt: "2024-02-15" },
   { id: 7, name: "Devid Nico", code: "#123456789", providers: 0, location: "Jakarta", status: "Not Verified", createdAt: "2024-01-17", updatedAt: "2024-02-15" },
   { id: 8, name: "pooja sharma", code: "#123456789", providers: 1, location: "Jakarta", status: "Active", createdAt: "2024-01-18", updatedAt: "2024-02-15" },
