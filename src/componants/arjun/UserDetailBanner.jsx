@@ -1,99 +1,169 @@
-import React from 'react'
-import { CiLocationOn } from "react-icons/ci";
-import { IoIosCall } from "react-icons/io";
-import { CiMail } from "react-icons/ci";
-export const UserDetailBanner = () => {
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  FiStar,
+  FiMoreHorizontal,
+  FiPhone,
+  FiMail,
+  FiMapPin,
+  FiUser,
+} from "react-icons/fi";
+
+const UserDetailBanner = () => {
+  // 🔹 ADDED STATE
+  const [user, setUser] = useState({
+    name: "Karen Hope",
+    role: "Plumber",
+    rating: 4.9,
+    franchise: "K Top",
+    address: "Jakarta, Indonesia",
+    phone: "+12 345 6789 0",
+    email: "Hope@mail.com",
+    photo: null,
+  });
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const menuRef = useRef(null);
+
+  // ✏️ Edit user (simple demo)
+  const editUser = () => {
+    const name = prompt("Edit name:", user.name);
+    if (!name) return;
+
+    setUser({ ...user, name });
+    setMenuOpen(false);
+  };
+
+  // ❌ Delete user (demo)
+  const deleteUser = () => {
+    if (!window.confirm("Delete this user?")) return;
+
+    alert("User deleted (demo)");
+    setMenuOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleEdit = () => {
+    navigate("/serviceproviderdetails");
+  };
+
+    const handleDelete = () => {
+    navigate("/serviceproviders");
+  };
+
   return (
-    <div  className='w-full max-w-[1017px]  min-h-[498px]  relative  bg-[#FFFFFF] rounded-tl-[20px] mx-auto'>
-        <div  className='w-full h-[140px] bg-[#4D44B5] rounded-tl-[20px]  rounded-tr-[20px] relative  overflow-hidden '>
-            
-            <div className='w-[263px] h-[140px] bg-[#FB7D5B] absolute  right-[111px] top-[40px] rounded-tl-[20px] rounded-tr-[20px] hidden  sm:block'/>
-            <div  className=' w-[263px] h-[140px] bg-[#FCC43E]  absolute  top-[18px] right-[40px] rounded-tl-[20px] rounded-tr-[20px] hidden sm:block'/>
-           
-         </div>
-         <div className='bg-[#C1BBEB] sm:left-10 left-4 top-[10px] absolute rounded-full border-8 border-[#FFFFFF] w-[200px] h-[200px]  overflow-visible' /> 
-         <p className='mt-[80px] font-[700] text-[32px] text-[#303972] ml-4 sm:ml-[70px]'>
-          Name
-         </p>
-         <p className='ml-4 sm:ml-[70px] font-[600] text-[18px] text-[#A098AE]'>
-          user
-         </p>
-          
-         <div  className='w-full max-w-[953px]  min-h-[75px]   ml-auto mr-[auto] flex flex-col sm:flex-row flex-wrap gap-4 mt-9'>
-          {/* Contact details Start */}
-          <div className='w-[220px] h-[75px] flex items-center m-4'>
-                  <div className='flex flex-col '>
-                    <p className='text-[#A098AE] text-[18px] font-[400] ml-1'>
-                      Location
-                    </p>
-                    <div className='flex flex-row'>
-                            <div className='w-[40px] h-[40px] rounded-full bg-[#FB7D5B] p-2' >
-                                 <CiLocationOn className='w-[24px] h-[24px] text-[#FFFFFF] ' />
-                            </div>
-                       
-                        <p className='text-[18px]  font-[600] text-[#303972] flex   items-center ml-2'>
-                         Location
-                        </p>
-                    </div>
-                </div>
-         </div>
-        
+    <div className="bg-white rounded-2xl overflow-hidden shadow-sm">
 
-         <div className='w-[220px] h-[75px]  flex items-center m-4'>
-                  <div className='flex flex-col '>
-                    <p className='text-[#A098AE] text-[18px] font-[400] ml-1'>
-                      Address
-                    </p>
-                    <div className='flex flex-row'>
-                            <div className='w-[40px] h-[40px] rounded-full bg-[#FB7D5B] p-2' >
-                                 <CiLocationOn className='w-[24px] h-[24px] text-[#FFFFFF] ' />
-                            </div>
-                       
-                        <p className='text-[18px]  font-[600] text-[#303972] flex   items-center ml-2'>
-                         Location
-                        </p>
-                    </div>
-                </div>
-         </div>
+      {/* TOP BANNER */}
+      <div className="relative h-28 sm:h-32 bg-[#4D44B5]">
+        <div className="absolute right-20 sm:right-32 bottom-0 w-24 h-12 sm:w-40 sm:h-20 bg-orange-400 rounded-t-xl" />
+        <div className="absolute right-4 sm:right-10 bottom-0 w-24 h-20 sm:w-40 sm:h-28 bg-yellow-400 rounded-t-xl" />
+      </div>
 
-          <div className='w-[220px] h-[75px]  flex items-center m-4'>
-                  <div className='flex flex-col '>
-                    <p className='text-[#A098AE] text-[18px] font-[400] ml-1'>
-                      Phone
-                    </p>
-                    <div className='flex flex-row'>
-                            <div className='w-[40px] h-[40px] rounded-full bg-[#FB7D5B] p-2' >
-                                 <IoIosCall  className='w-[24px] h-[24px] text-[#FFFFFF] ' />
-                            </div>
-                       
-                        <p className='text-[18px]  font-[600] text-[#303972] flex   items-center ml-2'>
-                         +91 1234345
-                        </p>
-                    </div>
-                </div>
-         </div>
-<div className='w-[220px] h-[75px]  flex items-center m-4'>
-                  <div className='flex flex-col '>
-                    <p className='text-[#A098AE] text-[18px] font-[400] ml-1'>
-                     Email
-                    </p>
-                    <div className='flex flex-row'>
-                            <div className='w-[40px] h-[40px] rounded-full bg-[#FB7D5B] p-2' >
-                                 <CiMail className='w-[24px] h-[24px] text-[#FFFFFF] ' />
-                            </div>
-                       
-                        <p className='text-[18px]  font-[600] text-[#303972] flex   items-center ml-2'>
-                        hope@email.com
-                        </p>
-                    </div>
-                </div>
-         </div>
-          {/* Contact details ends */}
- 
-         </div>
-         
-         
+      {/* CONTENT */}
+      <div className="relative px-4 sm:px-6 pb-6">
+
+        {/* AVATAR */}
+        <div className="absolute -top-12 sm:-top-14 left-1/2 sm:left-6 -translate-x-1/2 sm:translate-x-0 z-10">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-white bg-[#C9C6F2] overflow-hidden flex items-center justify-center">
+            {user.photo ? (
+              <img
+                src={user.photo}
+                alt={user.name}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <FiUser className="text-white w-10 h-10 sm:w-12 sm:h-12" />
+            )}
+          </div>
+        </div>
+
+        {/* MENU */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="absolute top-4 right-4 sm:right-6 text-gray-400 hover:text-gray-600 z-10 cursor-pointer"
+        >
+          <FiMoreHorizontal size={20} />
+        </button>
+
+        {/* MENU DROPDOWN */}
+        {menuOpen && (
+          <div className="absolute right-4 top-12 bg-white border rounded-lg shadow-md w-32 z-20" ref={menuRef}>
+            <button
+              onClick={handleEdit}
+              className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+            >
+              Edit
+            </button>
+            <button
+              onClick={handleDelete}
+              className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 cursor-pointer"
+            >
+              Delete
+            </button>
+          </div>
+        )}
+
+        {/* USER INFO */}
+        <div className="pt-14 sm:pt-16 text-center sm:text-left">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+            <h2 className="text-lg sm:text-xl font-semibold text-[#2d2d6e]">
+              {user.name}
+            </h2>
+
+            <div className="flex items-center justify-center sm:justify-start gap-1 text-yellow-500">
+              <FiStar />
+              <span className="text-sm font-medium text-gray-700">
+                {user.rating}
+              </span>
+            </div>
+          </div>
+
+          <p className="text-sm text-gray-400 mt-1">
+            {user.role}
+          </p>
+        </div>
+
+        {/* DETAILS */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-6 text-sm">
+
+          <Detail icon={<FiUser />} label="Franchise" value={user.franchise} />
+          <Detail icon={<FiMapPin />} label="Address" value={user.address} />
+          <Detail icon={<FiPhone />} label="Phone" value={user.phone} />
+          <Detail icon={<FiMail />} label="Email" value={user.email} breakAll />
+
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
+
+// 🔹 Small reusable detail component
+const Detail = ({ icon, label, value, breakAll }) => (
+  <div className="flex items-center gap-3">
+    <div className="w-9 h-9 rounded-full bg-orange-100 flex items-center justify-center text-orange-500">
+      {icon}
+    </div>
+    <div>
+      <p className="text-gray-400">{label}</p>
+      <p className={`font-medium text-gray-700 ${breakAll ? "break-all sm:break-normal" : ""}`}>
+        {value}
+      </p>
+    </div>
+  </div>
+);
+
 export default UserDetailBanner;

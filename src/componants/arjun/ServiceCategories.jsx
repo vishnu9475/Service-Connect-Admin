@@ -12,20 +12,25 @@ const ServiceCategories = () => {
   ];
 
   return (
-    <div className="w-full bg-white rounded-[30px] p-6 shadow-xl shadow-gray-100 font-sans min-h-[590px]">
+    <div className="w-full bg-white rounded-[30px] p-6 shadow-xl shadow-gray-100 font-sans min-h-[590px] border border-gray-50">
       {/* Header */}
-      <h2 className="text-lg font-bold text-[#313165] mb-4">Service Categories</h2>
+      <h2 className="text-lg font-bold text-[#313165] mb-6">Service Categories</h2>
 
       {/* List Container */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-5">
         {services.map((service) => (
           <div 
             key={service.id} 
             className="flex flex-col gap-2 cursor-pointer group"
-            onClick={() => navigate(`/services/${service.id}`)} // Optional: makes items clickable too
+            // All items lead to the development subcategory page
+            onClick={() => navigate('/subcategory')} 
           >
-            <div className="w-full h-24 bg-[#C5C5EF] rounded-lg transition-all group-hover:bg-[#B8B8E6]" />
-            <span className="text-[#313165] font-bold text-sm">{service.name}</span>
+            {/* Image Placeholder with subtle hover depth */}
+            <div className="w-full h-24 bg-[#C5C5EF]/60 rounded-2xl transition-all duration-300 group-hover:bg-[#C5C5EF] group-hover:shadow-md ring-1 ring-inset ring-black/5" />
+            
+            <span className="text-[#313165] font-bold text-sm ml-1 group-hover:text-[#4D44B5] transition-colors">
+              {service.name}
+            </span>
           </div>
         ))}
       </div>
@@ -33,8 +38,8 @@ const ServiceCategories = () => {
       {/* View More Button */}
       <button
         type="button"
-        onClick={() => navigate('/category')} // Change '/all-services' to your actual route
-        className="mt-6 w-full py-3 bg-[#EDEAF7] text-[#5D5DB1] font-bold rounded-2xl hover:bg-[#E5E1F4] transition-colors"
+        onClick={() => navigate('/category')} 
+        className="mt-8 w-full py-4 bg-[#F3F1FB] text-[#5D5DB1] text-sm font-extrabold rounded-2xl hover:bg-[#EDEAF7] hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 shadow-sm shadow-indigo-100/50"
       >
         View More
       </button>

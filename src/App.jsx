@@ -13,6 +13,8 @@ import RoleAndP from './page_admin/RoleAndP.jsx'
 import ServiceProviderDetails from './page_admin/ServiceProviderDetails.jsx'
 import Adminlogin from './page_admin/Adminlogin.jsx'
 import RoleSelect from './page_admin/RoleSelect.jsx';
+// import AddSuperAdmin from "./page_admin/AddSuperAdminP.jsx"
+// import SuperAdminList from "./page_admin/SuperAdminListP.jsx"
 
 // neja
 import Franchisee from "./page_admin/Franchisee";
@@ -87,6 +89,8 @@ function App() {
       <Route path="/serviceproviderdetails" element={<ServiceProviderDetails />} />
       <Route path="/addnewservice" element={<AddNewService />} />
       <Route path="/roleandp" element={<RoleAndP />} />
+      {/* <Route path="/addsuperadmin" element={<AddSuperAdmin />} />
+      <Route path="/superadminlist" element={<SuperAdminList />} /> */}
 
       <Route path="/franchisee" element={<Franchisee/>}/>
       <Route path="/franchiseedetails" element={<FranchiseeDetails/>}/>

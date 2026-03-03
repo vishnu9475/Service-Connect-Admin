@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import SideMenu from "../componants/neja/AdminSideMenu113";
 import AdminMain from  "../componants/neja/AdminMain114";
 import TeamMemPerTop from "../componants/vishnu/TeamMemPerTop";
@@ -6,6 +7,10 @@ import TeamMemberPermissions from "../componants/vishnu/TeamMemberPermission";
 
 
 function Page144() {
+  const navigate = useNavigate();
+    const handleAdd = () => {
+    navigate("/addsuperadmin");
+    };
   return (
     <div className="min-h-screen bg-[#F3F4FF]">
       <SideMenu />
@@ -14,7 +19,8 @@ function Page144() {
         <AdminMain title={<span className="font-bold text-xl">Team Members</span>}>
 
           <div className="space-y-6">
-            <AddTeamMember />
+            <AddTeamMember
+            handleAdd={handleAdd} />
 
             {/* ONE CONTAINER */}
             <div className="mx-auto max-w-[1100px] bg-white border border-gray-400">

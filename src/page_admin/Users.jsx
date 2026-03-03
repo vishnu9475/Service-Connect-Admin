@@ -16,27 +16,167 @@ import { IoMdArrowDropdown } from "react-icons/io";
 const Users = () => {
   const navigate = useNavigate();
   
-  const [allUsers, setAllUsers] = useState([
-  { name: "Samanta William", id: "#123456781", date: "March 25, 2021", services: 2, location: "Jakarta", status: "Inactive" },
-  { name: "Tony Soap", id: "#123456782", date: "March 25, 2022", services: 8, location: "Jakarta", status: "active" },
-  { name: "Karen Hope", id: "#123456783", date: "March 25, 2023", services: 10, location: "Jakarta", status: "active" },
-  { name: "Jordan Nico", id: "#123456784", date: "March 25, 2020", services: 0, location: "Jakarta", status: "active" },
-  { name: "Nadila Adani", id: "#123456785", date: "April 12, 2023", services: 5, location: "Jakarta", status: "active" },
-  { name: "Dandi Setyawan", id: "#123456786", date: "April 15, 2023", services: 3, location: "Jakarta", status: "Inactive" },
-  { name: "Bella Simatupang", id: "#123456787", date: "May 02, 2023", services: 12, location: "Jakarta", status: "active" },
-  { name: "Rizky Ramadhan", id: "#123456788", date: "May 10, 2023", services: 1, location: "Jakarta", status: "active" },
-  { name: "Eka Wijaya", id: "#123456789", date: "June 18, 2023", services: 7, location: "Jakarta", status: "Inactive" },
-  { name: "Fanya Putri", id: "#123456790", date: "June 22, 2023", services: 4, location: "Jakarta", status: "active" },
-  { name: "Gilang Pratama", id: "#123456791", date: "July 01, 2023", services: 9, location: "Jakarta", status: "active" },
-  { name: "Hana Lestari", id: "#123456792", date: "July 14, 2023", services: 2, location: "Jakarta", status: "active" },
-  { name: "Indra Kusuma", id: "#123456793", date: "August 05, 2023", services: 15, location: "Jakarta", status: "Inactive" },
-  { name: "Joko Anwar", id: "#123456794", date: "August 20, 2023", services: 6, location: "Jakarta", status: "active" },
-  { name: "Kiki Amalia", id: "#123456795", date: "September 03, 2023", services: 0, location: "Jakarta", status: "active" },
-  { name: "Lucky Hakim", id: "#123456796", date: "September 12, 2023", services: 11, location: "Jakarta", status: "active" },
-  { name: "Maya Sofia", id: "#123456797", date: "October 05, 2023", services: 3, location: "Jakarta", status: "Inactive" },
-  { name: "Nanda Persada", id: "#123456798", date: "October 22, 2023", services: 8, location: "Jakarta", status: "active" },
-  { name: "Olivia Zalianty", id: "#123456799", date: "November 10, 2023", services: 4, location: "Jakarta", status: "active" },
-  { name: "Putu Gede", id: "#123456800", date: "December 01, 2023", services: 5, location: "Jakarta", status: "active" },
+ const [allUsers, setAllUsers] = useState([
+  { 
+    name: "Samanta William", 
+    id: "#123456781", 
+    date: "March 25, 2021", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 789", 
+    status: "Inactive" 
+  },
+  { 
+    name: "Tony Soap", 
+    id: "#123456782", 
+    date: "March 25, 2022", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 790", 
+    status: "active" 
+  },
+  { 
+    name: "Karen Hope", 
+    id: "#123456783", 
+    date: "March 25, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 791", 
+    status: "active" 
+  },
+  { 
+    name: "Jordan Nico", 
+    id: "#123456784", 
+    date: "March 25, 2020", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 792", 
+    status: "active" 
+  },
+  { 
+    name: "Nadila Adani", 
+    id: "#123456785", 
+    date: "April 12, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 793", 
+    status: "active" 
+  },
+  { 
+    name: "Dandi Setyawan", 
+    id: "#123456786", 
+    date: "April 15, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 794", 
+    status: "Inactive" 
+  },
+  { 
+    name: "Bella Simatupang", 
+    id: "#123456787", 
+    date: "May 02, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 795", 
+    status: "active" 
+  },
+  { 
+    name: "Rizky Ramadhan", 
+    id: "#123456788", 
+    date: "May 10, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 796", 
+    status: "active" 
+  },
+  { 
+    name: "Eka Wijaya", 
+    id: "#123456789", 
+    date: "June 18, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 797", 
+    status: "Inactive" 
+  },
+  { 
+    name: "Fanya Putri", 
+    id: "#123456790", 
+    date: "June 22, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 798", 
+    status: "active" 
+  },
+  { 
+    name: "Gilang Pratama", 
+    id: "#123456791", 
+    date: "July 01, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 799", 
+    status: "active" 
+  },
+  { 
+    name: "Hana Lestari", 
+    id: "#123456792", 
+    date: "July 14, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 800", 
+    status: "active" 
+  },
+  { 
+    name: "Indra Kusuma", 
+    id: "#123456793", 
+    date: "August 05, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 801", 
+    status: "Inactive" 
+  },
+  { 
+    name: "Joko Anwar", 
+    id: "#123456794", 
+    date: "August 20, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 802", 
+    status: "active" 
+  },
+  { 
+    name: "Kiki Amalia", 
+    id: "#123456795", 
+    date: "September 03, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 803", 
+    status: "active" 
+  },
+  { 
+    name: "Lucky Hakim", 
+    id: "#123456796", 
+    date: "September 12, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 804", 
+    status: "active" 
+  },
+  { 
+    name: "Maya Sofia", 
+    id: "#123456797", 
+    date: "October 05, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 805", 
+    status: "Inactive" 
+  },
+  { 
+    name: "Nanda Persada", 
+    id: "#123456798", 
+    date: "October 22, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 806", 
+    status: "active" 
+  },
+  { 
+    name: "Olivia Zalianty", 
+    id: "#123456799", 
+    date: "November 10, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 807", 
+    status: "active" 
+  },
+  { 
+    name: "Putu Gede", 
+    id: "#123456800", 
+    date: "December 01, 2023", 
+    location: "Jakarta", 
+    contact: "+62 812 3456 808", 
+    status: "active" 
+  },
 ]);
   const [filterStatus, setFilterStatus] = useState("All Status");
   const [searchTerm, setSearchTerm] = useState("");
@@ -97,7 +237,12 @@ const Users = () => {
       <AdminSideMenu113 />
       
       <div className="flex-1 lg:ml-64 w-full flex flex-col min-h-screen relative">
-        <AdminMain114 title="USER LIST" userName="Nabila" userRole="Admin">
+        <AdminMain114 
+              title={<span className="text-[#303972] font-bold tracking-tight">User List</span>}
+              userName="Nabila" 
+              userRole="Admin" 
+              showSearch={false} // Add this prop to hide the internal search bar
+        >
           
           <div className="p-4 md:p-8 space-y-8 flex-1">
             
@@ -107,15 +252,15 @@ const Users = () => {
 
             <div className="flex flex-col xl:flex-row justify-between gap-6 items-center">
               {/* --- SEARCH BAR --- */}
-              <div className="relative w-full xl:w-96 group">
-                <FaSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-[#4D44B5] transition-transform" />
-                <input 
-                  type="text" 
-                  className="w-full pl-14 pr-6 py-3 rounded-full bg-white border-none shadow-sm focus:ring-1 focus:ring-[#4D44B5] text-sm outline-none"
-                  placeholder="Search here..."
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
+             <div className="relative w-full xl:w-80 group">
+         <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#4D44B5] text-sm transition-transform group-focus-within:scale-110" />
+            <input 
+                 type="text" 
+                className="w-full pl-11 pr-4 py-2 rounded-full bg-white border border-transparent shadow-sm focus:border-gray-100 focus:ring-1 focus:ring-[#4D44B5] text-sm outline-none transition-all"
+                placeholder="Search here..."
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
+</div>
 
               {/* --- ACTION BUTTONS GROUP --- */}
               <div className="flex flex-wrap items-center justify-end gap-3 w-full xl:w-auto">

@@ -6,6 +6,7 @@ import {
   EllipsisHorizontalIcon,
   PlusIcon,
   TrashIcon,
+  ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
@@ -81,6 +82,46 @@ function ServiceProviderList() {
   const [openMenuId, setOpenMenuId] = useState(null);
   const [page, setPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("");
+  const [sortOpen, setSortOpen] = useState(false);
+  const [sortBy, setSortBy] = useState("")
+  const [filterOpen, setFilterOpen] = useState(false);
+
+  const pageSize = 5;
+
+  const processedUsers = [...users]
+    .filter((u) => {
+      const match = u.name.toLowerCase().includes(search.toLowerCase());
+      if (["Active", "Notactive", "Verified", "Not Verified"].includes(filter)) {
+        if (filter === "Verified") return u.status !== "Not Verified";
+        return u.status === filter;
+      }
+      return match;
+    })
+    .sort((a, b) => {
+      if (!sortOrder) return 0;
+      if (sortOrder === "Newest") return new Date(b.date) - new Date(a.date);
+      if (sortOrder === "Oldest") return new Date(a.date) - new Date(b.date);
+      if (sortOrder === "LastUpdated")
+        return new Date(b.lastUpdated) - new Date(a.lastUpdated);
+      return 0;
+    });
+
+  const paginatedUsers = processedUsers.slice(
+    (page - 1) * pageSize,
+    page * pageSize
+  );
+
+  const toggleRow = (id) =>
+    setSelected((p) =>
+      p.includes(id) ? p.filter((x) => x !== id) : [...p, id]
+    );
+
+  const toggleAll = () =>
+    setSelected(
+      selected.length === processedUsers.length
+        ? []
+        : processedUsers.map((u) => u.id)
+    );
 
   const handleBulkDelete = () => {
     if (selected.length === 0) return alert("Please select at least one user");
@@ -95,51 +136,12 @@ function ServiceProviderList() {
     setSelected((prev) => prev.filter((id) => id !== user.id));
     setOpenMenuId(null);
   };
-const pageSize = 5;
-  const processedUsers = [...users]
-    .filter((u) => {
-      const match = u.name.toLowerCase().includes(search.toLowerCase());
-      if (["Active", "Notactive", "Verified", "Not Verified"].includes(filter)) {
-        if (filter === "Verified") return u.status !== "Not Verified";
-        return u.status === filter;
-      }
-      return match;
-    })
-    .sort((a, b) => {
-  if (!sortOrder) return 0;
-
-  if (sortOrder === "Newest") {
-    return new Date(b.date) - new Date(a.date);
-  }
-
-  if (sortOrder === "Oldest") {
-    return new Date(a.date) - new Date(b.date);
-  }
-
-  if (sortOrder === "LastUpdated") {
-    return new Date(b.lastUpdated) - new Date(a.lastUpdated);
-  }
-
-  return 0;
-});
-const paginatedUsers = processedUsers.slice(
-  (page - 1) * pageSize,
-  page * pageSize
-);
-  const toggleRow = (id) =>
-    setSelected((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
-
-  const toggleAll = () =>
-    setSelected(
-      selected.length === processedUsers.length
-        ? []
-        : processedUsers.map((u) => u.id)
-    );
 
   return (
     <div className="bg-white rounded-2xl shadow-sm p-4 md:p-6">
       {/* TOP BAR */}
       <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6">
+        {/* SEARCH */}
         <div className="relative w-full md:w-64">
           <MagnifyingGlassIcon className="w-5 h-5 text-indigo-500 absolute left-4 top-1/2 -translate-y-1/2" />
           <input
@@ -150,31 +152,78 @@ const paginatedUsers = processedUsers.slice(
           />
         </div>
 
-        {/* 🔒 FIXED-WIDTH CONTROLS (NO JUMP AT 1024px) */}
+        {/* CONTROLS */}
         <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
-          <select
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-            className="w-[140px] px-4 py-2 rounded-full border border-indigo-500 text-indigo-600 text-sm bg-white outline-none"
-          >
-            <option>All</option>
-            <option>Active</option>
-            <option>Notactive</option>
-            <option>Verified</option>
-            <option>Not Verified</option>
-          </select>
+          {/* FILTER DROPDOWN */}
+<div className="relative">
+  <button
+    onClick={() => setFilterOpen((prev) => !prev)}
+    className="flex items-center gap-2 px-4 py-2 rounded-full border border-indigo-500 text-indigo-600 text-sm bg-white"
+  >
+    {filter}
+    <ChevronDownIcon className="w-4 h-4" />
+  </button>
 
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-            className="w-[140px] px-4 py-2 rounded-full border border-indigo-500 text-indigo-600 text-sm bg-white outline-none"
-          >
-            <option value="">Sort by</option>
-<option value="Newest">Newest</option>
-<option value="Oldest">Oldest</option>
-<option value="LastUpdated">Last Updated</option>
-          </select>
+  {filterOpen && (
+    <div className="absolute right-0 mt-2 w-44 bg-white border rounded-xl shadow-lg z-50">
+      {["All", "Active", "Notactive", "Verified", "Not Verified"].map((opt) => (
+        <button
+          key={opt}
+          onClick={() => {
+            setFilter(opt);
+            setFilterOpen(false);
+            setPage(1);
+          }}
+          className={`w-full text-left px-4 py-2 text-sm hover:bg-indigo-50 ${
+            filter === opt
+              ? "text-[#4D44B5] font-medium"
+              : "text-gray-700"
+          }`}
+        >
+          {opt}
+        </button>
+      ))}
+    </div>
+  )}
+</div>
 
+          {/* FILTER */}
+        <div className="relative">
+  {/* BUTTON */}
+  <button
+    onClick={() => setSortOpen((prev) => !prev)}
+    className="flex items-center gap-2 px-4 py-2 rounded-full border border-indigo-500 text-indigo-600 text-sm bg-white"
+  >
+    {sortBy || ""}
+    <ChevronDownIcon className="w-4 h-4" />
+  </button>
+
+  {/* DROPDOWN MENU */}
+  {sortOpen && (
+    <div className="absolute right-0 mt-2 w-44 bg-white border rounded-xl shadow-lg z-50">
+      {["Newest", "Oldest", "Last Updated"].map((opt) => (
+        <button
+          key={opt}
+          onClick={() => {
+            setSortBy(opt);
+            setSortOrder(opt); // connects to your existing sorting logic
+            setSortOpen(false);
+            setPage(1);
+          }}
+          className={`w-full text-left px-4 py-2 text-sm hover:bg-indigo-50 ${
+            sortBy === opt
+              ? "text-[#4D44B5] font-medium"
+              : "text-gray-700"
+          }`}
+        >
+          {opt}
+        </button>
+      ))}
+    </div>
+  )}
+</div>  
+
+          {/* NEW USER */}
           <button
             onClick={() => navigate("/Addnewuser")}
             className="w-[140px] flex items-center justify-center gap-2 px-5 py-2 rounded-full bg-[#4D44B5] text-white text-sm whitespace-nowrap"
@@ -183,25 +232,19 @@ const paginatedUsers = processedUsers.slice(
             New User
           </button>
 
-          {/* <button
+          {/* DELETE */}
+          <button
             onClick={handleBulkDelete}
-            className="w-10 h-10 flex items-center justify-center text-blue-600 hover:text-blue-800"
+            disabled={selected.length === 0}
+            className={`w-10 h-10 flex items-center justify-center transition-all ${
+              selected.length > 0
+                ? "text-[#4D44B5] hover:scale-110 active:scale-95"
+                : "text-gray-300 cursor-not-allowed"
+            }`}
             title="Delete selected"
           >
             <TrashIcon className="w-5 h-5" />
-          </button> */}
-          <button
-  onClick={handleBulkDelete}
-  disabled={selected.length === 0}
-  className={`w-10 h-10 flex items-center justify-center transition-all ${
-    selected.length > 0
-      ? "text-[#4D44B5] hover:scale-110 active:scale-95"
-      : "text-gray-300 cursor-not-allowed"
-  }`}
-  title="Delete selected"
->
-  <TrashIcon className="w-5 h-5" />
-</button>
+          </button>
 
         </div>
       </div>
@@ -233,7 +276,7 @@ const paginatedUsers = processedUsers.slice(
           </thead>
 
           <tbody className="text-sm text-gray-700">
-             {paginatedUsers.map((user) => (
+            {paginatedUsers.map((user) => (
               <tr key={user.id} className="border-b border-gray-100">
                 <td className="w-[48px] py-4 px-3 text-center">
                   <input
@@ -242,7 +285,6 @@ const paginatedUsers = processedUsers.slice(
                     onChange={() => toggleRow(user.id)}
                   />
                 </td>
-
                 <td className="py-4 px-3 font-medium text-indigo-900">
                   {user.name}
                 </td>
@@ -252,22 +294,24 @@ const paginatedUsers = processedUsers.slice(
                 <td className="py-4 px-3 text-indigo-700">{user.location}</td>
 
                 <td className="py-4 px-3">
-                  <div className="flex gap-2">
-                   <button
-  onClick={() => alert(`Calling ${user.name}`)}
-  className="w-9 h-9 flex items-center justify-center rounded-full bg-indigo-100"
->
-                      <PhoneIcon className="w-4 h-4 text-indigo-600" />
-                    </button>
-                   <button
-  onClick={() => alert(`Emailing ${user.name}`)}
-  className="w-9 h-9 flex items-center justify-center rounded-full bg-indigo-100"
->
-                      <EnvelopeIcon className="w-4 h-4 text-indigo-600" />
-                    </button>
-                  </div>
-                </td>
+  <div className="flex gap-2">
+    {/* CALL */}
+    <button
+      onClick={() => alert(`📞 Calling ${user.name}`)}
+      className="w-9 h-9 flex items-center justify-center rounded-full bg-indigo-100 hover:bg-indigo-200 transition"
+    >
+      <PhoneIcon className="w-4 h-4 text-indigo-600" />
+    </button>
 
+    {/* EMAIL */}
+    <button
+      onClick={() => alert(`✉️ Emailing ${user.name}`)}
+      className="w-9 h-9 flex items-center justify-center rounded-full bg-indigo-100 hover:bg-indigo-200 transition"
+    >
+      <EnvelopeIcon className="w-4 h-4 text-indigo-600" />
+    </button>
+  </div>
+</td>
                 <td className="py-4 px-3">
                   <span
                     className={`inline-flex w-[110px] justify-center py-1 rounded-full text-white text-xs ${user.statusColor}`}
@@ -321,9 +365,9 @@ const paginatedUsers = processedUsers.slice(
       {/* PAGINATION */}
       <div className="flex justify-between items-center mt-6 text-sm text-gray-400">
         <p>
-  Showing {(page - 1) * 5 + 1} –
-  {Math.min(page * 5, users.length)} from {users.length}
-</p>
+          Showing {(page - 1) * 5 + 1} –{" "}
+          {Math.min(page * 5, users.length)} from {users.length}
+        </p>
         <div className="flex items-center gap-1">
           <button disabled={page === 1} onClick={() => setPage((p) => p - 1)}>
             ‹

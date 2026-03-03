@@ -30,9 +30,9 @@ const RecentActivities = () => {
               You have <span className="font-bold text-gray-500">456 New Users</span>
             </p>
           </div>
-          <button className="w-10 h-10 rounded-2xl bg-indigo-600 text-white text-xl font-light shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all active:scale-95">
+          {/* <button className="w-10 h-10 rounded-2xl bg-indigo-600 text-white text-xl font-light shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all active:scale-95">
             +
-          </button>
+          </button> */}
         </div>
 
         {/* User List */}

@@ -1,7 +1,7 @@
 import React from "react";
 import AdminSideMenu113 from "../componants/neja/AdminSideMenu113";
 import AdminMain114 from  "../componants/neja/AdminMain114";
-import StudentDetails from "../componants/arjun/StudentDetails";
+import UserDetails from "../componants/arjun/UsertDetails";
 
 const Add_New_User = () => {
   return (
@@ -17,7 +17,7 @@ const Add_New_User = () => {
         <div className="mx-auto w-full max-w-[2560px] flex flex-col flex-1">
          
  <AdminMain114
-            title="ADD NEW USER"
+            title={<span className="text-[#303972] font-bold tracking-tight">Add New User</span>}
             userName="Nabila"
             userRole="Admin"
             showSearch={false}    // Shows the search bar
@@ -34,7 +34,7 @@ const Add_New_User = () => {
                   - w-full ensures it shrinks for mobile
               */}
               <div className="w-full max-w-[1475px] mx-auto bg-white rounded-[20px] shadow-sm p-4 sm:p-6 lg:p-10">
-                <StudentDetails />
+                <UserDetails />
               </div>
 
             </div>

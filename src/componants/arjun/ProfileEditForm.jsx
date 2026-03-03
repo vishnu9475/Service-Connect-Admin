@@ -1,6 +1,16 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
 
 const ProfileEditForm = () => {
+
+  const navigate = useNavigate();
+
+  // Function for the save alert + navigation
+  const handleSave = () => {
+    alert("Profile Updated Successfully!");
+    navigate("/dashboard"); // 🔁 change this route if needed
+  };
+
   return (
     <div className='w-full max-w-[763px] bg-[#FDFEFF] flex flex-col p-6 rounded-[20px]'>
       {/* Header */}
@@ -82,12 +92,15 @@ const ProfileEditForm = () => {
             Designation
           </label>
         </div>
-        <div className='flex-1 hidden sm:block'></div> {/* Spacer for symmetry */}
+        <div className='flex-1 hidden sm:block'></div>
       </div>
 
       {/* Footer: Action */}
       <div className='flex justify-center sm:justify-end mt-4'>
-        <button className='w-full sm:w-[195px] h-[58px] bg-[#5570F1] rounded-[12px] text-[#FFFFFF] font-semibold text-[18px] cursor-pointer hover:bg-[#4458c7] transition-colors'>
+        <button 
+          onClick={handleSave}
+          className='w-full sm:w-[195px] h-[58px] bg-[#4D44B5] rounded-[12px] text-[#FFFFFF] font-semibold text-[18px] cursor-pointer hover:bg-[#3b338a] transition-colors'
+        >
           Save 
         </button>
       </div>

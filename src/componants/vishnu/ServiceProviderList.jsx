@@ -48,6 +48,9 @@ function ServiceProviderList() {
   const [filter, setFilter] = useState("All");
   const [openFilter, setOpenFilter] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
+  const [selectedFranchise, setSelectedFranchise] = useState("All Franchise");
+  const [openFranchise, setOpenFranchise] = useState(false);
+  const franchiseRef = useRef(null);
 
   const itemsPerPage = 5;
   const menuRef = useRef(null);
@@ -69,51 +72,46 @@ function ServiceProviderList() {
       if (sortRef.current && !sortRef.current.contains(e.target)) {
         setOpenSort(false);
       }
+      // cole frachise dropdown
+      if (franchiseRef.current && !franchiseRef.current.contains(e.target)) {
+        setOpenFranchise(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-  //  Reset page when search or filter changes
-  useEffect(() => {
-    setPage(1);
-  }, [search, filter]);
+      }, []);
+      //  Reset page when search or filter changes
+      useEffect(() => {
+        setPage(1);
+      }, [search, filter, selectedFranchise]);
 
+      // ✅ close menu on page change (logic only)
+      useEffect(() => {
+        setOpenMenu(false);
+      }, [page]);
 
-  // ✅ close menu on page change (logic only)
-  useEffect(() => {
-    setOpenMenu(false);
-  }, [page]);
+      /* PROCESS franchise */
+      const franchiseList = [
+        "All Franchise",
+        ...new Set(users.map((u) => u.franchise))
+      ];
+      
+      /* PROCESS USERS */
+      const processedUsers = [...users]
+        .filter((u) => {
+        const query = search.trim().toLowerCase();
 
-  /* PROCESS USERS */
-  const processedUsers = [...users]
-    .filter((u) => {
-  const query = search.trim().toLowerCase();
+        const matchesSearch = Object.values(u).some((value) =>
+          String(value).toLowerCase().includes(query)
+        );
 
-  return Object.values(u).some((value) =>
-    String(value).toLowerCase().includes(query)
-  );
-})
-    // .sort((a, b) => {
-    //   switch (filter) {
-    //     case "Active":
-    //       return a.status === "Active" ? -1 : 1;
-    //     case "Not Active":
-    //       return a.status === "Not Active" ? -1 : 1;
-    //     case "Not Verified":
-    //       return a.status === "Not Verified" ? -1 : 1;
-    //     case "Providers High":
-    //       return b.services - a.services;
-    //     case "Providers Low":
-    //       return a.services - b.services;
-    //     case "Jobs High":
-    //       return b.jobs - a.jobs;
-    //     case "Jobs Low":
-    //       return a.jobs - b.jobs;
-    //     default:
-    //       return 0;
-    //   }
-    // });
+        const matchesFranchise =
+          selectedFranchise === "All Franchise" ||
+          u.franchise === selectedFranchise;
+
+        return matchesSearch && matchesFranchise;
+      })
     .sort((a, b) => {
   // STATUS + OTHER FILTERS FIRST
   switch (filter) {
@@ -223,10 +221,32 @@ function ServiceProviderList() {
       {/* TOP BAR */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <div className="flex gap-4">
-          <button className="flex items-center gap-2 bg-[#4D44B5] text-white px-4 py-1.5 text-xs xl:px-5 xl:py-2 xl:text-sm rounded-full">
-            Frachise Name
-            <ChevronDownIcon className="w-4 h-4" />
-          </button>
+          <div ref={franchiseRef} className="relative">
+            <button
+              onClick={() => setOpenFranchise(!openFranchise)}
+              className="flex items-center gap-2 bg-[#4D44B5] text-white px-4 py-1.5 text-xs xl:px-5 xl:py-2 xl:text-sm rounded-full"
+            >
+              {selectedFranchise}
+              <ChevronDownIcon className="w-4 h-4" />
+            </button>
+
+            {openFranchise && (
+              <div className="absolute top-12 left-0 bg-white border rounded-lg shadow text-sm z-20 w-40">
+                {franchiseList.map((item) => (
+                  <button
+                    key={item}
+                    onClick={() => {
+                      setSelectedFranchise(item);
+                      setOpenFranchise(false);
+                    }}
+                    className="block px-4 py-2 hover:bg-indigo-50 w-full text-left"
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
           <div className="relative flex items-center">
             <MagnifyingGlassIcon className="w-4 h-4 text-indigo-500 absolute left-4" />
             <input
