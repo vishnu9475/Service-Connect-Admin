@@ -1,7 +1,7 @@
 import React from "react";
-import AdminSideMenu from "../components/AdminSideMenu";
-import Header from "../components/Header";
-import SubCategoryList from "../components/SubCategoryList";
+import AdminSideMenu from "../componants_service/AdminSideMenu";
+import Header from "../componants_service/Header";
+import SubCategoryList from "../componants_service/SubCategoryList";
 
 const Page121 = () => {
   return (
