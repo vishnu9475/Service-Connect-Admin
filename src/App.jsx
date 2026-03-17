@@ -95,7 +95,7 @@ import AccountSuccess from "./page_service/S12_Congradulations.jsx"
 import Page62 from "./page_service/S13_PaymentMethods.jsx"
 import S17_E_RECIEPT_EDIT from "./page_service/S17_E_RECIEPT_EDIT.jsx";
 import S14_AddNewCard from "./page_service/S14_AddNewCard.jsx";
-import S18_CheckoutSuccess from "./page_service/S18_CheckoutSuccess.jsx";
+import S18_CheckoutSuccess from "./page_service/S18_CheckOutSuccess.jsx";
 import S19_Dashboard from "./page_service/S19_Dashboard.jsx";
 import S20_MyServices from "./page_service/S20_MyServices.jsx";
 import S22_Requests from "./page_service/S22_Requests.jsx";
