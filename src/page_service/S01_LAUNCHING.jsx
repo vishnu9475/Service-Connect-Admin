@@ -1,5 +1,6 @@
 import { Phone, Mail, Chrome } from "lucide-react";
 import {  useNavigate } from "react-router-dom";
+import serviceMain from "../assets/service-main.png";
 
 export default function StartPage() {
   const navigate=useNavigate();
@@ -13,7 +14,7 @@ export default function StartPage() {
         {/* Logo / Illustration */}
         <div className="relative flex justify-center mb-10">
           <div className="w-48 h-48 rounded-full  flex items-center justify-center">
-          <img src="src/assets/service-main.png" className="w-100 h-55"/>
+          <img src={serviceMain} className="w-100 h-55"/>
            
           </div>
         </div>
